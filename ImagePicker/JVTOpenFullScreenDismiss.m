@@ -25,7 +25,7 @@ static NSTimeInterval transitionDuration = 0.3;
     [containerView addSubview:snapShotView];
     
     fromViewController.view.alpha = 0;
-    __weak JVTOpenFullScreenDismiss *weakSelf = self;
+    __unsafe_unretained JVTOpenFullScreenDismiss *weakSelf = self;
     [UIView animateWithDuration:animationDuration delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         snapShotView.frame = weakSelf.openingFrame;
     } completion:^(BOOL finished) {

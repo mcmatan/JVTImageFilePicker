@@ -38,7 +38,7 @@
     NSString *cancelTxt = @"Cancel";
     self.actionSheet = [[JVTActionSheetView alloc] init];
     
-    __weak JVTFilesPicker *weakSelf = self;
+    __unsafe_unretained JVTFilesPicker *weakSelf = self;
     JVTActionSheetAction *photoLibrary = [JVTActionSheetAction actionWithTitle:photoLibraryTxt handler:^(JVTActionSheetAction *action) {
         [weakSelf photoLibraryPress];
     }];
@@ -90,7 +90,7 @@
 #pragma mark - type of action presses
 
 - (void)photoLibraryPress {
-    __weak JVTFilesPicker *weakSelf = self;
+    __unsafe_unretained JVTFilesPicker *weakSelf = self;
     UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
     imagePickerController.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
     [self.presentedFromController presentViewController:imagePickerController animated:YES completion:nil];
@@ -114,7 +114,7 @@
     AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
     if(authStatus == AVAuthorizationStatusAuthorized || authStatus == AVAuthorizationStatusNotDetermined) {
         
-        __weak JVTFilesPicker *weakSelf = self;
+        __unsafe_unretained JVTFilesPicker *weakSelf = self;
         UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
         imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
         imagePickerController.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto;
@@ -243,7 +243,7 @@
 #pragma mark - Alerts
 
 -(void) presentFileNotSupportedAlert {
-    __weak JVTFilesPicker *weakSelf = self;
+    __unsafe_unretained JVTFilesPicker *weakSelf = self;
     NSString *title = NSLocalizedString(@"room.fileTypeNotSupported", @"fileTypeNotSupported");
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okBtn = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
@@ -254,7 +254,7 @@
 }
 
 -(void) presentPermissionDenied {
-    __weak JVTFilesPicker *weakSelf = self;
+    __unsafe_unretained JVTFilesPicker *weakSelf = self;
     NSString *title = NSLocalizedString(@"room.permissionDenied.title", @"title");
     NSString *subtitle = NSLocalizedString(@"room.permissionDenied.subtitle", @"subtitle");
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:subtitle preferredStyle:UIAlertControllerStyleAlert];
