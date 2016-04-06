@@ -1,6 +1,6 @@
-# ImagePickerSheetController
+# ImageFilesPicker
 ImagePickerSheetController in Objective c
-# ImagePickerSheetController
+# ImageFilesPicker
 
 ## About
 
