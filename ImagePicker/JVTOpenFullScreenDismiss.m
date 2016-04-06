@@ -7,6 +7,7 @@
 //
 
 #import "JVTOpenFullScreenDismiss.h"
+#import "EXTScope.h"
 static NSTimeInterval transitionDuration = 0.3;
 
 @implementation JVTOpenFullScreenDismiss
@@ -25,9 +26,10 @@ static NSTimeInterval transitionDuration = 0.3;
     [containerView addSubview:snapShotView];
     
     fromViewController.view.alpha = 0;
-    __unsafe_unretained JVTOpenFullScreenDismiss *weakSelf = self;
+    @weakify(self);
     [UIView animateWithDuration:animationDuration delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        snapShotView.frame = weakSelf.openingFrame;
+        @strongify(self);
+        snapShotView.frame = self.openingFrame;
     } completion:^(BOOL finished) {
         [snapShotView removeFromSuperview];
         [fromViewController.view removeFromSuperview];

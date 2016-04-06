@@ -16,6 +16,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "JVTActionSheetAction.h"
 #import "JVTActionSheetView.h"
+#import "EXTScope.h"
 
 @interface JVTFilesPicker () <JVTRecetImagesCollectionDelegate>
 @property(nonatomic, strong) JVTActionSheetView *actionSheet;
@@ -38,18 +39,22 @@
     NSString *cancelTxt = @"Cancel";
     self.actionSheet = [[JVTActionSheetView alloc] init];
     
-    __unsafe_unretained JVTFilesPicker *weakSelf = self;
+    @weakify(self);
     JVTActionSheetAction *photoLibrary = [JVTActionSheetAction actionWithTitle:photoLibraryTxt handler:^(JVTActionSheetAction *action) {
-        [weakSelf photoLibraryPress];
+        @strongify(self);
+        [self photoLibraryPress];
     }];
     JVTActionSheetAction *takePhotoOrVideo = [JVTActionSheetAction actionWithTitle:takePhotoOrVideoTxt handler:^(JVTActionSheetAction *action) {
-        [weakSelf takePhotoOrVideoPress];
+        @strongify(self);
+        [self takePhotoOrVideoPress];
     }];
     JVTActionSheetAction *uploadFile = [JVTActionSheetAction actionWithTitle:uploadFileTxt handler:^(JVTActionSheetAction *action) {
-        [weakSelf uploadFilePress];
+        @strongify(self);
+        [self uploadFilePress];
     }];
     JVTActionSheetAction *cancel = [JVTActionSheetAction actionWithTitle:cancelTxt handler:^(JVTActionSheetAction *action) {
-            [weakSelf dismissPresentedControllerAndInformDelegate:nil];
+        @strongify(self);
+            [self dismissPresentedControllerAndInformDelegate:nil];
     }];
     
     [self.actionSheet addAction:photoLibrary];
@@ -90,12 +95,13 @@
 #pragma mark - type of action presses
 
 - (void)photoLibraryPress {
-    __unsafe_unretained JVTFilesPicker *weakSelf = self;
+    @weakify(self);
     UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
     imagePickerController.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
     [self.presentedFromController presentViewController:imagePickerController animated:YES completion:nil];
 
     imagePickerController.finalizationBlock = ^(UIImagePickerController *picker, NSDictionary *info) {
+        @strongify(self);
         UIImage *image = (UIImage *) [info valueForKey:UIImagePickerControllerOriginalImage];
         NSURL *imagePath = [info objectForKey:UIImagePickerControllerReferenceURL];
         NSString *imageName = [imagePath lastPathComponent];
@@ -105,7 +111,8 @@
         [picker pushViewController:imagePreviewViewController animated:YES];
     };
     imagePickerController.cancellationBlock = ^(UIImagePickerController *picker) {
-        [weakSelf dismissPresentedControllerAndInformDelegate:picker];
+        @strongify(self);
+        [self dismissPresentedControllerAndInformDelegate:picker];
     };
 }
 
@@ -114,13 +121,14 @@
     AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
     if(authStatus == AVAuthorizationStatusAuthorized || authStatus == AVAuthorizationStatusNotDetermined) {
         
-        __unsafe_unretained JVTFilesPicker *weakSelf = self;
+        @weakify(self);
         UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
         imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
         imagePickerController.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto;
         [self.presentedFromController presentViewController:imagePickerController animated:YES completion:nil];
         
         imagePickerController.finalizationBlock = ^(UIImagePickerController *picker, NSDictionary *info) {
+            @strongify(self);
             UIImage *image = (UIImage *) [info valueForKey:UIImagePickerControllerOriginalImage];
             NSURL *imagePath = [info objectForKey:UIImagePickerControllerReferenceURL];
             NSString *imageName = [imagePath lastPathComponent];
@@ -131,7 +139,8 @@
             
         };
         imagePickerController.cancellationBlock = ^(UIImagePickerController *picker) {
-            [weakSelf dismissPresentedControllerAndInformDelegate:picker];
+            @strongify(self);
+            [self dismissPresentedControllerAndInformDelegate:picker];
         };
         
     } else if(authStatus == AVAuthorizationStatusDenied){
@@ -243,25 +252,27 @@
 #pragma mark - Alerts
 
 -(void) presentFileNotSupportedAlert {
-    __unsafe_unretained JVTFilesPicker *weakSelf = self;
+    @weakify(self);
     NSString *title = NSLocalizedString(@"room.fileTypeNotSupported", @"fileTypeNotSupported");
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okBtn = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
     [alert addAction:okBtn];
     [self.presentedFromController presentViewController:alert animated:YES completion:^{
-        [weakSelf updateDelegateOnDissmiss];
+@strongify(self);
+        [self updateDelegateOnDissmiss];
     }];
 }
 
 -(void) presentPermissionDenied {
-    __unsafe_unretained JVTFilesPicker *weakSelf = self;
+    @weakify(self);
     NSString *title = NSLocalizedString(@"room.permissionDenied.title", @"title");
     NSString *subtitle = NSLocalizedString(@"room.permissionDenied.subtitle", @"subtitle");
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:subtitle preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okBtn = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
     [alert addAction:okBtn];
     [self.presentedFromController presentViewController:alert animated:YES completion:^{
-        [weakSelf updateDelegateOnDissmiss];
+@strongify(self);
+        [self updateDelegateOnDissmiss];
     }];
 }
 
