@@ -65,7 +65,7 @@
 #pragma mark - Private
 
 - (void)handleTapGesture:(id)sender {
-    [self.navigationController setNavigationBarHidden:!self.navigationController.navigationBarHidden animated:YES];
+    [self.navigationController setNavigationBarHidden:self.navigationController.navigationBarHidden animated:YES];
 }
 
 - (void)confirmSelection:(id)sender {
