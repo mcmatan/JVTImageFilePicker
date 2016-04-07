@@ -4,6 +4,12 @@ ImagePickerSheetController in Objective c
 
 ## About
 
+Butifuly designed UICompenent for uploading content
+
+![demo](http://gifimgs.com/res/0416/57065e786bd4a151447737.gif)
+
+Full screen preview from recent camera roll
+
 ![demo](https://i.imgflip.com/121euk.gif)
 
 ## CocoaPod
