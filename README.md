@@ -3,8 +3,7 @@
 
 [![Pod version](https://img.shields.io/cocoapods/v/ImageFilesPicker.svg?style=flat)](http://cocoadocs.org/docsets/ImageFilesPicker)
 
-
-![demo](http://gifimgs.com/res/0416/57065e786bd4a151447737.gif)
+<img src="http://gifimgs.com/res/0416/57065e786bd4a151447737.gif" alt="ImagePicker Icon" align="center" />
 
 ## Description
 
