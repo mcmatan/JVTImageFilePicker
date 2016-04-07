@@ -5,10 +5,11 @@
 
 ## Description
 
-<img src="https://i.imgflip.com/121euk.gif" alt="ImagePicker Icon" align="right" />
 **ImageFilesPicker** Is a butifuly designed UICompenent for uploading content
 
 **ImageFilesPicker** has full screen preview from recent camera roll
+
+![demo](http://gifimgs.com/res/0416/57065e786bd4a151447737.gif)
 
 ## Usage
 
