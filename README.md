@@ -1,6 +1,5 @@
 
 ##ImageFilesPicker
-=================
 
 [![Pod version](https://img.shields.io/cocoapods/v/ImageFilesPicker.svg?style=flat)](http://cocoadocs.org/docsets/ImageFilesPicker)
 
