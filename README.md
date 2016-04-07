@@ -1,5 +1,5 @@
 
-**ImageFilesPicker**
+##ImageFilesPicker
 
 ![demo](http://gifimgs.com/res/0416/57065e786bd4a151447737.gif)
 
