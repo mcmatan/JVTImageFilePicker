@@ -9,7 +9,7 @@
 
 **ImageFilesPicker** has full screen preview from recent camera roll
 
-![demo](http://gifimgs.com/res/0416/57065e786bd4a151447737.gif)
+![demo](https://i.imgflip.com/121euk.gif)
 
 ## Usage
 
