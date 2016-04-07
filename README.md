@@ -1,7 +1,7 @@
 
-![demo](http://gifimgs.com/res/0416/57065e786bd4a151447737.gif)
+**ImageFilesPicker**
 
-[![Version](0.1]
+![demo](http://gifimgs.com/res/0416/57065e786bd4a151447737.gif)
 
 ## Description
 
