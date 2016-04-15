@@ -6,11 +6,11 @@
 //  Copyright © 2016 Matan Cohen. All rights reserved.
 //
 
-#import "JVTOpenFullScreenDismiss.h"
+#import "JVTTransitionOpenImageFullScreenDismiss.h"
 #import "EXTScope.h"
 static NSTimeInterval transitionDuration = 0.3;
 
-@implementation JVTOpenFullScreenDismiss
+@implementation JVTTransitionOpenImageFullScreenDismiss
 
 -(NSTimeInterval) transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext {
     return transitionDuration;
@@ -34,6 +34,9 @@ static NSTimeInterval transitionDuration = 0.3;
         [snapShotView removeFromSuperview];
         [fromViewController.view removeFromSuperview];
         [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
+        if (self.dissmissBlock) {
+            self.dissmissBlock();
+        }
     }];
     
 }

@@ -6,24 +6,29 @@
 //  Copyright © 2016 Matan Cohen. All rights reserved.
 //
 
-#import "JVTOpenFullScreenTransitionDelegate.h"
-#import "JVTOpenFullScreenPresentationAnimator.h"
-#import "JVTOpenFullScreenDismiss.h"
+#import "JVTTransitionOpenImageFullScreenDelegate.h"
+#import "JVTTransitionOpenImageFullScreenPresentation.h"
+#import "JVTTransitionOpenImageFullScreenDismiss.h"
 
-@implementation JVTOpenFullScreenTransitionDelegate  {
+@implementation JVTTransitionOpenImageFullScreenDelegate {
     
 }
 
 -(id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
  
-    JVTOpenFullScreenPresentationAnimator *presentationAnimation = [JVTOpenFullScreenPresentationAnimator new];
+    JVTTransitionOpenImageFullScreenPresentation *presentationAnimation = [JVTTransitionOpenImageFullScreenPresentation new];
     presentationAnimation.openingFrame = self.openingFrame;
     return presentationAnimation;
 }
 
 -(id<UIViewControllerAnimatedTransitioning>) animationControllerForDismissedController:(UIViewController *)dismissed {
-    JVTOpenFullScreenDismiss *dissmissAnimation = [JVTOpenFullScreenDismiss new];
+    JVTTransitionOpenImageFullScreenDismiss *dissmissAnimation = [JVTTransitionOpenImageFullScreenDismiss new];
     dissmissAnimation.openingFrame = self.openingFrame;
+    dissmissAnimation.dissmissBlock = ^{
+        if (self.delegate) {
+            [self.delegate didDissmiss];
+        }
+    };
     return dissmissAnimation;
     
 }

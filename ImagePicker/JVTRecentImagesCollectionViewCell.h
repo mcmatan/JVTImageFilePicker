@@ -10,4 +10,5 @@
 
 @interface JVTRecentImagesCollectionViewCell : UICollectionViewCell
 -(void) setImage:(UIImage *) image ;
++(NSString *) cellIdentifer;
 @end

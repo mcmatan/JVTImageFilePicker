@@ -34,5 +34,9 @@
     [super prepareForReuse];
     self.imageView.image = nil;
 }
+
++(NSString *) cellIdentifer {
+    return NSStringFromClass([self class]);
+}
 @end
 

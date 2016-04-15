@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 @import UIKit;
-@interface JVTOpenFullScreenDismiss : NSObject <UIViewControllerAnimatedTransitioning>
+@interface JVTTransitionOpenImageFullScreenDismiss : NSObject <UIViewControllerAnimatedTransitioning>
 @property (nonatomic, assign)    CGRect openingFrame;
-
+@property (nonatomic,strong) void (^dissmissBlock)();
 @end

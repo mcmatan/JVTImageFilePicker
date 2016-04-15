@@ -1,5 +1,5 @@
 //
-//  JVTOpenFullScreenPresentationAnimator.h
+//  JVTTransitionOpenImageFullScreenPresentation.h
 //  ImagePicker
 //
 //  Created by Matan Cohen on 4/5/16.
@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 @import UIKit;
 
-@interface JVTOpenFullScreenPresentationAnimator : NSObject <UIViewControllerAnimatedTransitioning>
+@interface JVTTransitionOpenImageFullScreenPresentation : NSObject <UIViewControllerAnimatedTransitioning>
 @property (nonatomic, assign)    CGRect openingFrame;
 @end

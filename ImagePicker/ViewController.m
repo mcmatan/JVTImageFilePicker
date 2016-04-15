@@ -13,18 +13,26 @@
 
 #import "JVTActionSheetAction.h"
 #import "JVTActionSheetView.h"
+
+#import "JVTCustomCameraView.h"
+
+#import "LLSimpleCamera.h"
+@import AVFoundation;
+
 @interface ViewController ()<FilesPickerDelegate>
 @property (nonatomic,strong) JVTFilesPicker *filePicker;
 @property (nonatomic,strong) JVTRecetImagesCollection *recentImagesCollection;
-
 @property (nonatomic,strong) JVTActionSheetView *actionSheetView;
+
+
+@property (nonatomic,strong) LLSimpleCamera *camera;
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor redColor];
+    self.view.backgroundColor = [UIColor lightGrayColor];
 }
 
 -(void) viewDidAppear:(BOOL)animated {

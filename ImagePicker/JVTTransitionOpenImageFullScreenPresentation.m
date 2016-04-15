@@ -1,16 +1,16 @@
 //
-//  JVTOpenFullScreenPresentationAnimator.m
+//  JVTTransitionOpenImageFullScreenPresentation.m
 //  ImagePicker
 //
 //  Created by Matan Cohen on 4/5/16.
 //  Copyright © 2016 Matan Cohen. All rights reserved.
 //
 
-#import "JVTOpenFullScreenPresentationAnimator.h"
+#import "JVTTransitionOpenImageFullScreenPresentation.h"
 
 static NSTimeInterval transitionDuration = 0.5;
 
-@implementation JVTOpenFullScreenPresentationAnimator
+@implementation JVTTransitionOpenImageFullScreenPresentation
 
 -(NSTimeInterval) transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext {
     return transitionDuration;
