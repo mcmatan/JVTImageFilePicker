@@ -11,6 +11,16 @@
 
 **ImageFilesPicker** has full screen preview from recent camera roll
 
+**Camera instant share!**
+
+**Image picker**
+
+**Files upload via drop box, drive etc..**
+
+**Checks for camera accessibility, and adops UI presentation on live permission change.**
+
+
+
 ![demo](https://i.imgflip.com/121euk.gif)
 
 ## Usage
@@ -36,14 +46,6 @@
     NSLog(@"Did pick image");
 }
 ```
-
-
-## Features 
-
--Camera instant share!
--Image picker
--Files upload via drop box, drive etc..
--Checks for camera accessibility, and adops UI presentation on live permission change.
 
 ## Installation
 
