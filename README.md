@@ -5,6 +5,7 @@
 
 <img src="http://gifimgs.com/res/0416/57065e786bd4a151447737.gif" alt="ImagePicker Icon" align="center" />
 
+
 ## Description
 
 **ImageFilesPicker** Is a butifuly designed UICompenent for uploading content
@@ -21,7 +22,7 @@
 
 
 
-![demo](https://i.imgflip.com/121euk.gif)
+![demo](http://gifimgs.com/res/0416/57139cde8ecc8010362204.gif)
 
 ## Usage
 
