@@ -38,6 +38,13 @@
 ```
 
 
+## Features 
+
+-Camera instant share!
+-Image picker
+-Files upload via drop box, drive etc..
+-Checks for camera accessibility, and adops UI presentation on live permission change.
+
 ## Installation
 
 **ImagePicker** is available through [CocoaPods](http://cocoapods.org). To install
