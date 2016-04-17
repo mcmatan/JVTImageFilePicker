@@ -17,22 +17,24 @@
 #import "JVTCustomCameraView.h"
 #import "JVTTransitionOpenViewFullScreenDelegate.h"
 #import "LLSimpleCamera.h"
+#import "JVTCameraAccesebility.h"
 
 @import GLKit;
 static int cameraIndex = 0;
-@interface JVTRecetImagesCollection () <UICollectionViewDelegate, UICollectionViewDataSource, JVTOpenFullScreenTransitionDetailsVCDelegate, JVTTransitionOpenImageFullScreenDismissCalles, AVCaptureVideoDataOutputSampleBufferDelegate, JVTTransitionOpenViewFullScreenDelegateDismissCalles>
+@interface JVTRecetImagesCollection () <UICollectionViewDelegate, UICollectionViewDataSource, JVTOpenFullScreenTransitionDetailsVCDelegate, JVTTransitionOpenImageFullScreenDismissCalles, AVCaptureVideoDataOutputSampleBufferDelegate, JVTTransitionOpenViewFullScreenDelegateDismissCalles, JVTOpenFullScreenTransitioinCameraVCDelegate>
 @property (nonatomic,strong) UICollectionView *collectionView;
 @property (nonatomic,strong) NSArray<UIImage *> *imagesModel;
 
 @property (nonatomic,strong) JVTTransitionOpenImageFullScreenDelegate *transitionImageOpenDelegate;
 @property (nonatomic,strong) JVTTransitionOpenViewFullScreenDelegate *transitionViewOpenDelegate;
 
-@property (nonatomic,strong) JVTOpenFullScreenTransitionDetailsVC *vc;
-@property (nonatomic,strong) JVTOpenFullScreenTransitioinCameraVC *cameraVC;
+@property (nonatomic,strong) JVTOpenFullScreenTransitionDetailsVC *imageDisplayVC;
+@property (nonatomic,strong) JVTOpenFullScreenTransitioinCameraVC *cameraInstantTakeDisplay;
 
 @property (nonatomic,strong) JVTCustomCameraView *customCameraView;
 
 @property (nonatomic,strong) LLSimpleCamera *camera;
+@property (nonatomic, assign) BOOL cameraAccesible;
 
 @end
 
@@ -45,17 +47,33 @@ static int cameraIndex = 0;
           withImagesToDisplay:(NSArray<UIImage *>*) imagesToDisplay{
     self = [super initWithFrame:frame];
     if (self) {
+        self.cameraAccesible = NO;
         self.imagesModel = imagesToDisplay;
         [self configureItemSize];
         [self setupPresentationControllerAndTransitions];
         [self setupCollection];
-        self.customCameraView = [[JVTCustomCameraView alloc] init];
-        
-        // create camera with standard settings
-        self.camera = [[LLSimpleCamera alloc] init];
+        [self checkForCameraAccesbiliyAnsAskIfNeeded];
         
     }
     return self;
+}
+
+-(void) checkForCameraAccesbiliyAnsAskIfNeeded {
+    @weakify(self);
+    [JVTCameraAccesebility getCameraAccessibilityAndRequestIfNeeded:^(BOOL allowedToUseCamera) {
+        @strongify(self);
+        self.cameraAccesible = allowedToUseCamera;
+        if (allowedToUseCamera) {
+            [self cameraStateAccessible];
+            [self.collectionView reloadData];
+        }
+    }];
+}
+
+-(void) cameraStateAccessible {
+    self.customCameraView = [[JVTCustomCameraView alloc] init];
+    // create camera with standard settings
+    self.camera = [[LLSimpleCamera alloc] init];
 }
 
 -(void) configureItemSize {
@@ -90,10 +108,6 @@ static int cameraIndex = 0;
     self.transitionImageOpenDelegate.delegate = self;
     self.transitionViewOpenDelegate = [[JVTTransitionOpenViewFullScreenDelegate alloc] init];
     self.transitionViewOpenDelegate.delegate = self;
-    self.cameraVC = [[JVTOpenFullScreenTransitioinCameraVC alloc] init];
-    self.cameraVC.transitioningDelegate = self.transitionViewOpenDelegate;
-    self.cameraVC.modalPresentationStyle = UIModalPresentationCustom;
-    [self.cameraVC view];
 }
 
 #pragma mark - CollectionView deleegate data source
@@ -103,7 +117,7 @@ static int cameraIndex = 0;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.item == cameraIndex) {
+    if (indexPath.item == cameraIndex && self.cameraAccesible) {
         JVTRecentImagesVideoCollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:[JVTRecentImagesVideoCollectionViewCell cellIdentifer] forIndexPath:indexPath];
         
         
@@ -121,7 +135,7 @@ static int cameraIndex = 0;
 
 -(void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.item == cameraIndex) {
+    if (indexPath.item == cameraIndex && self.cameraAccesible) {
           [self cameraCellPressed:collectionView indexPath:indexPath];
     } else {
         [self imageCellPressed:collectionView indexPath:indexPath];
@@ -137,10 +151,10 @@ static int cameraIndex = 0;
     
     self.transitionImageOpenDelegate.openingFrame = frameToOpenFrom;
     
-    self.vc = [[JVTOpenFullScreenTransitionDetailsVC alloc] init];
-    self.vc.delegate = self;
-    [self.vc setImage:self.imagesModel[indexPath.row]];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:self.vc];
+    self.imageDisplayVC = [[JVTOpenFullScreenTransitionDetailsVC alloc] init];
+    self.imageDisplayVC.delegate = self;
+    [self.imageDisplayVC setImage:self.imagesModel[indexPath.row]];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:self.imageDisplayVC];
     nav.transitioningDelegate = self.transitionImageOpenDelegate;
     nav.modalPresentationStyle = UIModalPresentationCustom;
     [presentingViewController presentViewController:nav animated:YES completion:nil];
@@ -152,15 +166,21 @@ static int cameraIndex = 0;
     CGRect attFrame = att.frame;
     CGRect frameToOpenFrom = [collectionView convertRect:attFrame toView:presentingViewController.view];
     
+    self.cameraInstantTakeDisplay = [[JVTOpenFullScreenTransitioinCameraVC alloc] init];
+    self.cameraInstantTakeDisplay.delegate = self;
+    self.cameraInstantTakeDisplay.transitioningDelegate = self.transitionViewOpenDelegate;
+    self.cameraInstantTakeDisplay.modalPresentationStyle = UIModalPresentationCustom;
+    [self.cameraInstantTakeDisplay view];
+    
     self.camera.view.frame = frameToOpenFrom;
     [presentingViewController.view addSubview:self.camera.view];
     
     self.transitionViewOpenDelegate.openingFrame = frameToOpenFrom;
     [self.transitionViewOpenDelegate setViewToPresentFrom:self.camera.view];
     [self.transitionViewOpenDelegate setViewToDissmissFrom:self.camera.view];
-    [self.cameraVC setViewToPresent:self.camera.view];
+    [self.cameraInstantTakeDisplay setViewToPresent:self.camera.view];
     
-    [presentingViewController presentViewController:self.cameraVC animated:YES completion:nil];
+    [presentingViewController presentViewController:self.cameraInstantTakeDisplay animated:YES completion:nil];
 }
 
 -(void) didPressSendOnImage:(UIImage *)image {
@@ -174,4 +194,20 @@ static int cameraIndex = 0;
     [self.collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:0 inSection:0]]];
 }
 
+#pragma mark - JVTOpenFullScreenTransitioinCameraVCDelegate
+
+-(void) didPressTakeImage {
+        __weak typeof(self) weakSelf = self;
+    
+            [self.camera capture:^(LLSimpleCamera *camera, UIImage *image, NSDictionary *metadata, NSError *error) {
+                if(!error) {
+                    
+                    [weakSelf.delegate didPressSendOnImage:image];
+                }
+                else {
+                    NSLog(@"An error has occured: %@", error);
+                }
+            } exactSeenImage:YES];
+    
+}
 @end

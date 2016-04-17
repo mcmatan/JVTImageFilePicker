@@ -45,6 +45,7 @@
 }
 
 
+
 -(void) setViewToPresent:(UIView *) view {
     _viewToPresent = view;
 }
@@ -65,6 +66,12 @@
 
 -(void) startImagePicker {
 
+}
+
+-(void) snapButtonPressed:(UIButton *) button {
+    [self.delegate didPressTakeImage];
+    [self dismissViewControllerAnimated:YES completion:^{
+    }];
 }
 
 @end

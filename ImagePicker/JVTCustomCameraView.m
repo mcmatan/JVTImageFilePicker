@@ -47,12 +47,6 @@
         }
         if (videoConnection) { break; }
     }
-    
-//    [self.stillImageOutput captureStillImageAsynchronouslyFromConnection:videoConnection completionHandler: ^(CMSampleBufferRef imageSampleBuffer, NSError *error) {
-////        NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageSampleBuffer];
-////        UIImage *image = [[UIImage alloc] initWithData:imageData];
-////        callback(image);
-//    }];
 }
 
 
@@ -108,7 +102,7 @@
 
 
 
-//
+
 //-(void) addCamera {
 //
 //    AVAuthorizationStatus authorizationState = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];

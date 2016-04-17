@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 @import AVFoundation;
+
+@protocol JVTOpenFullScreenTransitioinCameraVCDelegate <NSObject>
+
+-(void) didPressTakeImage;
+
+@end
+
 @interface JVTOpenFullScreenTransitioinCameraVC : UIViewController
 -(void) setViewToPresent:(UIView *) view ;
+@property (nonatomic, weak) id<JVTOpenFullScreenTransitioinCameraVCDelegate> delegate;
 @end

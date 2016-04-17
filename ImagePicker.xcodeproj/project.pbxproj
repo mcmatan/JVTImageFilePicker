@@ -15,6 +15,7 @@
 		ED05646D1CC11F280020524C /* JVTTransitionOpenViewFullScreenDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ED05646C1CC11F280020524C /* JVTTransitionOpenViewFullScreenDelegate.m */; };
 		ED0564701CC11F800020524C /* JVTTransitionOpenViewFullScreenPresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = ED05646F1CC11F800020524C /* JVTTransitionOpenViewFullScreenPresentation.m */; };
 		ED0564731CC11FBD0020524C /* JVTTransitionOpenViewFullScreenDismiss.m in Sources */ = {isa = PBXBuildFile; fileRef = ED0564721CC11FBD0020524C /* JVTTransitionOpenViewFullScreenDismiss.m */; };
+		ED2B87ED1CC3BE250033AEE9 /* JVTCameraAccesebility.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2B87EC1CC3BE250033AEE9 /* JVTCameraAccesebility.m */; };
 		ED7A8E471CB3B09800A39614 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ED7A8E461CB3B09800A39614 /* main.m */; };
 		ED7A8E4A1CB3B09800A39614 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ED7A8E491CB3B09800A39614 /* AppDelegate.m */; };
 		ED7A8E4D1CB3B09800A39614 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED7A8E4C1CB3B09800A39614 /* ViewController.m */; };
@@ -74,6 +75,8 @@
 		ED05646F1CC11F800020524C /* JVTTransitionOpenViewFullScreenPresentation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVTTransitionOpenViewFullScreenPresentation.m; sourceTree = "<group>"; };
 		ED0564711CC11FBD0020524C /* JVTTransitionOpenViewFullScreenDismiss.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVTTransitionOpenViewFullScreenDismiss.h; sourceTree = "<group>"; };
 		ED0564721CC11FBD0020524C /* JVTTransitionOpenViewFullScreenDismiss.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVTTransitionOpenViewFullScreenDismiss.m; sourceTree = "<group>"; };
+		ED2B87EB1CC3BE250033AEE9 /* JVTCameraAccesebility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVTCameraAccesebility.h; sourceTree = "<group>"; };
+		ED2B87EC1CC3BE250033AEE9 /* JVTCameraAccesebility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVTCameraAccesebility.m; sourceTree = "<group>"; };
 		ED7A8E421CB3B09800A39614 /* ImagePicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImagePicker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED7A8E461CB3B09800A39614 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		ED7A8E481CB3B09800A39614 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -206,6 +209,15 @@
 			name = ViewTransition;
 			sourceTree = "<group>";
 		};
+		ED2B87EA1CC3BE0E0033AEE9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				ED2B87EB1CC3BE250033AEE9 /* JVTCameraAccesebility.h */,
+				ED2B87EC1CC3BE250033AEE9 /* JVTCameraAccesebility.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		ED7A8E391CB3B09800A39614 = {
 			isa = PBXGroup;
 			children = (
@@ -273,10 +285,11 @@
 		ED7A8E781CB3B0AD00A39614 /* Picker */ = {
 			isa = PBXGroup;
 			children = (
+				ED2B87EA1CC3BE0E0033AEE9 /* Model */,
 				ED7A8E791CB3B0B800A39614 /* JVTFilesPicker.h */,
 				ED7A8E7A1CB3B0B800A39614 /* JVTFilesPicker.m */,
 				ED0564591CBFBE290020524C /* CustomCamera */,
-				ED7A8EA31CB4035100A39614 /* JVTActionSheetView */,
+				ED7A8EA31CB4035100A39614 /* ActionSheetView */,
 				ED7A8E8A1CB3B56600A39614 /* RecetImagesCollection */,
 			);
 			name = Picker;
@@ -334,23 +347,23 @@
 			name = TransitionDelegate;
 			sourceTree = "<group>";
 		};
-		ED7A8EA31CB4035100A39614 /* JVTActionSheetView */ = {
+		ED7A8EA31CB4035100A39614 /* ActionSheetView */ = {
 			isa = PBXGroup;
 			children = (
-				ED7A8EA71CB403BE00A39614 /* JVTActionSheetAction */,
+				ED7A8EA71CB403BE00A39614 /* ActionSheetAction */,
 				ED7A8EA41CB4036600A39614 /* JVTActionSheetView.h */,
 				ED7A8EA51CB4036600A39614 /* JVTActionSheetView.m */,
 			);
-			name = JVTActionSheetView;
+			name = ActionSheetView;
 			sourceTree = "<group>";
 		};
-		ED7A8EA71CB403BE00A39614 /* JVTActionSheetAction */ = {
+		ED7A8EA71CB403BE00A39614 /* ActionSheetAction */ = {
 			isa = PBXGroup;
 			children = (
 				ED7A8EA81CB4044A00A39614 /* JVTActionSheetAction.h */,
 				ED7A8EA91CB4044A00A39614 /* JVTActionSheetAction.m */,
 			);
-			name = JVTActionSheetAction;
+			name = ActionSheetAction;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -487,6 +500,7 @@
 				ED7A8E7F1CB3B0C600A39614 /* EXTScope.m in Sources */,
 				ED0564701CC11F800020524C /* JVTTransitionOpenViewFullScreenPresentation.m in Sources */,
 				ED7A8E7B1CB3B0B800A39614 /* JVTFilesPicker.m in Sources */,
+				ED2B87ED1CC3BE250033AEE9 /* JVTCameraAccesebility.m in Sources */,
 				ED7A8E9F1CB3DE2C00A39614 /* JVTTransitionOpenImageFullScreenDismiss.m in Sources */,
 				ED7A8E4D1CB3B09800A39614 /* ViewController.m in Sources */,
 				ED0564581CBF92EC0020524C /* JVTOpenFullScreenTransitioinCameraVC.m in Sources */,

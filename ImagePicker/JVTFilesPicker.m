@@ -17,6 +17,7 @@
 #import "JVTActionSheetAction.h"
 #import "JVTActionSheetView.h"
 #import "EXTScope.h"
+#import "JVTCameraAccesebility.h"
 
 @interface JVTFilesPicker () <JVTRecetImagesCollectionDelegate>
 @property(nonatomic, strong) JVTActionSheetView *actionSheet;
@@ -67,7 +68,10 @@
             [self.actionSheet addAction:alertAction];
         }
     }
+    
+    
     [self addCollectionImagesPreviewToSheetAndPresent:self.actionSheet];
+    
 }
 
 -(void) addCollectionImagesPreviewToSheetAndPresent:(JVTActionSheetView *) alertController {
