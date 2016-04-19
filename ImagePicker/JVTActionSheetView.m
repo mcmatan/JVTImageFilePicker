@@ -67,7 +67,7 @@ static CGFloat itemHeight = 50;
         self.sheetView.frame = oldSheetViewFrame;
         
         CGRect itemViewFrame = self.headerView.frame;
-        itemViewFrame.origin.y = self.sheetView.frame.size.height - itemViewFrame.size.height;
+        itemViewFrame.origin.y = 0;
         self.headerView.frame = itemViewFrame;
         
         [self.sheetView addSubview:self.headerView];

@@ -41,6 +41,7 @@ static int cameraIndex = 0;
 @implementation JVTRecetImagesCollection {
     CGFloat itemWidth;
     CGFloat itemHeight;
+    CGFloat cellPadding;
 }
 
 -(instancetype) initWithFrame:(CGRect)frame
@@ -77,8 +78,9 @@ static int cameraIndex = 0;
 }
 
 -(void) configureItemSize {
+    cellPadding = 5;
     CGFloat aspectRatio =   [UIScreen mainScreen].bounds.size.width / [UIScreen mainScreen].bounds.size.height;
-    CGFloat height = CGRectGetHeight(self.frame);
+    CGFloat height = CGRectGetHeight(self.frame)  - (cellPadding * 2);
     CGFloat width = height * aspectRatio;
     
     itemWidth = width;
@@ -89,8 +91,8 @@ static int cameraIndex = 0;
 -(void) setupCollection {
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.itemSize = CGSizeMake(itemWidth, itemHeight);
-    flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
-    flowLayout.minimumLineSpacing = 5.0;
+    flowLayout.sectionInset = UIEdgeInsetsMake(cellPadding, 0, cellPadding, 0);
+    flowLayout.minimumLineSpacing = cellPadding;
     flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)) collectionViewLayout:flowLayout];
     [self.collectionView registerClass:[JVTRecentImagesCollectionViewCell class] forCellWithReuseIdentifier:[JVTRecentImagesCollectionViewCell cellIdentifer]];
