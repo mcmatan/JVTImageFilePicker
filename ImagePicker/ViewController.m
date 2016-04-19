@@ -33,6 +33,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor lightGrayColor];
+    UIImage *image = [UIImage imageNamed:@"Dark-Polygon-iphone-6-background.jpg"];
+    UIImageView *backgroundImage = [[UIImageView alloc] initWithImage:image];
+    backgroundImage.contentMode = UIViewContentModeScaleAspectFill;
+    backgroundImage.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
+    [self.view addSubview:backgroundImage];
+    [self.view sendSubviewToBack:backgroundImage];
 }
 
 -(void) viewDidAppear:(BOOL)animated {

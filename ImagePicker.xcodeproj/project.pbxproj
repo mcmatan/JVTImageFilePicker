@@ -16,6 +16,7 @@
 		ED0564701CC11F800020524C /* JVTTransitionOpenViewFullScreenPresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = ED05646F1CC11F800020524C /* JVTTransitionOpenViewFullScreenPresentation.m */; };
 		ED0564731CC11FBD0020524C /* JVTTransitionOpenViewFullScreenDismiss.m in Sources */ = {isa = PBXBuildFile; fileRef = ED0564721CC11FBD0020524C /* JVTTransitionOpenViewFullScreenDismiss.m */; };
 		ED2B87ED1CC3BE250033AEE9 /* JVTCameraAccesebility.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2B87EC1CC3BE250033AEE9 /* JVTCameraAccesebility.m */; };
+		ED2B87EF1CC3D0A90033AEE9 /* Dark-Polygon-iphone-6-background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ED2B87EE1CC3D0A90033AEE9 /* Dark-Polygon-iphone-6-background.jpg */; };
 		ED7A8E471CB3B09800A39614 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ED7A8E461CB3B09800A39614 /* main.m */; };
 		ED7A8E4A1CB3B09800A39614 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ED7A8E491CB3B09800A39614 /* AppDelegate.m */; };
 		ED7A8E4D1CB3B09800A39614 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED7A8E4C1CB3B09800A39614 /* ViewController.m */; };
@@ -77,6 +78,7 @@
 		ED0564721CC11FBD0020524C /* JVTTransitionOpenViewFullScreenDismiss.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVTTransitionOpenViewFullScreenDismiss.m; sourceTree = "<group>"; };
 		ED2B87EB1CC3BE250033AEE9 /* JVTCameraAccesebility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVTCameraAccesebility.h; sourceTree = "<group>"; };
 		ED2B87EC1CC3BE250033AEE9 /* JVTCameraAccesebility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVTCameraAccesebility.m; sourceTree = "<group>"; };
+		ED2B87EE1CC3D0A90033AEE9 /* Dark-Polygon-iphone-6-background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Dark-Polygon-iphone-6-background.jpg"; sourceTree = "<group>"; };
 		ED7A8E421CB3B09800A39614 /* ImagePicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImagePicker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED7A8E461CB3B09800A39614 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		ED7A8E481CB3B09800A39614 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -241,12 +243,14 @@
 		ED7A8E441CB3B09800A39614 /* ImagePicker */ = {
 			isa = PBXGroup;
 			children = (
+				ED2B87EA1CC3BE0E0033AEE9 /* Model */,
 				ED7A8E7C1CB3B0BA00A39614 /* Utiles */,
 				ED7A8E781CB3B0AD00A39614 /* Picker */,
 				ED7A8E481CB3B09800A39614 /* AppDelegate.h */,
 				ED7A8E491CB3B09800A39614 /* AppDelegate.m */,
 				ED7A8E4B1CB3B09800A39614 /* ViewController.h */,
 				ED7A8E4C1CB3B09800A39614 /* ViewController.m */,
+				ED2B87EE1CC3D0A90033AEE9 /* Dark-Polygon-iphone-6-background.jpg */,
 				ED7A8E4E1CB3B09800A39614 /* Main.storyboard */,
 				ED7A8E511CB3B09800A39614 /* Assets.xcassets */,
 				ED7A8E531CB3B09800A39614 /* LaunchScreen.storyboard */,
@@ -285,7 +289,6 @@
 		ED7A8E781CB3B0AD00A39614 /* Picker */ = {
 			isa = PBXGroup;
 			children = (
-				ED2B87EA1CC3BE0E0033AEE9 /* Model */,
 				ED7A8E791CB3B0B800A39614 /* JVTFilesPicker.h */,
 				ED7A8E7A1CB3B0B800A39614 /* JVTFilesPicker.m */,
 				ED0564591CBFBE290020524C /* CustomCamera */,
@@ -472,6 +475,7 @@
 			files = (
 				ED7A8E551CB3B09800A39614 /* LaunchScreen.storyboard in Resources */,
 				ED7A8E521CB3B09800A39614 /* Assets.xcassets in Resources */,
+				ED2B87EF1CC3D0A90033AEE9 /* Dark-Polygon-iphone-6-background.jpg in Resources */,
 				ED7A8E501CB3B09800A39614 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
