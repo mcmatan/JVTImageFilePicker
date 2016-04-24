@@ -43,7 +43,6 @@ static int cameraIndex = 0;
     CGFloat itemHeight;
     CGFloat cellPadding;
 }
-///Check 1.2
 
 -(instancetype) initWithFrame:(CGRect)frame
           withImagesToDisplay:(NSArray<UIImage *>*) imagesToDisplay{
@@ -92,7 +91,7 @@ static int cameraIndex = 0;
 -(void) setupCollection {
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.itemSize = CGSizeMake(itemWidth, itemHeight);
-    flowLayout.sectionInset = UIEdgeInsetsMake(cellPadding, 0, cellPadding, 0);
+    flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
     flowLayout.minimumLineSpacing = cellPadding;
     flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)) collectionViewLayout:flowLayout];

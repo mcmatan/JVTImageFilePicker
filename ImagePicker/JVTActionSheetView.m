@@ -56,7 +56,7 @@ static CGFloat itemHeight = 50;
     self.presentingOnView = view;
     self.sheetWidth = view.frame.size.width;
     
-    CGFloat topPadding = 5;
+    CGFloat topPadding = 0;
     self.sheetView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.sheetWidth, topPadding)];
     self.sheetView.backgroundColor = [UIColor whiteColor];
     
@@ -134,7 +134,7 @@ static CGFloat itemHeight = 50;
     UIBlockButton *btn = [[UIBlockButton alloc] init];
     [btn setTitle:action.title forState:UIControlStateNormal];
     [btn.titleLabel setTextAlignment:NSTextAlignmentCenter];
-    [btn setTitleColor:[UIColor colorWithRed:113.0/255.0 green:126.0/255.0 blue:255.0/255.0 alpha:1.0] forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor colorWithRed:46.0/255.0 green:145.0/255.0 blue:255.0/255.0 alpha:1.0] forState:UIControlStateNormal];
     
     [view setFrame:CGRectMake(0, 0, self.sheetWidth, itemHeight)];
     [btn setFrame:view.frame];
