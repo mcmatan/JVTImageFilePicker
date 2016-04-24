@@ -43,6 +43,7 @@ static int cameraIndex = 0;
     CGFloat itemHeight;
     CGFloat cellPadding;
 }
+///Check 1.2
 
 -(instancetype) initWithFrame:(CGRect)frame
           withImagesToDisplay:(NSArray<UIImage *>*) imagesToDisplay{
