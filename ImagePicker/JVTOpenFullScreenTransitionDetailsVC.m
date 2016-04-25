@@ -11,7 +11,6 @@
 @interface JVTOpenFullScreenTransitionDetailsVC () {
     CGPoint startPosition;
 }
-@property (nonatomic,strong) UIImageView *imageView;
 @property (nonatomic,strong) UIImage *image;
 @end
 
@@ -22,12 +21,15 @@
     self = [super init];
     if (self) {
         _image = image;
+        _imageView = [[UIImageView alloc] init];
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.view.backgroundColor = [UIColor blackColor];
     
     [self setupImageView];
     
@@ -42,12 +44,14 @@
 }
 
 -(void) setupImageView {
-    
-    self.imageView = [[UIImageView alloc] initWithFrame:[self rectForImageView:_image]];
-    [self.imageView setImage:self.image];
-    [self.imageView setContentMode:UIViewContentModeScaleAspectFill];
-    [self.view addSubview:self.imageView];
-    
+    [self.view addSubview:[self imageView]];
+}
+
+-(UIImageView*) imageView {
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:[self rectForImageView:_image]];
+    [imageView setImage:self.image];
+    [imageView setContentMode:UIViewContentModeScaleAspectFill];
+    return imageView;
 }
 
 -(CGRect) rectForImageView:(UIImage *) image {

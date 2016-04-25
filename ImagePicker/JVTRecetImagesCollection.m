@@ -169,7 +169,7 @@ static int cameraIndex = 0;
     
     self.imageDisplayVC = [[JVTOpenFullScreenTransitionDetailsVC alloc] initWithImage:self.imagesModel[indexPath.item]];
     self.imageDisplayVC.delegate = self;
-    
+    self.transitionImageOpenDelegate.dissmissAnimatingView = self.imageDisplayVC.imageView;
     
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:self.imageDisplayVC];
     nav.transitioningDelegate = self.transitionImageOpenDelegate;
