@@ -17,14 +17,19 @@
 
 @implementation JVTOpenFullScreenTransitionDetailsVC
 
+-(instancetype) initWithImage:(UIImage *) image
+{
+    self = [super init];
+    if (self) {
+        _image = image;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))];
-    [self.imageView setImage:self.image];
-    [self.imageView setContentMode:UIViewContentModeScaleAspectFill];
-    [self.view addSubview:self.imageView];
-    self.view.backgroundColor = [UIColor redColor];
+    [self setupImageView];
     
     [self.navigationController setNavigationBarHidden:YES animated:NO];
     
@@ -34,6 +39,28 @@
     UIBarButtonItem *back = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleDone target:self action:@selector(closeSelf)];
     self.navigationItem.leftBarButtonItem = back;
 
+}
+
+-(void) setupImageView {
+    
+    self.imageView = [[UIImageView alloc] initWithFrame:[self rectForImageView:_image]];
+    [self.imageView setImage:self.image];
+    [self.imageView setContentMode:UIViewContentModeScaleAspectFill];
+    [self.view addSubview:self.imageView];
+    
+}
+
+-(CGRect) rectForImageView:(UIImage *) image {
+    CGFloat screenWidth = CGRectGetWidth(self.view.frame);
+    CGFloat screenHeight = CGRectGetHeight(self.view.frame);
+    CGFloat screenAspectRatio =  screenWidth / screenHeight;
+    if (image.size.width > image.size.height) {
+        CGFloat imageHeight = screenWidth * screenAspectRatio;
+        CGFloat imageWidth = screenWidth;
+        return CGRectMake(0, (screenHeight / 2) - (imageHeight / 2), imageWidth, imageHeight);
+    } else {
+        return CGRectMake(0, 0, screenWidth, screenHeight);
+    }
 }
 
 -(void) viewDidAppear:(BOOL)animated {
@@ -49,10 +76,6 @@
 -(void) pressSend {
     [self.delegate didPressSendOnImage:self.image];
     [self closeSelf];    
-}
-
--(void) setImage:(UIImage *) image {
-    _image = image;
 }
 
 -(void) closeSelf {

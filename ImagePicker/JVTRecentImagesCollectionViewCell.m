@@ -9,7 +9,6 @@
 #import "JVTRecentImagesCollectionViewCell.h"
 
 @interface JVTRecentImagesCollectionViewCell ()
-@property (nonatomic,strong) UIImageView *imageView;
 @end
 
 @implementation JVTRecentImagesCollectionViewCell

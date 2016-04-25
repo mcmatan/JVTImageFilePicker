@@ -19,6 +19,8 @@
 #import "LLSimpleCamera.h"
 #import "JVTCameraAccesebility.h"
 
+static NSString * CellPortraitIdentifier = @"CELL_PROTRAIT";
+static NSString * CellLandscpeIdentifier = @"CELL_LANDSCAPE";
 @import GLKit;
 static int cameraIndex = 0;
 @interface JVTRecetImagesCollection () <UICollectionViewDelegate, UICollectionViewDataSource, JVTOpenFullScreenTransitionDetailsVCDelegate, JVTTransitionOpenImageFullScreenDismissCalles, AVCaptureVideoDataOutputSampleBufferDelegate, JVTTransitionOpenViewFullScreenDelegateDismissCalles, JVTOpenFullScreenTransitioinCameraVCDelegate>
@@ -39,8 +41,9 @@ static int cameraIndex = 0;
 @end
 
 @implementation JVTRecetImagesCollection {
-    CGFloat itemWidth;
     CGFloat itemHeight;
+    CGFloat itemWidthLandscap;
+    CGFloat itemWidthPortrait;
     CGFloat cellPadding;
 }
 
@@ -82,20 +85,22 @@ static int cameraIndex = 0;
     CGFloat aspectRatio =   [UIScreen mainScreen].bounds.size.width / [UIScreen mainScreen].bounds.size.height;
     CGFloat height = CGRectGetHeight(self.frame)  - (cellPadding * 2);
     CGFloat width = height * aspectRatio;
+    CGFloat widthAspectRatio = height / width;
+    CGFloat widthLandscap = height * widthAspectRatio;
     
-    itemWidth = width;
+    itemWidthPortrait = width;
+    itemWidthLandscap = widthLandscap;
     itemHeight = height;
-    
 }
 
 -(void) setupCollection {
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    flowLayout.itemSize = CGSizeMake(itemWidth, itemHeight);
     flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
     flowLayout.minimumLineSpacing = cellPadding;
     flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)) collectionViewLayout:flowLayout];
-    [self.collectionView registerClass:[JVTRecentImagesCollectionViewCell class] forCellWithReuseIdentifier:[JVTRecentImagesCollectionViewCell cellIdentifer]];
+    [self.collectionView registerClass:[JVTRecentImagesCollectionViewCell class] forCellWithReuseIdentifier:CellLandscpeIdentifier];
+    [self.collectionView registerClass:[JVTRecentImagesCollectionViewCell class] forCellWithReuseIdentifier:CellPortraitIdentifier];
     [self.collectionView registerClass:[JVTRecentImagesVideoCollectionViewCell class] forCellWithReuseIdentifier:[JVTRecentImagesVideoCollectionViewCell cellIdentifer]];
     [self addSubview:self.collectionView];
     self.collectionView.backgroundColor = [UIColor whiteColor];
@@ -114,6 +119,7 @@ static int cameraIndex = 0;
 
 #pragma mark - CollectionView deleegate data source
 
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.imagesModel.count;
 }
@@ -123,14 +129,22 @@ static int cameraIndex = 0;
         JVTRecentImagesVideoCollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:[JVTRecentImagesVideoCollectionViewCell cellIdentifer] forIndexPath:indexPath];
         
         
-        self.camera.view.frame = CGRectMake(0, 0, itemWidth, itemHeight);
+        self.camera.view.frame = CGRectMake(0, 0, itemWidthPortrait, itemHeight);
         self.camera.view.userInteractionEnabled = NO;
         [self.camera start];
         [cell setViewToPresent:self.camera.view];
         
         return cell;
     }
-    JVTRecentImagesCollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:[JVTRecentImagesCollectionViewCell cellIdentifer] forIndexPath:indexPath];
+    
+    NSString *cellIdentifier;
+    UIImage *image = self.imagesModel[indexPath.item];
+    if ([self isImagePortrait:image]) {
+        cellIdentifier = CellPortraitIdentifier;
+    } else {
+        cellIdentifier = CellLandscpeIdentifier;
+    }
+    JVTRecentImagesCollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     [cell setImage:self.imagesModel[indexPath.row]];
     return cell;
 }
@@ -153,14 +167,16 @@ static int cameraIndex = 0;
     
     self.transitionImageOpenDelegate.openingFrame = frameToOpenFrom;
     
-    self.imageDisplayVC = [[JVTOpenFullScreenTransitionDetailsVC alloc] init];
+    self.imageDisplayVC = [[JVTOpenFullScreenTransitionDetailsVC alloc] initWithImage:self.imagesModel[indexPath.item]];
     self.imageDisplayVC.delegate = self;
-    [self.imageDisplayVC setImage:self.imagesModel[indexPath.row]];
+    
+    
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:self.imageDisplayVC];
     nav.transitioningDelegate = self.transitionImageOpenDelegate;
     nav.modalPresentationStyle = UIModalPresentationCustom;
     [presentingViewController presentViewController:nav animated:YES completion:nil];
 }
+
 
 -(void) cameraCellPressed:(UICollectionView *) collectionView indexPath:(NSIndexPath *) indexPath {
     UIViewController *presentingViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
@@ -185,6 +201,12 @@ static int cameraIndex = 0;
     [presentingViewController presentViewController:self.cameraInstantTakeDisplay animated:YES completion:nil];
 }
 
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UIImage *image = self.imagesModel[indexPath.item];
+    return [self cellSizeForImage:image];
+}
+
 -(void) didPressSendOnImage:(UIImage *)image {
     [self.delegate didPressSendOnImage:image];
 }
@@ -194,6 +216,19 @@ static int cameraIndex = 0;
 -(void) didDissmiss {
     [self setupPresentationControllerAndTransitions];
     [self.collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:0 inSection:0]]];
+}
+
+#pragma mark - size calculations
+
+-(CGSize) cellSizeForImage:(UIImage *) image {
+    if ([self isImagePortrait:image]) {
+        return CGSizeMake(itemWidthPortrait, itemHeight);
+    }
+    return CGSizeMake(itemWidthLandscap, itemHeight);
+}
+
+-(BOOL) isImagePortrait:(UIImage *) image {
+    return image.size.height > image.size.width;
 }
 
 #pragma mark - JVTOpenFullScreenTransitioinCameraVCDelegate

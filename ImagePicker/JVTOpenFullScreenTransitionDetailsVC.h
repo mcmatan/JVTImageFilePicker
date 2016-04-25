@@ -15,6 +15,6 @@
 @end
 
 @interface JVTOpenFullScreenTransitionDetailsVC : UIViewController
--(void) setImage:(UIImage *) image ;
+-(instancetype) initWithImage:(UIImage *) image;
 @property (nonatomic,weak) id<JVTOpenFullScreenTransitionDetailsVCDelegate> delegate;
 @end
