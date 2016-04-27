@@ -11,4 +11,5 @@
 
 @interface JVTTransitionOpenImageFullScreenPresentation : NSObject <UIViewControllerAnimatedTransitioning>
 @property (nonatomic, assign)    CGRect openingFrame;
+@property (nonatomic,assign ) CGRect endingFrame;
 @end

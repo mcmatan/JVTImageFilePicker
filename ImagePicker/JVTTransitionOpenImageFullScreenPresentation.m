@@ -17,35 +17,35 @@ static NSTimeInterval transitionDuration = 0.5;
 }
 
 -(void) animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
-    UIViewController *fromViewController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     __block UIViewController *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     __block UIView *containerView = [transitionContext containerView];
     
+    UIView *backgroundBlackView = [UIView new];
+    backgroundBlackView.backgroundColor = [UIColor blackColor];
+    backgroundBlackView.frame = CGRectMake(0, 0, CGRectGetWidth(containerView.frame), CGRectGetHeight(containerView.frame));
+    backgroundBlackView.alpha = 0;
+    
+    [containerView addSubview:backgroundBlackView];
+    
     NSTimeInterval animationDuration = [self transitionDuration:transitionContext];
     
-    //Add blured background
-    CGRect fromViewFrame = fromViewController.view.frame;
-    
-    UIGraphicsBeginImageContext(fromViewFrame.size);
-    [fromViewController.view drawViewHierarchyInRect:fromViewFrame afterScreenUpdates:NO];
-    UIGraphicsEndImageContext();
-    
-    __block UIView *snapShotView = [toViewController.view resizableSnapshotViewFromRect:toViewController.view.frame afterScreenUpdates:YES withCapInsets:UIEdgeInsetsZero];
-    snapShotView.frame = self.openingFrame;
-    [containerView addSubview:snapShotView];
+    __block UIView *fromViewSnapShot = [toViewController.view resizableSnapshotViewFromRect:self.endingFrame afterScreenUpdates:YES withCapInsets:UIEdgeInsetsZero];
+    fromViewSnapShot.frame = self.openingFrame;
+    [containerView addSubview:fromViewSnapShot];
     
     toViewController.view.alpha = 0;
     [containerView addSubview:toViewController.view];
     
+    
     [UIView animateWithDuration:animationDuration delay:0 usingSpringWithDamping:0.8 initialSpringVelocity:20.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        snapShotView.frame = fromViewController.view.frame;
+        fromViewSnapShot.frame = self.endingFrame;
+        backgroundBlackView.alpha = 1;
     } completion:^(BOOL finished) {
-        [snapShotView removeFromSuperview];
         toViewController.view.alpha = 1.0;
+        [backgroundBlackView removeFromSuperview];
+        [fromViewSnapShot removeFromSuperview];
         [transitionContext completeTransition:finished];
     }];
-    
-    
 }
 
 @end

@@ -165,11 +165,13 @@ static int cameraIndex = 0;
     CGRect attFrame = att.frame;
     CGRect frameToOpenFrom = [collectionView convertRect:attFrame toView:presentingViewController.view];
     
-    self.transitionImageOpenDelegate.openingFrame = frameToOpenFrom;
     
     self.imageDisplayVC = [[JVTOpenFullScreenTransitionDetailsVC alloc] initWithImage:self.imagesModel[indexPath.item]];
     self.imageDisplayVC.delegate = self;
     self.transitionImageOpenDelegate.dissmissAnimatingView = self.imageDisplayVC.imageView;
+    
+    self.transitionImageOpenDelegate.openingFrame = frameToOpenFrom;
+    self.transitionImageOpenDelegate.endingFrame = self.imageDisplayVC.imageView.frame;
     
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:self.imageDisplayVC];
     nav.transitioningDelegate = self.transitionImageOpenDelegate;
@@ -228,7 +230,7 @@ static int cameraIndex = 0;
 }
 
 -(BOOL) isImagePortrait:(UIImage *) image {
-    return image.size.height > image.size.width;
+    return image.size.height >= image.size.width;
 }
 
 #pragma mark - JVTOpenFullScreenTransitioinCameraVCDelegate

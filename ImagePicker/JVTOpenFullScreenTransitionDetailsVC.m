@@ -33,14 +33,24 @@
     
     [self setupImageView];
     
-    [self.navigationController setNavigationBarHidden:YES animated:NO];
-    
     UIBarButtonItem *sendButton = [[UIBarButtonItem alloc] initWithTitle:@"Send" style:UIBarButtonItemStyleDone target:self action:@selector(pressSend)];
     self.navigationItem.rightBarButtonItem = sendButton;
 
     UIBarButtonItem *back = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleDone target:self action:@selector(closeSelf)];
     self.navigationItem.leftBarButtonItem = back;
 
+}
+
+-(void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self.navigationController setNavigationBarHidden:YES];
+}
+
+-(void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 -(void) setupImageView {
@@ -51,6 +61,7 @@
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:[self rectForImageView:_image]];
     [imageView setImage:self.image];
     [imageView setContentMode:UIViewContentModeScaleAspectFill];
+    imageView.clipsToBounds = YES;
     return imageView;
 }
 
@@ -65,11 +76,6 @@
     } else {
         return CGRectMake(0, 0, screenWidth, screenHeight);
     }
-}
-
--(void) viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 

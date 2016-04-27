@@ -22,16 +22,16 @@ static NSTimeInterval transitionDuration = 0.3;
     
     NSTimeInterval animationDuration = [self transitionDuration:transitionContext];
     
-    __block UIView *snapShotView = [fromViewController.view resizableSnapshotViewFromRect:fromViewController.view.bounds afterScreenUpdates:YES withCapInsets:UIEdgeInsetsZero];
-    [containerView addSubview:snapShotView];
+    __block UIView *openigViewSnapShot = [fromViewController.view resizableSnapshotViewFromRect:self.endingFrame afterScreenUpdates:YES withCapInsets:UIEdgeInsetsZero];
+    openigViewSnapShot.frame = self.endingFrame;
+    [containerView addSubview:openigViewSnapShot];
     
     fromViewController.view.alpha = 0;
     @weakify(self);
     [UIView animateWithDuration:animationDuration delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         @strongify(self);
-        snapShotView.frame = self.openingFrame;
+        openigViewSnapShot.frame = self.openingFrame;
     } completion:^(BOOL finished) {
-        [snapShotView removeFromSuperview];
         [fromViewController.view removeFromSuperview];
         [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
         if (self.dissmissBlock) {

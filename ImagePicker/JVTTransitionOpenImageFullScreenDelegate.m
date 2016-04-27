@@ -18,12 +18,14 @@
  
     JVTTransitionOpenImageFullScreenPresentation *presentationAnimation = [JVTTransitionOpenImageFullScreenPresentation new];
     presentationAnimation.openingFrame = self.openingFrame;
+    presentationAnimation.endingFrame = self.endingFrame;
     return presentationAnimation;
 }
 
 -(id<UIViewControllerAnimatedTransitioning>) animationControllerForDismissedController:(UIViewController *)dismissed {
     JVTTransitionOpenImageFullScreenDismiss *dissmissAnimation = [JVTTransitionOpenImageFullScreenDismiss new];
     dissmissAnimation.openingFrame = self.openingFrame;
+    dissmissAnimation.endingFrame = self.endingFrame;
     dissmissAnimation.animatingView = self.dissmissAnimatingView;
     dissmissAnimation.dissmissBlock = ^{
         if (self.delegate) {
