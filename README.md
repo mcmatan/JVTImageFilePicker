@@ -22,7 +22,7 @@
 
 
 
-![demo](http://gifimgs.com/res/0416/57139cde8ecc8010362204.gif)
+![demo](https://media.giphy.com/media/BV2WtKWhzzHVe/giphy.gif)
 
 ## Usage
 
