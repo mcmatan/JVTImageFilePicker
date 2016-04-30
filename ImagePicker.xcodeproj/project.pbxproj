@@ -682,8 +682,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/Vendor/**",
-					"$(SRCROOT)/Resource/**",
+					"$(SRCROOT)/Vendor/include/**",
+					"$(SRCROOT)/Resource/include/**",
 				);
 				INFOPLIST_FILE = ImagePicker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -699,8 +699,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/Vendor/**",
-					"$(SRCROOT)/Resource/**",
+					"$(SRCROOT)/Vendor/include/**",
+					"$(SRCROOT)/Resource/include/**",
 				);
 				INFOPLIST_FILE = ImagePicker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
