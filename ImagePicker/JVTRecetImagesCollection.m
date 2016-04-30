@@ -165,10 +165,6 @@ static int cameraIndex = 0;
     CGRect attFrame = att.frame;
     CGRect frameToOpenFrom = [collectionView convertRect:attFrame toView:presentingViewController.view];
     
-    JVTRecentImagesCollectionViewCell *cell = (JVTRecentImagesCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    self.cellImageViewPresenting = cell.imageView;
-    [cell.imageView setHidden:YES];
-    
     UIImage *image = self.imagesModel[indexPath.item];
     self.imageDisplayVC = [[JVTImagePreviewVC alloc] initWithImage:image];
     self.imageDisplayVC.delegate = self;
@@ -180,6 +176,13 @@ static int cameraIndex = 0;
     nav.transitioningDelegate = self.transitionImageOpenDelegate;
     nav.modalPresentationStyle = UIModalPresentationCustom;
     [presentingViewController presentViewController:nav animated:YES completion:^{}];
+    
+    JVTRecentImagesCollectionViewCell *cell = (JVTRecentImagesCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    self.cellImageViewPresenting = cell.imageView;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [cell.imageView setHidden:YES];
+    });
+    
 }
 
 
