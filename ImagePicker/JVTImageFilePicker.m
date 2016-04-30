@@ -6,7 +6,7 @@
 //  Copyright © 2016 Matan Cohen. All rights reserved.
 //
 
-#import "JVTFilesPicker.h"
+#import "JVTImageFilePicker.h"
 #import "UIImagePickerController+Block.h"
 #import "JVTWorker.h"
 #import <MobileCoreServices/MobileCoreServices.h>
@@ -19,13 +19,13 @@
 #import "EXTScope.h"
 #import "JVTCameraAccesebility.h"
 
-@interface JVTFilesPicker () <JVTRecetImagesCollectionDelegate>
+@interface JVTImageFilePicker () <JVTRecetImagesCollectionDelegate>
 @property(nonatomic, strong) JVTActionSheetView *actionSheet;
 @property(nonatomic, weak) UIViewController *presentedFromController;
 @property (nonatomic,strong) JVTRecetImagesCollection *recetImagesCollection;
 @end
 
-@implementation JVTFilesPicker
+@implementation JVTImageFilePicker
 
 
 - (void)presentFilesPickerOnController:(UIViewController *)presentFromController

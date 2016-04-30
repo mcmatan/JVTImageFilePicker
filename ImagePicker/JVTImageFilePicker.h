@@ -20,7 +20,7 @@
 - (void)didDismissFilesPicker;
 @end
 
-@interface JVTFilesPicker : NSObject <UIDocumentPickerDelegate, UIDocumentMenuDelegate, JVTImagePreviewVCDelegate>
+@interface JVTImageFilePicker : NSObject <UIDocumentPickerDelegate, UIDocumentMenuDelegate, JVTImagePreviewVCDelegate>
 @property(weak) id <FilesPickerDelegate> delegate;
 
 - (void)presentFilesPickerOnController:(UIViewController *)presentFromController;
