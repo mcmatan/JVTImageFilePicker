@@ -54,7 +54,7 @@
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'ImageFilesPicker', '~> 0.1.1'
+pod 'ImageFilesPicker', '~> 0.1.2'
 ```
 
 
