@@ -9,13 +9,13 @@
 #import <UIKit/UIKit.h>
 @import AVFoundation;
 
-@protocol JVTOpenFullScreenTransitioinCameraVCDelegate <NSObject>
+@protocol JVTCameraViewPreviewVCDelegate <NSObject>
 
 -(void) didPressTakeImage;
 
 @end
 
-@interface JVTOpenFullScreenTransitioinCameraVC : UIViewController
+@interface JVTCameraViewPreviewVC : UIViewController
 -(void) setViewToPresent:(UIView *) view ;
-@property (nonatomic, weak) id<JVTOpenFullScreenTransitioinCameraVCDelegate> delegate;
+@property (nonatomic, weak) id<JVTCameraViewPreviewVCDelegate> delegate;
 @end

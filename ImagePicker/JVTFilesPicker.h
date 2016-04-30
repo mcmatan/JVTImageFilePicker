@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "JVTImagePreviewController.h"
+#import "JVTImagePreviewVC.h"
 
 @import UIKit;
 @class JVTActionSheetAction;
@@ -20,7 +20,7 @@
 - (void)didDismissFilesPicker;
 @end
 
-@interface JVTFilesPicker : NSObject <UIDocumentPickerDelegate, UIDocumentMenuDelegate, JVTImagePreviewControllerDelegate>
+@interface JVTFilesPicker : NSObject <UIDocumentPickerDelegate, UIDocumentMenuDelegate, JVTImagePreviewVCDelegate>
 @property(weak) id <FilesPickerDelegate> delegate;
 
 - (void)presentFilesPickerOnController:(UIViewController *)presentFromController;

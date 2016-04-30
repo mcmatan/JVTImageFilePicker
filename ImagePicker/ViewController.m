@@ -14,8 +14,6 @@
 #import "JVTActionSheetAction.h"
 #import "JVTActionSheetView.h"
 
-#import "JVTCustomCameraView.h"
-
 #import "LLSimpleCamera.h"
 @import AVFoundation;
 
@@ -44,9 +42,11 @@
 -(void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    self.filePicker = [[JVTFilesPicker alloc] init];
-    self.filePicker.delegate = self;
-    [self presentActionSheet];
+    if (!self.filePicker) {
+        self.filePicker = [[JVTFilesPicker alloc] init];
+        self.filePicker.delegate = self;
+        [self presentActionSheet];
+    }
 }
 
 -(void) presentActionSheet {

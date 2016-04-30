@@ -26,7 +26,6 @@
     JVTTransitionOpenImageFullScreenDismiss *dissmissAnimation = [JVTTransitionOpenImageFullScreenDismiss new];
     dissmissAnimation.openingFrame = self.openingFrame;
     dissmissAnimation.endingFrame = self.endingFrame;
-    dissmissAnimation.animatingView = self.dissmissAnimatingView;
     dissmissAnimation.dissmissBlock = ^{
         if (self.delegate) {
             [self.delegate didDissmiss];

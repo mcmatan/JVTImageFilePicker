@@ -41,19 +41,19 @@
     self.actionSheet = [[JVTActionSheetView alloc] init];
     
     @weakify(self);
-    JVTActionSheetAction *photoLibrary = [JVTActionSheetAction actionWithTitle:photoLibraryTxt handler:^(JVTActionSheetAction *action) {
+    JVTActionSheetAction *photoLibrary = [JVTActionSheetAction actionWithTitle:photoLibraryTxt actionType:kActionType_default handler:^(JVTActionSheetAction *action) {
         @strongify(self);
         [self photoLibraryPress];
     }];
-    JVTActionSheetAction *takePhotoOrVideo = [JVTActionSheetAction actionWithTitle:takePhotoOrVideoTxt handler:^(JVTActionSheetAction *action) {
+    JVTActionSheetAction *takePhotoOrVideo = [JVTActionSheetAction actionWithTitle:takePhotoOrVideoTxt actionType:kActionType_default handler:^(JVTActionSheetAction *action) {
         @strongify(self);
         [self takePhotoOrVideoPress];
     }];
-    JVTActionSheetAction *uploadFile = [JVTActionSheetAction actionWithTitle:uploadFileTxt handler:^(JVTActionSheetAction *action) {
+    JVTActionSheetAction *uploadFile = [JVTActionSheetAction actionWithTitle:uploadFileTxt actionType:kActionType_default handler:^(JVTActionSheetAction *action) {
         @strongify(self);
         [self uploadFilePress];
     }];
-    JVTActionSheetAction *cancel = [JVTActionSheetAction actionWithTitle:cancelTxt handler:^(JVTActionSheetAction *action) {
+    JVTActionSheetAction *cancel = [JVTActionSheetAction actionWithTitle:cancelTxt actionType:kActionType_cancel handler:^(JVTActionSheetAction *action) {
         @strongify(self);
             [self dismissPresentedControllerAndInformDelegate:nil];
     }];
@@ -107,12 +107,8 @@
     imagePickerController.finalizationBlock = ^(UIImagePickerController *picker, NSDictionary *info) {
         @strongify(self);
         UIImage *image = (UIImage *) [info valueForKey:UIImagePickerControllerOriginalImage];
-        NSURL *imagePath = [info objectForKey:UIImagePickerControllerReferenceURL];
-        NSString *imageName = [imagePath lastPathComponent];
 
-        JVTImagePreviewController *imagePreviewViewController = [[JVTImagePreviewController alloc] initWithImage:image imageName:imageName];
-        imagePreviewViewController.delegate = self;
-        [picker pushViewController:imagePreviewViewController animated:YES];
+        [self showPreviewForImage:image];
     };
     imagePickerController.cancellationBlock = ^(UIImagePickerController *picker) {
         @strongify(self);
@@ -129,17 +125,14 @@
         UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
         imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
         imagePickerController.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto;
+        imagePickerController.allowsEditing = NO;
         [self.presentedFromController presentViewController:imagePickerController animated:YES completion:nil];
         
         imagePickerController.finalizationBlock = ^(UIImagePickerController *picker, NSDictionary *info) {
             @strongify(self);
             UIImage *image = (UIImage *) [info valueForKey:UIImagePickerControllerOriginalImage];
-            NSURL *imagePath = [info objectForKey:UIImagePickerControllerReferenceURL];
-            NSString *imageName = [imagePath lastPathComponent];
 
-            JVTImagePreviewController *imagePreviewViewController = [[JVTImagePreviewController alloc] initWithImage:image imageName:imageName];
-            imagePreviewViewController.delegate = self;
-            [picker pushViewController:imagePreviewViewController animated:YES];
+            [self didPressSendOnImage:image];
             
         };
         imagePickerController.cancellationBlock = ^(UIImagePickerController *picker) {
@@ -161,12 +154,6 @@
 
     [self.presentedFromController presentViewController:documentMenuViewController animated:YES completion:nil];
 }
-
-- (void)imagePreviewController:(JVTImagePreviewController *)controller didConfirmImageSelection:(UIImage *)image ImageName:(NSString *)imageName {
-    [self.delegate didPickImage:image withImageName:imageName];
-    [controller dismissViewControllerAnimated:YES completion:nil];
-}
-
 
 #pragma mark - documents picker
 
@@ -282,8 +269,33 @@
 
 #pragma mark - CollectionView picker delegat
 
--(void)didPressSendOnImage:(UIImage *)image {
+-(void)didChooseImagesFromCollection:(UIImage *)image {
     [self.actionSheet dismiss];
     [self.delegate didPickImage:image withImageName:@"asset"];
 }
+
+#pragma mark - ImagePreview delegate
+
+-(void) didPressSendOnImage:(UIImage *) image {
+    [self.presentedFromController dismissViewControllerAnimated:YES completion:nil];
+    [self.delegate didPickImage:image withImageName:@"asset"];
+}
+
+#pragma mark - image preview
+
+-(void) showPreviewForImage:(UIImage *) image {
+    UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
+    if (topController.presentedViewController) {
+        topController = topController.presentedViewController;
+    }
+    JVTImagePreviewVC *imagePreviewViewController = [[JVTImagePreviewVC alloc] initWithImage:image];
+    imagePreviewViewController.delegate = self;
+    if (topController.navigationController) {
+        [topController.navigationController pushViewController:imagePreviewViewController animated:YES];
+    } else {
+        [topController presentViewController:imagePreviewViewController animated:YES completion:nil];
+    }
+}
+
+
 @end

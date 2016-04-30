@@ -8,14 +8,14 @@
 
 @import UIKit;
 
-@protocol JVTOpenFullScreenTransitionDetailsVCDelegate <NSObject>
+@protocol JVTImagePreviewVCDelegate <NSObject>
 
 -(void) didPressSendOnImage:(UIImage *) image;
 
 @end
 
-@interface JVTOpenFullScreenTransitionDetailsVC : UIViewController
-@property (nonatomic,strong) UIImageView *imageView;;
+@interface JVTImagePreviewVC : UIViewController
 -(instancetype) initWithImage:(UIImage *) image;
-@property (nonatomic,weak) id<JVTOpenFullScreenTransitionDetailsVCDelegate> delegate;
+-(CGRect) rectForImageView:(UIImage *) image ;
+@property (nonatomic,weak) id<JVTImagePreviewVCDelegate> delegate;
 @end

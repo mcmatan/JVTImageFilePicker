@@ -18,6 +18,5 @@
 @interface JVTTransitionOpenImageFullScreenDelegate : NSObject <UIViewControllerTransitioningDelegate>
 @property (nonatomic,assign ) CGRect openingFrame;
 @property (nonatomic,assign ) CGRect endingFrame;
-@property (nonatomic) UIView *dissmissAnimatingView;
 @property (nonatomic,weak) id<JVTTransitionOpenImageFullScreenDismissCalles> delegate;
 @end

@@ -128,8 +128,9 @@ static CGFloat itemHeight = 50;
 
 -(UIView *) itemViewForAction:(JVTActionSheetAction *) action {
     UIView *view = [[UIView alloc] init];
-    UIView *topLineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.sheetWidth, 0.5)];
-    topLineView.backgroundColor = [UIColor colorWithRed:223.0/255.0 green:226.0/255.0 blue:229.0/255.0 alpha:1.0];
+    CGFloat linePaddingFromLeft = 10;
+    UIView *topLineView = [[UIView alloc] initWithFrame:CGRectMake(linePaddingFromLeft, 0, self.sheetWidth - linePaddingFromLeft, 0.5)];
+    topLineView.backgroundColor = [UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1.0];
     [view addSubview:topLineView];
     UIBlockButton *btn = [[UIBlockButton alloc] init];
     [btn setTitle:action.title forState:UIControlStateNormal];
@@ -139,6 +140,10 @@ static CGFloat itemHeight = 50;
     [view setFrame:CGRectMake(0, 0, self.sheetWidth, itemHeight)];
     [btn setFrame:view.frame];
     [view addSubview:btn];
+    
+    CGFloat fontSize = 18;
+    CGFloat fontWeight = action.actionType == kActionType_default ? UIFontWeightRegular : UIFontWeightSemibold;
+    [btn.titleLabel setFont:[UIFont systemFontOfSize:fontSize weight:fontWeight]];
     
     [btn handleControlEvent:UIControlEventTouchUpInside withBlock:^{
         [self endPresentationAnimation];

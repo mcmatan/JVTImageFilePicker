@@ -10,7 +10,7 @@
 
 @protocol JVTRecetImagesCollectionDelegate <NSObject>
 
--(void) didPressSendOnImage:(UIImage *)image ;
+-(void) didChooseImagesFromCollection:(UIImage *)image ;
 
 @end
 

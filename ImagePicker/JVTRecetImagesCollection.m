@@ -9,31 +9,31 @@
 #import "JVTRecetImagesCollection.h"
 #import "JVTRecentImagesCollectionViewCell.h"
 #import "JVTTransitionOpenImageFullScreenDelegate.h"
-#import "JVTOpenFullScreenTransitionDetailsVC.h"
+#import "JVTImagePreviewVC.h"
 #import "JVTRecentImagesVideoCollectionViewCell.h"
 #import "UIImagePickerController+Block.h"
 #import "EXTScope.h"
-#import "JVTOpenFullScreenTransitioinCameraVC.h"
+#import "JVTCameraViewPreviewVC.h"
 #import "JVTCustomCameraView.h"
 #import "JVTTransitionOpenViewFullScreenDelegate.h"
+#import "EXTScope.h"
 #import "LLSimpleCamera.h"
 #import "JVTCameraAccesebility.h"
+#import "JVTImagePreviewVC.h"
 
 static NSString * CellPortraitIdentifier = @"CELL_PROTRAIT";
 static NSString * CellLandscpeIdentifier = @"CELL_LANDSCAPE";
 @import GLKit;
 static int cameraIndex = 0;
-@interface JVTRecetImagesCollection () <UICollectionViewDelegate, UICollectionViewDataSource, JVTOpenFullScreenTransitionDetailsVCDelegate, JVTTransitionOpenImageFullScreenDismissCalles, AVCaptureVideoDataOutputSampleBufferDelegate, JVTTransitionOpenViewFullScreenDelegateDismissCalles, JVTOpenFullScreenTransitioinCameraVCDelegate>
+@interface JVTRecetImagesCollection () <UICollectionViewDelegate, UICollectionViewDataSource, JVTImagePreviewVCDelegate, JVTTransitionOpenImageFullScreenDismissCalles, AVCaptureVideoDataOutputSampleBufferDelegate, JVTTransitionOpenViewFullScreenDelegateDismissCalles, JVTCameraViewPreviewVCDelegate>
 @property (nonatomic,strong) UICollectionView *collectionView;
 @property (nonatomic,strong) NSArray<UIImage *> *imagesModel;
 
 @property (nonatomic,strong) JVTTransitionOpenImageFullScreenDelegate *transitionImageOpenDelegate;
 @property (nonatomic,strong) JVTTransitionOpenViewFullScreenDelegate *transitionViewOpenDelegate;
 
-@property (nonatomic,strong) JVTOpenFullScreenTransitionDetailsVC *imageDisplayVC;
-@property (nonatomic,strong) JVTOpenFullScreenTransitioinCameraVC *cameraInstantTakeDisplay;
-
-@property (nonatomic,strong) JVTCustomCameraView *customCameraView;
+@property (nonatomic,strong) JVTImagePreviewVC *imageDisplayVC;
+@property (nonatomic,strong) JVTCameraViewPreviewVC *cameraInstantTakeDisplay;
 
 @property (nonatomic,strong) LLSimpleCamera *camera;
 @property (nonatomic, assign) BOOL cameraAccesible;
@@ -75,8 +75,6 @@ static int cameraIndex = 0;
 }
 
 -(void) cameraStateAccessible {
-    self.customCameraView = [[JVTCustomCameraView alloc] init];
-    // create camera with standard settings
     self.camera = [[LLSimpleCamera alloc] init];
 }
 
@@ -166,12 +164,12 @@ static int cameraIndex = 0;
     CGRect frameToOpenFrom = [collectionView convertRect:attFrame toView:presentingViewController.view];
     
     
-    self.imageDisplayVC = [[JVTOpenFullScreenTransitionDetailsVC alloc] initWithImage:self.imagesModel[indexPath.item]];
+    UIImage *image = self.imagesModel[indexPath.item];
+    self.imageDisplayVC = [[JVTImagePreviewVC alloc] initWithImage:image];
     self.imageDisplayVC.delegate = self;
-    self.transitionImageOpenDelegate.dissmissAnimatingView = self.imageDisplayVC.imageView;
     
     self.transitionImageOpenDelegate.openingFrame = frameToOpenFrom;
-    self.transitionImageOpenDelegate.endingFrame = self.imageDisplayVC.imageView.frame;
+    self.transitionImageOpenDelegate.endingFrame = [self.imageDisplayVC rectForImageView:image];
     
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:self.imageDisplayVC];
     nav.transitioningDelegate = self.transitionImageOpenDelegate;
@@ -186,7 +184,7 @@ static int cameraIndex = 0;
     CGRect attFrame = att.frame;
     CGRect frameToOpenFrom = [collectionView convertRect:attFrame toView:presentingViewController.view];
     
-    self.cameraInstantTakeDisplay = [[JVTOpenFullScreenTransitioinCameraVC alloc] init];
+    self.cameraInstantTakeDisplay = [[JVTCameraViewPreviewVC alloc] init];
     self.cameraInstantTakeDisplay.delegate = self;
     self.cameraInstantTakeDisplay.transitioningDelegate = self.transitionViewOpenDelegate;
     self.cameraInstantTakeDisplay.modalPresentationStyle = UIModalPresentationCustom;
@@ -209,8 +207,14 @@ static int cameraIndex = 0;
     return [self cellSizeForImage:image];
 }
 
+-(void) didChooseImagesFromCollection:(UIImage *)image {
+    [self.delegate didChooseImagesFromCollection:image];
+}
+
+#pragma mark - JVTImagePreviewVCDelegate
+
 -(void) didPressSendOnImage:(UIImage *)image {
-    [self.delegate didPressSendOnImage:image];
+    [self.delegate didChooseImagesFromCollection:image];
 }
 
 #pragma mark - JVTOpenFullScreenTransitionDelegateCalls delegate
@@ -236,12 +240,33 @@ static int cameraIndex = 0;
 #pragma mark - JVTOpenFullScreenTransitioinCameraVCDelegate
 
 -(void) didPressTakeImage {
-        __weak typeof(self) weakSelf = self;
+    @weakify(self);
     
             [self.camera capture:^(LLSimpleCamera *camera, UIImage *image, NSDictionary *metadata, NSError *error) {
+                @strongify(self);
                 if(!error) {
                     
-                    [weakSelf.delegate didPressSendOnImage:image];
+                    self.imageDisplayVC = [[JVTImagePreviewVC alloc] initWithImage:image];
+                    self.imageDisplayVC.delegate = self;
+                    
+
+                    UIView *mainWindow = [[UIApplication sharedApplication].windows lastObject];
+                    UIView *snapShot = [mainWindow snapshotViewAfterScreenUpdates:YES];
+                    [mainWindow addSubview:snapShot];
+
+                    [self.collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:0 inSection:0]]];
+                    UIViewController *presentingViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+                    [presentingViewController.presentedViewController dismissViewControllerAnimated:NO completion:nil];
+                    [presentingViewController presentViewController:self.imageDisplayVC animated:NO completion:nil];
+                    
+                    
+                    [self setNeedsDisplay];
+                    [self setNeedsLayout];
+                    
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        [snapShot removeFromSuperview];
+                    });
+                    
                 }
                 else {
                     NSLog(@"An error has occured: %@", error);
