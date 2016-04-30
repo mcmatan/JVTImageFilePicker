@@ -31,7 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor lightGrayColor];
-    UIImage *image = [UIImage imageNamed:@"Dark-Polygon-iphone-6-background.jpg"];
+    UIImage *image = [UIImage imageNamed:@"background.jpg"];
     UIImageView *backgroundImage = [[UIImageView alloc] initWithImage:image];
     backgroundImage.contentMode = UIViewContentModeScaleAspectFill;
     backgroundImage.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
