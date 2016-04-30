@@ -14,4 +14,5 @@
 - (void)addAction:(JVTActionSheetAction *)action;
 -(void) presentOnTopOfView:(UIView *) view;
 -(void) dismiss;
+-(void) show ;
 @end

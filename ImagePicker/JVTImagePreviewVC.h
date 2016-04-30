@@ -12,6 +12,9 @@
 
 -(void) didPressSendOnImage:(UIImage *) image;
 
+@optional
+-(void) didDismissImagePreview;
+
 @end
 
 @interface JVTImagePreviewVC : UIViewController

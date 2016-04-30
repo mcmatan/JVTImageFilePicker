@@ -7,6 +7,7 @@
 //
 
 #import "JVTImagePreviewVC.h"
+#import "EXTScope.h"
 
 @interface JVTImagePreviewVC () {
     CGPoint startPosition;
@@ -89,6 +90,7 @@
     _imageView = [[UIImageView alloc] init];
     [_imageView setTranslatesAutoresizingMaskIntoConstraints:NO];
     _imageView.contentMode = UIViewContentModeScaleAspectFit;
+    _imageView.clipsToBounds = YES;
     
     
     _imageView.userInteractionEnabled = YES;
@@ -114,6 +116,10 @@
     if (image.size.width > image.size.height) {
         CGFloat imageHeight = self.imageView.frame.size.width * (image.size.height / image.size.width);
        return CGRectMake(0, self.view.frame.size.height / 2 - (imageHeight / 2), self.imageView.frame.size.width, imageHeight);
+    } else {
+        CGFloat imageWidth = self.view.frame.size.width;
+        CGFloat imageHeight = imageWidth * (image.size.height / image.size.width);
+        return CGRectMake(0,  self.view.frame.size.height / 2 - (imageHeight / 2), imageWidth, imageHeight);
     }
     
     return self.imageView.frame;
@@ -130,9 +136,16 @@
 }
 
 -(void) closeSelf {
+    
     [self.backgroundBlackTransparentView removeFromSuperview];
     [self.navigationController setNavigationBarHidden:YES animated:NO];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    @weakify(self);
+    [self dismissViewControllerAnimated:YES completion:^{
+        @strongify(self);
+        if ([self.delegate respondsToSelector:@selector(didDismissImagePreview)]) {
+            [self.delegate didDismissImagePreview];
+        }
+    }];
 }
 
 

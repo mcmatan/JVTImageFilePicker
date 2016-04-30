@@ -35,7 +35,7 @@
     [self.presentedFromController.view endEditing:YES];
     
     NSString *photoLibraryTxt = @"Photo Library";
-    NSString *takePhotoOrVideoTxt = @"Take Photo Or Video";
+    NSString *takePhotoOrVideoTxt = @"Take Photo";
     NSString *uploadFileTxt = @"Upload File";
     NSString *cancelTxt = @"Cancel";
     self.actionSheet = [[JVTActionSheetView alloc] init];
@@ -112,7 +112,9 @@
     };
     imagePickerController.cancellationBlock = ^(UIImagePickerController *picker) {
         @strongify(self);
-        [self dismissPresentedControllerAndInformDelegate:picker];
+        [picker dismissViewControllerAnimated:YES completion:^{
+            [self.actionSheet show];
+        }];
     };
 }
 
@@ -137,7 +139,9 @@
         };
         imagePickerController.cancellationBlock = ^(UIImagePickerController *picker) {
             @strongify(self);
-            [self dismissPresentedControllerAndInformDelegate:picker];
+            [picker dismissViewControllerAnimated:YES completion:^{
+                [self.actionSheet show];
+            }];
         };
         
     } else if(authStatus == AVAuthorizationStatusDenied){

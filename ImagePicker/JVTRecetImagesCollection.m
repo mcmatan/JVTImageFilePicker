@@ -38,6 +38,8 @@ static int cameraIndex = 0;
 @property (nonatomic,strong) LLSimpleCamera *camera;
 @property (nonatomic, assign) BOOL cameraAccesible;
 
+@property (nonatomic, weak) UIImageView *cellImageViewPresenting;
+
 @end
 
 @implementation JVTRecetImagesCollection {
@@ -163,6 +165,9 @@ static int cameraIndex = 0;
     CGRect attFrame = att.frame;
     CGRect frameToOpenFrom = [collectionView convertRect:attFrame toView:presentingViewController.view];
     
+    JVTRecentImagesCollectionViewCell *cell = (JVTRecentImagesCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    self.cellImageViewPresenting = cell.imageView;
+    [cell.imageView setHidden:YES];
     
     UIImage *image = self.imagesModel[indexPath.item];
     self.imageDisplayVC = [[JVTImagePreviewVC alloc] initWithImage:image];
@@ -174,7 +179,7 @@ static int cameraIndex = 0;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:self.imageDisplayVC];
     nav.transitioningDelegate = self.transitionImageOpenDelegate;
     nav.modalPresentationStyle = UIModalPresentationCustom;
-    [presentingViewController presentViewController:nav animated:YES completion:nil];
+    [presentingViewController presentViewController:nav animated:YES completion:^{}];
 }
 
 
@@ -215,6 +220,10 @@ static int cameraIndex = 0;
 
 -(void) didPressSendOnImage:(UIImage *)image {
     [self.delegate didChooseImagesFromCollection:image];
+}
+
+-(void) didDismissImagePreview {
+    [self.cellImageViewPresenting setHidden:NO];
 }
 
 #pragma mark - JVTOpenFullScreenTransitionDelegateCalls delegate

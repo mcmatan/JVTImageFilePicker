@@ -22,6 +22,27 @@ static NSTimeInterval transitionDuration = 0.3;
     
     NSTimeInterval animationDuration = [self transitionDuration:transitionContext];
     
+    
+    
+    CGFloat openingFrameRatio;
+    
+    if (self.openingFrame.size.width > self.openingFrame.size.height) {
+        
+        openingFrameRatio =   self.openingFrame.size.height / self.openingFrame.size.width;
+        CGRect endingFrameWithRatio = self.endingFrame;
+        endingFrameWithRatio.size.height = endingFrameWithRatio.size.width * openingFrameRatio;
+        endingFrameWithRatio.origin.y =  (fromViewController.view.bounds.size.height /  2 ) - (endingFrameWithRatio.size.height/2);
+        self.endingFrame = endingFrameWithRatio;
+        
+    } else {
+        
+        openingFrameRatio =   self.openingFrame.size.width / self.openingFrame.size.height;
+        CGRect endingFrameWithRatio = self.endingFrame;
+        endingFrameWithRatio.size.width = endingFrameWithRatio.size.height * openingFrameRatio;
+        endingFrameWithRatio.origin.x =  (fromViewController.view.bounds.size.width /  2 ) - (endingFrameWithRatio.size.width/2);
+        self.endingFrame = endingFrameWithRatio;
+    }
+    
     __block UIView *openigViewSnapShot = [fromViewController.view resizableSnapshotViewFromRect:self.endingFrame afterScreenUpdates:YES withCapInsets:UIEdgeInsetsZero];
     openigViewSnapShot.frame = self.endingFrame;
     [containerView addSubview:openigViewSnapShot];

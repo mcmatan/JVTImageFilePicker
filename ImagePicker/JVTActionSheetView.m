@@ -48,6 +48,10 @@ static CGFloat itemHeight = 50;
     [self endPresentationAnimation];
 }
 
+-(void) show {
+    [self startPresentationAnimation];
+}
+
 -(void) presentOnTopOfView:(UIView *) view {
     if (isPresented) {
         return;
