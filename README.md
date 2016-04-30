@@ -29,7 +29,7 @@
 **ImageFilesPicker** works as a normal controller, just instantiate it and present it.
 
 ```objectivec
- self.filePicker = [[JVTFilesPicker alloc] init];
+ self.filePicker = [[JVTImageFilePicker alloc] init];
  self.filePicker.delegate = self;
  [self.filePicker presentFilesPickerOnController:self];
 ```

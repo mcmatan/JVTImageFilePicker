@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "JVTFilesPicker.h"
+#import "JVTImageFilePicker.h"
 #import "JVTRecentImagesProvider.h"
 #import "JVTRecetImagesCollection.h"
 
@@ -18,7 +18,7 @@
 @import AVFoundation;
 
 @interface ViewController ()<FilesPickerDelegate>
-@property (nonatomic,strong) JVTFilesPicker *filePicker;
+@property (nonatomic,strong) JVTImageFilePicker *filePicker;
 @property (nonatomic,strong) JVTRecetImagesCollection *recentImagesCollection;
 @property (nonatomic,strong) JVTActionSheetView *actionSheetView;
 
@@ -43,7 +43,7 @@
     [super viewDidAppear:animated];
     
     if (!self.filePicker) {
-        self.filePicker = [[JVTFilesPicker alloc] init];
+        self.filePicker = [[JVTImageFilePicker alloc] init];
         self.filePicker.delegate = self;
         [self presentActionSheet];
     }
