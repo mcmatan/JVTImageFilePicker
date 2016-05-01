@@ -10,11 +10,9 @@
 
 **ImageFilesPicker** Is a butifuly designed UICompenent for uploading content
 
-**ImageFilesPicker** has full screen preview from recent camera roll
+**Preview from recent camera roll** 
 
-**Camera instant share!**
-
-**Image picker**
+**Live Camera instant share!**
 
 **Files upload via drop box, drive etc..**
 
@@ -57,6 +55,7 @@ it, simply add the following line to your Podfile:
 pod 'ImageFilesPicker', '~> 0.1.3'
 ```
 
+Dont forget to enable icloud at Capabilities, for file sharing.
 
 ## Author
 
