@@ -2,36 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="820fb8da-650c-46de-b139-e56a0ef9e3d4" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Resource/background.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Vendor/EXTScope.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Vendor/EXTScope.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Vendor/LLSimpleCamera.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Vendor/LLSimpleCamera.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Vendor/UIBlockButton.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Vendor/UIBlockButton.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Vendor/UIImage+FixOrientation.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Vendor/UIImage+FixOrientation.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Vendor/UIImagePickerController+Block.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Vendor/UIImagePickerController+Block.m" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Vendor/metamacros.h" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ImagePicker/EXTScope.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ImagePicker/EXTScope.m" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ImagePicker/LLSimpleCamera.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ImagePicker/LLSimpleCamera.m" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ImagePicker/UIBlockButton.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ImagePicker/UIBlockButton.m" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ImagePicker/UIImage+FixOrientation.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ImagePicker/UIImage+FixOrientation.m" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ImagePicker/UIImagePickerController+Block.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ImagePicker/UIImagePickerController+Block.m" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ImagePicker/background.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ImagePicker/metamacros.h" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/ImagePicker/JVTFilesPicker.h" afterPath="$PROJECT_DIR$/ImagePicker/JVTImageFilePicker.h" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/ImagePicker/JVTFilesPicker.m" afterPath="$PROJECT_DIR$/ImagePicker/JVTImageFilePicker.m" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ImagePicker.xcodeproj/project.xcworkspace/xcuserdata/matan.cohen.xcuserdatad/UserInterfaceState.xcuserstate" afterPath="$PROJECT_DIR$/ImagePicker.xcodeproj/project.xcworkspace/xcuserdata/matan.cohen.xcuserdatad/UserInterfaceState.xcuserstate" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ImagePicker.xcodeproj/project.pbxproj" afterPath="$PROJECT_DIR$/ImagePicker.xcodeproj/project.pbxproj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ImagePicker/ViewController.m" afterPath="$PROJECT_DIR$/ImagePicker/ViewController.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
     </list>
     <ignored path="ImagePicker.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -65,8 +36,8 @@
       <file leaf-file-name="JVTImageFilePicker.m" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ImagePicker/JVTImageFilePicker.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.32921812">
-              <caret line="27" column="34" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="34" />
+            <state vertical-scroll-proportion="0.4526749">
+              <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -231,8 +202,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ImagePicker/JVTImageFilePicker.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.32921812">
-          <caret line="27" column="34" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="34" />
+        <state vertical-scroll-proportion="0.4526749">
+          <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
           <folding />
         </state>
       </provider>

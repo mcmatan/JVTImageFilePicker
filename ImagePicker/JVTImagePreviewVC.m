@@ -50,7 +50,7 @@
     self.backgroundBlackTransparentView.frame = backgroundFrame;
     
     CGFloat btnWidth = 70;
-    CGFloat btnPaddingFromLeft;
+    CGFloat btnPaddingFromLeft = 0;
     UIButton *btnCancel = [UIButton buttonWithType:UIButtonTypeCustom];
     [btnCancel setTitle:@"Cancel" forState:UIControlStateNormal];
     [btnCancel.titleLabel setTextColor:[UIColor whiteColor]];
