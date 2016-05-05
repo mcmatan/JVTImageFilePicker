@@ -248,7 +248,8 @@
 
 -(void) presentFileNotSupportedAlert {
     @weakify(self);
-    NSString *title = NSLocalizedString(@"room.fileTypeNotSupported", @"fileTypeNotSupported");
+    
+    NSString *title = @"Unable to Upload";
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okBtn = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
     [alert addAction:okBtn];
@@ -260,8 +261,8 @@
 
 -(void) presentPermissionDenied {
     @weakify(self);
-    NSString *title = NSLocalizedString(@"room.permissionDenied.title", @"title");
-    NSString *subtitle = NSLocalizedString(@"room.permissionDenied.subtitle", @"subtitle");
+    NSString *title = @"Permission Denied";
+    NSString *subtitle = @"App isn't allowed to access to the camera. You can change this from Settings > Privacy > Camera";
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:subtitle preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *okBtn = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
     [alert addAction:okBtn];
