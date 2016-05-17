@@ -210,7 +210,9 @@ static int cameraIndex = 0;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+    if (indexPath.item == cameraIndex && self.cameraAccesible) {
+        return CGSizeMake(itemWidthPortrait, itemHeight);;
+    }
     UIImage *image = self.imagesModel[indexPath.item];
     return [self cellSizeForImage:image];
 }
