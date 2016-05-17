@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
 s.name              = 'ImageFilesPicker'
-s.version           = '0.1.5'
+s.version           = '0.1.6'
 s.summary           = 'ImageFilesPicker'
 s.homepage          = 'https://github.com/mcmatan/ImageFilesPicker'
 s.ios.deployment_target = '8.0'
