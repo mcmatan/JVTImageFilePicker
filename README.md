@@ -52,7 +52,7 @@
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'ImageFilesPicker', '~> 0.1.5'
+pod 'ImageFilesPicker', '~> 0.1.6'
 ```
 
 Dont forget to enable icloud at Capabilities, for file sharing.
