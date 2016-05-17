@@ -11,6 +11,8 @@
 @import AssetsLibrary;
 #import "JVTCameraAccesebility.h"
 
+#define IMAGE_SIZE CGSizeMake(1000, 1000)
+
 static NSInteger maxResults = 15;
 
 @implementation JVTRecentImagesProvider
@@ -45,7 +47,7 @@ static NSInteger maxResults = 15;
         
         //   Get assets from the PHFetchResult object
         [allPhotosResult enumerateObjectsUsingBlock:^(PHAsset *asset, NSUInteger idx, BOOL *stop) {
-            CGSize size=CGSizeMake(200, 200);
+            CGSize size = IMAGE_SIZE;
             PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
             options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat; //I only want the highest possible quality
             options.synchronous = YES;
