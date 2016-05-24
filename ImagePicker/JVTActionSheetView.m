@@ -36,6 +36,10 @@ static CGFloat itemHeight = 50;
     return self;
 }
 
+-(BOOL) isPresented {
+    return isPresented;
+}
+
 - (void)addAction:(JVTActionSheetAction *)action {
     [self.actions addObject:action];
 }
@@ -94,15 +98,24 @@ static CGFloat itemHeight = 50;
     
     
     [self.sheetView setHidden:YES];
-    [view addSubview:self.backgroundDimmedView];
-    self.backgroundDimmedView.frame = CGRectMake(0, 0, CGRectGetWidth(view.frame), CGRectGetHeight(view.frame));
-    self.backgroundDimmedView.alpha = 0;
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapOnDimmedBackground)];
+    [self.backgroundDimmedView addGestureRecognizer:tap];
+    
     [view addSubview:self.sheetView];
     
     [self startPresentationAnimation];
 }
 
+-(void) addBackgroundDimmed  {
+    [self.backgroundDimmedView removeFromSuperview];
+    [self.presentingOnView insertSubview:self.backgroundDimmedView belowSubview:self.sheetView];
+    self.backgroundDimmedView.frame = CGRectMake(0, 0, CGRectGetWidth(self.presentingOnView.frame), CGRectGetHeight(self.presentingOnView.frame));
+    self.backgroundDimmedView.alpha = 0;
+}
+
 -(void) startPresentationAnimation {
+    [self addBackgroundDimmed];
     CGRect startFrame = self.sheetView.frame;
     startFrame.origin.y = self.presentingOnView.bounds.size.height;
     CGRect endFrame = startFrame;
@@ -113,7 +126,7 @@ static CGFloat itemHeight = 50;
     
     [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         [self.sheetView setFrame:endFrame];
-        self.backgroundDimmedView.alpha = 0.5;
+        self.backgroundDimmedView.alpha = 0.8;
     } completion:^(BOOL finished) {}];
 }
 
@@ -155,6 +168,10 @@ static CGFloat itemHeight = 50;
     }];
     
     return view;
+}
+
+-(void) didTapOnDimmedBackground {
+    [self dismiss];
 }
 
 @end

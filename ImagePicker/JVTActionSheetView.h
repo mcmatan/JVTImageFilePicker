@@ -15,4 +15,5 @@
 -(void) presentOnTopOfView:(UIView *) view;
 -(void) dismiss;
 -(void) show ;
+-(BOOL) isPresented;
 @end

@@ -31,6 +31,11 @@
 - (void)presentFilesPickerOnController:(UIViewController *)presentFromController
   withAddingCustomActionsToActionSheet:(NSArray *) customAlertActions {
     
+    if (self.actionSheet && [self.actionSheet isPresented]) {
+        NSLog(@"Trying to present ImagePicker when already presented");
+        return;
+    }
+    
     self.presentedFromController = presentFromController;
     [self.presentedFromController.view endEditing:YES];
     

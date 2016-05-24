@@ -119,7 +119,6 @@ static int cameraIndex = 0;
 
 #pragma mark - CollectionView deleegate data source
 
-
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.imagesModel.count;
 }
@@ -138,14 +137,14 @@ static int cameraIndex = 0;
     }
     
     NSString *cellIdentifier;
-    UIImage *image = self.imagesModel[indexPath.item];
+    UIImage *image = [self imageForImagePath:indexPath];
     if ([self isImagePortrait:image]) {
         cellIdentifier = CellPortraitIdentifier;
     } else {
         cellIdentifier = CellLandscpeIdentifier;
     }
     JVTRecentImagesCollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
-    [cell setImage:self.imagesModel[indexPath.row]];
+    [cell setImage:image];
     return cell;
 }
 
@@ -165,7 +164,7 @@ static int cameraIndex = 0;
     CGRect attFrame = att.frame;
     CGRect frameToOpenFrom = [collectionView convertRect:attFrame toView:presentingViewController.view];
     
-    UIImage *image = self.imagesModel[indexPath.item];
+    UIImage *image = [self imageForImagePath:indexPath];
     self.imageDisplayVC = [[JVTImagePreviewVC alloc] initWithImage:image];
     self.imageDisplayVC.delegate = self;
     
@@ -213,7 +212,7 @@ static int cameraIndex = 0;
     if (indexPath.item == cameraIndex && self.cameraAccesible) {
         return CGSizeMake(itemWidthPortrait, itemHeight);;
     }
-    UIImage *image = self.imagesModel[indexPath.item];
+    UIImage *image = [self imageForImagePath:indexPath];
     return [self cellSizeForImage:image];
 }
 
@@ -249,6 +248,14 @@ static int cameraIndex = 0;
 
 -(BOOL) isImagePortrait:(UIImage *) image {
     return image.size.height >= image.size.width;
+}
+
+-(UIImage *) imageForImagePath:(NSIndexPath *) indexPath {
+    if (self.cameraAccesible) {
+        return self.imagesModel[indexPath.item - 1];
+    } else {
+        return self.imagesModel[indexPath.item];
+    }
 }
 
 #pragma mark - JVTOpenFullScreenTransitioinCameraVCDelegate
