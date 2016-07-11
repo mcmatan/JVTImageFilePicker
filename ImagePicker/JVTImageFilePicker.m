@@ -19,13 +19,24 @@
 #import "EXTScope.h"
 #import "JVTCameraAccesebility.h"
 
-@interface JVTImageFilePicker () <JVTRecetImagesCollectionDelegate>
+@interface JVTImageFilePicker () <JVTRecetImagesCollectionDelegate, JVTActionSheetActionDelegate>
 @property(nonatomic, strong) JVTActionSheetView *actionSheet;
 @property(nonatomic, weak) UIViewController *presentedFromController;
 @property (nonatomic,strong) JVTRecetImagesCollection *recetImagesCollection;
+@property (nonatomic,strong) UIView *backgroundDimmedView;
 @end
 
 @implementation JVTImageFilePicker
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.backgroundDimmedView = [[UIView alloc] init];
+        self.backgroundDimmedView.backgroundColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:0.5];
+    }
+    return self;
+}
 
 
 - (void)presentFilesPickerOnController:(UIViewController *)presentFromController
@@ -36,14 +47,19 @@
         return;
     }
     
+    
     self.presentedFromController = presentFromController;
     [self.presentedFromController.view endEditing:YES];
+    
+    [self addBackgroundDimmed];
+    [self showBackgroundDimmed];
     
     NSString *photoLibraryTxt = @"Photo Library";
     NSString *takePhotoOrVideoTxt = @"Take Photo";
     NSString *uploadFileTxt = @"Upload File";
     NSString *cancelTxt = @"Cancel";
     self.actionSheet = [[JVTActionSheetView alloc] init];
+    self.actionSheet.delegate = self;
     
     @weakify(self);
     JVTActionSheetAction *photoLibrary = [JVTActionSheetAction actionWithTitle:photoLibraryTxt actionType:kActionType_default handler:^(JVTActionSheetAction *action) {
@@ -116,10 +132,7 @@
         [self showPreviewForImage:image];
     };
     imagePickerController.cancellationBlock = ^(UIImagePickerController *picker) {
-        @strongify(self);
-        [picker dismissViewControllerAnimated:YES completion:^{
-            [self.actionSheet show];
-        }];
+        [picker dismissViewControllerAnimated:YES completion:^{}];
     };
 }
 
@@ -143,10 +156,7 @@
             
         };
         imagePickerController.cancellationBlock = ^(UIImagePickerController *picker) {
-            @strongify(self);
-            [picker dismissViewControllerAnimated:YES completion:^{
-                [self.actionSheet show];
-            }];
+            [picker dismissViewControllerAnimated:YES completion:^{}];
         };
         
     } else if(authStatus == AVAuthorizationStatusDenied){
@@ -249,6 +259,15 @@
     }
 }
 
+#pragma mark - Action sheet delegate
+
+-(void) actionSheetDidDismiss {
+    [self hideBackgroundDimmed];
+    [self.recetImagesCollection removeFromSuperview];
+    self.recetImagesCollection = nil;
+    NSLog(@"JVTImageFilesPicker dismissed");
+}
+
 #pragma mark - Alerts
 
 -(void) presentFileNotSupportedAlert {
@@ -307,5 +326,37 @@
     }
 }
 
+#pragma mark - Background dimmed view
 
+
+-(void) addBackgroundDimmed  {
+    [self.backgroundDimmedView removeFromSuperview];
+    [self.presentedFromController.view addSubview:self.backgroundDimmedView];
+    self.backgroundDimmedView.frame = CGRectMake(0, 0, CGRectGetWidth(self.presentedFromController.view.frame), CGRectGetHeight(self.presentedFromController.view.frame));
+    self.backgroundDimmedView.alpha = 0;
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapOnDimmedBackground)];
+    [self.backgroundDimmedView addGestureRecognizer:tap];
+}
+
+-(void) didTapOnDimmedBackground {
+    [self.actionSheet dismiss];
+}
+
+-(void) showBackgroundDimmed {
+    [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.backgroundDimmedView.alpha = 0.8;
+    } completion:^(BOOL finished) {}];
+}
+
+-(void) hideBackgroundDimmed {
+    @weakify(self);
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        @strongify(self);
+        self.backgroundDimmedView.alpha = 0;
+    } completion:^(BOOL finished) {
+        @strongify(self);
+        [self.backgroundDimmedView removeFromSuperview];
+    }];
+}
 @end

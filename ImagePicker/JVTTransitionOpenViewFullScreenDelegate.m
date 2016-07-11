@@ -9,10 +9,10 @@
 #import "JVTTransitionOpenViewFullScreenDelegate.h"
 #import "JVTTransitionOpenViewFullScreenPresentation.h"
 #import "JVTTransitionOpenViewFullScreenDismiss.h"
-
+#import "EXTScope.h"
 @interface JVTTransitionOpenViewFullScreenDelegate ()
-@property (nonatomic,strong) UIView *viewToPresentFrom;
-@property (nonatomic,strong) UIView *viewToDissmissFrom;
+@property (nonatomic,weak) UIView *viewToPresentFrom;
+@property (nonatomic,weak) UIView *viewToDissmissFrom;
 @end
 
 @implementation JVTTransitionOpenViewFullScreenDelegate
@@ -28,7 +28,9 @@
     JVTTransitionOpenViewFullScreenDismiss *dissmissAnimation = [JVTTransitionOpenViewFullScreenDismiss new];
     dissmissAnimation.openingFrame = self.openingFrame;
     dissmissAnimation.viewToDissmissFrom = self.viewToDissmissFrom;
+    @weakify(self);
     dissmissAnimation.dissmissBlock = ^{
+        @strongify(self);
         if (self.delegate) {
             [self.delegate didDissmiss];
         }

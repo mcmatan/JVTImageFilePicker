@@ -10,7 +10,7 @@
 @import AVFoundation;
 
 @interface JVTRecentImagesVideoCollectionViewCell ()
-@property (nonatomic,strong) UIView *viewToPresent;
+@property (nonatomic,weak) UIView *viewToPresent;
 @end
 
 @implementation JVTRecentImagesVideoCollectionViewCell

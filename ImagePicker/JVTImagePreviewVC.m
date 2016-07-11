@@ -20,7 +20,6 @@
 
 @implementation JVTImagePreviewVC
 
-
 -(instancetype) initWithImage:(UIImage *) image
 {
     self = [super init];
@@ -159,8 +158,10 @@
 -(void) showBottomInteractionsViewAnimation {
     [self.view bringSubviewToFront:self.backgroundBlackTransparentView];
     CGFloat backgroundViewHeight = self.backgroundBlackTransparentView.frame.size.height;
+    @weakify(self);
     CGRect backgroundFrame = CGRectMake(0,[UIScreen mainScreen].bounds.size.height - backgroundViewHeight, [UIScreen mainScreen].bounds.size.width, backgroundViewHeight);
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        @strongify(self);
         self.backgroundBlackTransparentView.frame = backgroundFrame;
     } completion:^(BOOL finished) {}];
 }

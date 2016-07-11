@@ -11,7 +11,7 @@
 @import AssetsLibrary;
 #import "JVTCameraAccesebility.h"
 
-#define IMAGE_SIZE CGSizeMake(1000, 1000)
+#define IMAGE_SIZE CGSizeMake(600, 600)
 
 static NSInteger maxResults = 15;
 

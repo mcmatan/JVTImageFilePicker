@@ -9,19 +9,18 @@
 #import "JVTActionSheetView.h"
 #import "JVTActionSheetAction.h"
 #import "UIBlockButton.h"
+#import "EXTScope.h"
 @import UIKit;
 
 static CGFloat itemHeight = 50;
 
-@interface JVTActionSheetView () {
-    BOOL isPresented;
-}
+@interface JVTActionSheetView () {}
 @property (nonatomic,strong) NSMutableArray<JVTActionSheetAction *> *actions;
-@property (nonatomic,strong) UIView *headerView;
+@property (nonatomic,weak) UIView *headerView;
 @property (nonatomic,assign) CGFloat sheetWidth;
 @property (nonatomic,strong) UIView *sheetView;
-@property (nonatomic,strong) UIView *presentingOnView;
-@property (nonatomic,strong) UIView *backgroundDimmedView;
+@property (nonatomic,weak) UIView *presentingOnView;
+@property (nonatomic, assign) BOOL isPresented;
 @end
 
 @implementation JVTActionSheetView
@@ -29,15 +28,8 @@ static CGFloat itemHeight = 50;
 -(instancetype) init {
     self = [super init];
     if (self) {
-        self.actions = [NSMutableArray array];
-        self.backgroundDimmedView = [[UIView alloc] init];
-        self.backgroundDimmedView.backgroundColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:0.5];
-    }
+        self.actions = [NSMutableArray array];    }
     return self;
-}
-
--(BOOL) isPresented {
-    return isPresented;
 }
 
 - (void)addAction:(JVTActionSheetAction *)action {
@@ -57,10 +49,10 @@ static CGFloat itemHeight = 50;
 }
 
 -(void) presentOnTopOfView:(UIView *) view {
-    if (isPresented) {
+    if (self.isPresented) {
         return;
     }
-    isPresented = YES;
+    self.isPresented = YES;
     self.presentingOnView = view;
     self.sheetWidth = view.frame.size.width;
     
@@ -99,23 +91,12 @@ static CGFloat itemHeight = 50;
     
     [self.sheetView setHidden:YES];
     
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapOnDimmedBackground)];
-    [self.backgroundDimmedView addGestureRecognizer:tap];
-    
     [view addSubview:self.sheetView];
     
     [self startPresentationAnimation];
 }
 
--(void) addBackgroundDimmed  {
-    [self.backgroundDimmedView removeFromSuperview];
-    [self.presentingOnView insertSubview:self.backgroundDimmedView belowSubview:self.sheetView];
-    self.backgroundDimmedView.frame = CGRectMake(0, 0, CGRectGetWidth(self.presentingOnView.frame), CGRectGetHeight(self.presentingOnView.frame));
-    self.backgroundDimmedView.alpha = 0;
-}
-
 -(void) startPresentationAnimation {
-    [self addBackgroundDimmed];
     CGRect startFrame = self.sheetView.frame;
     startFrame.origin.y = self.presentingOnView.bounds.size.height;
     CGRect endFrame = startFrame;
@@ -126,7 +107,6 @@ static CGFloat itemHeight = 50;
     
     [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         [self.sheetView setFrame:endFrame];
-        self.backgroundDimmedView.alpha = 0.8;
     } completion:^(BOOL finished) {}];
 }
 
@@ -134,12 +114,17 @@ static CGFloat itemHeight = 50;
     CGRect endFrame = self.sheetView.frame;
     endFrame.origin.y = self.presentingOnView.bounds.size.height;
 
+    @weakify(self);
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        @strongify(self);
         [self.sheetView setFrame:endFrame];
-        self.backgroundDimmedView.alpha = 0;
     } completion:^(BOOL finished) {
-        isPresented = NO;
-        [self.backgroundDimmedView removeFromSuperview];
+        @strongify(self);
+        self.isPresented = NO;
+
+        if (self.delegate) {
+            [self.delegate actionSheetDidDismiss];
+        }
     }];
 }
 
@@ -162,7 +147,9 @@ static CGFloat itemHeight = 50;
     CGFloat fontWeight = action.actionType == kActionType_default ? UIFontWeightRegular : UIFontWeightSemibold;
     [btn.titleLabel setFont:[UIFont systemFontOfSize:fontSize weight:fontWeight]];
     
+    @weakify(self);
     [btn handleControlEvent:UIControlEventTouchUpInside withBlock:^{
+        @strongify(self);
         [self endPresentationAnimation];
         action.handler(action);
     }];

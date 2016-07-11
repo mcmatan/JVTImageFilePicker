@@ -12,7 +12,7 @@
 #import "LLSimpleCamera.h"
 
 @interface JVTCameraViewPreviewVC ()
-@property (nonatomic,strong) UIView *viewToPresent;
+@property (nonatomic,weak) UIView *viewToPresent;
 @property (nonatomic,strong) UIButton *snapButton;
 @property (nonatomic, weak) UIView * originalSuperView;
 
@@ -87,15 +87,8 @@
 
 
 -(void) snapButtonPressed:(UIButton *) button {
-   // [self dissmiss:NO];
-  //   [self.originalSuperView addSubview:self.viewToPresent];
     [self.delegate didPressTakeImage];
-//    [self.originalSuperView addSubview:self.viewToPresent];
-//    @weakify(self);
-//    [self dismissViewControllerAnimated:NO completion:^{
-//        @strongify(self);
-//        [self.viewToPresent removeFromSuperview];
-//    }];
+
 }
 
 -(void) dissmiss:(BOOL) animated {
@@ -112,7 +105,9 @@
 -(void) showBottomInteractionsViewAnimation {
     CGFloat backgroundViewHeight = self.backgroundBlackTransparentView.frame.size.height;
     CGRect backgroundFrame = CGRectMake(0,[UIScreen mainScreen].bounds.size.height - backgroundViewHeight, [UIScreen mainScreen].bounds.size.width, backgroundViewHeight);
+    @weakify(self);
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        @strongify(self);
         self.backgroundBlackTransparentView.frame = backgroundFrame;
     } completion:^(BOOL finished) {}];
 }

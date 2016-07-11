@@ -14,7 +14,6 @@
 #import "UIImagePickerController+Block.h"
 #import "EXTScope.h"
 #import "JVTCameraViewPreviewVC.h"
-#import "JVTCustomCameraView.h"
 #import "JVTTransitionOpenViewFullScreenDelegate.h"
 #import "EXTScope.h"
 #import "LLSimpleCamera.h"

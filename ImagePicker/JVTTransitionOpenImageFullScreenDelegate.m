@@ -9,6 +9,7 @@
 #import "JVTTransitionOpenImageFullScreenDelegate.h"
 #import "JVTTransitionOpenImageFullScreenPresentation.h"
 #import "JVTTransitionOpenImageFullScreenDismiss.h"
+#import "EXTScope.h"
 
 @implementation JVTTransitionOpenImageFullScreenDelegate {
     
@@ -26,7 +27,9 @@
     JVTTransitionOpenImageFullScreenDismiss *dissmissAnimation = [JVTTransitionOpenImageFullScreenDismiss new];
     dissmissAnimation.openingFrame = self.openingFrame;
     dissmissAnimation.endingFrame = self.endingFrame;
+    @weakify(self);
     dissmissAnimation.dissmissBlock = ^{
+        @strongify(self);
         if (self.delegate) {
             [self.delegate didDissmiss];
         }

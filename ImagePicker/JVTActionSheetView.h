@@ -7,9 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+
+@protocol JVTActionSheetActionDelegate <NSObject>
+
+-(void) actionSheetDidDismiss;
+
+@end
+
 @class JVTActionSheetAction;
 @import UIKit;
 @interface JVTActionSheetView : NSObject
+@property (nonatomic, weak) id<JVTActionSheetActionDelegate> delegate;
 -(void)addHeaderView:(UIView *) headerView ;
 - (void)addAction:(JVTActionSheetAction *)action;
 -(void) presentOnTopOfView:(UIView *) view;
