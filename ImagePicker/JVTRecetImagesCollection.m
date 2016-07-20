@@ -158,10 +158,9 @@ static int cameraIndex = 0;
 }
 
 -(void) imageCellPressed:(UICollectionView *) collectionView indexPath:(NSIndexPath *) indexPath {
-    UIViewController *presentingViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
     UICollectionViewLayoutAttributes *att = [collectionView layoutAttributesForItemAtIndexPath:indexPath];
     CGRect attFrame = att.frame;
-    CGRect frameToOpenFrom = [collectionView convertRect:attFrame toView:presentingViewController.view];
+    CGRect frameToOpenFrom = [collectionView convertRect:attFrame toView:self.presentingViewController.view];
     
     UIImage *image = [self imageForImagePath:indexPath];
     self.imageDisplayVC = [[JVTImagePreviewVC alloc] initWithImage:image];
@@ -173,7 +172,7 @@ static int cameraIndex = 0;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:self.imageDisplayVC];
     nav.transitioningDelegate = self.transitionImageOpenDelegate;
     nav.modalPresentationStyle = UIModalPresentationCustom;
-    [presentingViewController presentViewController:nav animated:YES completion:^{}];
+    [self.presentingViewController presentViewController:nav animated:YES completion:^{}];
     
     JVTRecentImagesCollectionViewCell *cell = (JVTRecentImagesCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     self.cellImageViewPresenting = cell.imageView;
@@ -185,10 +184,9 @@ static int cameraIndex = 0;
 
 
 -(void) cameraCellPressed:(UICollectionView *) collectionView indexPath:(NSIndexPath *) indexPath {
-    UIViewController *presentingViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
     UICollectionViewLayoutAttributes *att = [collectionView layoutAttributesForItemAtIndexPath:indexPath];
     CGRect attFrame = att.frame;
-    CGRect frameToOpenFrom = [collectionView convertRect:attFrame toView:presentingViewController.view];
+    CGRect frameToOpenFrom = [collectionView convertRect:attFrame toView:self.presentingViewController.view];
     
     self.cameraInstantTakeDisplay = [[JVTCameraViewPreviewVC alloc] init];
     self.cameraInstantTakeDisplay.delegate = self;
@@ -197,14 +195,14 @@ static int cameraIndex = 0;
     [self.cameraInstantTakeDisplay view];
     
     self.camera.view.frame = frameToOpenFrom;
-    [presentingViewController.view addSubview:self.camera.view];
+    [self.presentingViewController.view addSubview:self.camera.view];
     
     self.transitionViewOpenDelegate.openingFrame = frameToOpenFrom;
     [self.transitionViewOpenDelegate setViewToPresentFrom:self.camera.view];
     [self.transitionViewOpenDelegate setViewToDissmissFrom:self.camera.view];
     [self.cameraInstantTakeDisplay setViewToPresent:self.camera.view];
     
-    [presentingViewController presentViewController:self.cameraInstantTakeDisplay animated:YES completion:nil];
+    [self.presentingViewController presentViewController:self.cameraInstantTakeDisplay animated:YES completion:nil];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -275,9 +273,8 @@ static int cameraIndex = 0;
                     [mainWindow addSubview:snapShot];
 
                     [self.collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:0 inSection:0]]];
-                    UIViewController *presentingViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
-                    [presentingViewController.presentedViewController dismissViewControllerAnimated:NO completion:nil];
-                    [presentingViewController presentViewController:self.imageDisplayVC animated:NO completion:nil];
+                    [self.presentingViewController.presentedViewController dismissViewControllerAnimated:NO completion:nil];
+                    [self.presentingViewController presentViewController:self.imageDisplayVC animated:NO completion:nil];
                     
                     
                     [self setNeedsDisplay];

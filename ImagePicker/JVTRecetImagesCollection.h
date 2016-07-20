@@ -18,4 +18,5 @@
 -(instancetype) initWithFrame:(CGRect)frame
           withImagesToDisplay:(NSArray<UIImage *>*) imagesToDisplay;
 @property (nonatomic, weak) id<JVTRecetImagesCollectionDelegate> delegate;
+@property (nonatomic, weak) UIViewController *presentingViewController;
 @end

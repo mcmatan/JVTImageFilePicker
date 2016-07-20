@@ -106,6 +106,7 @@
             CGRect frame = CGRectMake(0, 0, width, 163.0F);
             self.recetImagesCollection = [[JVTRecetImagesCollection alloc] initWithFrame:frame withImagesToDisplay:images];
             self.recetImagesCollection.delegate = self;
+            self.recetImagesCollection.presentingViewController = self.presentedFromController;
             [alertController addHeaderView:self.recetImagesCollection];
         }
         
