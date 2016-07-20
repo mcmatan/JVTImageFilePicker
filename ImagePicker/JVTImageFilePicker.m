@@ -314,16 +314,16 @@
 #pragma mark - image preview
 
 -(void) showPreviewForImage:(UIImage *) image {
-    UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
-    if (topController.presentedViewController) {
-        topController = topController.presentedViewController;
+
+    if (self.presentedFromController.presentedViewController) {
+        self.presentedFromController = self.presentedFromController.presentedViewController;
     }
     JVTImagePreviewVC *imagePreviewViewController = [[JVTImagePreviewVC alloc] initWithImage:image];
     imagePreviewViewController.delegate = self;
-    if (topController.navigationController) {
-        [topController.navigationController pushViewController:imagePreviewViewController animated:YES];
+    if (self.presentedFromController.navigationController) {
+        [self.presentedFromController.navigationController pushViewController:imagePreviewViewController animated:YES];
     } else {
-        [topController presentViewController:imagePreviewViewController animated:YES completion:nil];
+        [self.presentedFromController presentViewController:imagePreviewViewController animated:YES completion:nil];
     }
 }
 
