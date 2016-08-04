@@ -19,8 +19,11 @@
 **Checks for camera accessibility, and adops UI presentation on live permission change.**
 
 
+## Demo
 
-![demo](https://media.giphy.com/media/3Ltt9Htvf0cFi/giphy.gif)
+<p align = "center"><img src="https://media.giphy.com/media/3Ltt9Htvf0cFi/giphy.gif" alt="JVTImagePicker Icon"/>
+<img src="https://media.giphy.com/media/sxC7jn0uhgiL6/giphy.gif" alt="JVTImagePicker Icon" /></p>
+
 
 ## Usage
 
