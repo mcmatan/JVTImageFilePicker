@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
 s.name              = 'ImageFilesPicker'
-s.version           = '0.1.7'
+s.version           = '0.1.9'
 s.summary           = 'ImageFilesPicker'
 s.homepage          = 'https://github.com/mcmatan/ImageFilesPicker'
 s.ios.deployment_target = '8.0'
@@ -17,7 +17,7 @@ s.source            = {
 :git => 'https://github.com/mcmatan/ImageFilesPicker.git',
 }
 s.framework = "UIKit"
-s.source_files      = 'ImagePicker/*' , 'Vendor/*', 'Resource/*'
+s.source_files      =  'Vendor/*', 'Resource/*'
 s.requires_arc      = true
 
 end

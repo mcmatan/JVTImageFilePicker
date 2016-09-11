@@ -7,37 +7,38 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		ED0564541CBF8D060020524C /* JVTRecentImagesVideoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED0564531CBF8D060020524C /* JVTRecentImagesVideoCollectionViewCell.m */; };
-		ED0564581CBF92EC0020524C /* JVTCameraViewPreviewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ED0564571CBF92EC0020524C /* JVTCameraViewPreviewVC.m */; };
-		ED05646D1CC11F280020524C /* JVTTransitionOpenViewFullScreenDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ED05646C1CC11F280020524C /* JVTTransitionOpenViewFullScreenDelegate.m */; };
-		ED0564701CC11F800020524C /* JVTTransitionOpenViewFullScreenPresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = ED05646F1CC11F800020524C /* JVTTransitionOpenViewFullScreenPresentation.m */; };
-		ED0564731CC11FBD0020524C /* JVTTransitionOpenViewFullScreenDismiss.m in Sources */ = {isa = PBXBuildFile; fileRef = ED0564721CC11FBD0020524C /* JVTTransitionOpenViewFullScreenDismiss.m */; };
-		ED2B87ED1CC3BE250033AEE9 /* JVTCameraAccesebility.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2B87EC1CC3BE250033AEE9 /* JVTCameraAccesebility.m */; };
 		ED3D52BD1CD5265C00FD4A77 /* EXTScope.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3D52B31CD5265C00FD4A77 /* EXTScope.m */; };
 		ED3D52BE1CD5265C00FD4A77 /* LLSimpleCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3D52B51CD5265C00FD4A77 /* LLSimpleCamera.m */; };
 		ED3D52BF1CD5265C00FD4A77 /* UIBlockButton.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3D52B81CD5265C00FD4A77 /* UIBlockButton.m */; };
 		ED3D52C01CD5265C00FD4A77 /* UIImage+FixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3D52BA1CD5265C00FD4A77 /* UIImage+FixOrientation.m */; };
 		ED3D52C11CD5265C00FD4A77 /* UIImagePickerController+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3D52BC1CD5265C00FD4A77 /* UIImagePickerController+Block.m */; };
 		ED3D52C31CD5267700FD4A77 /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ED3D52C21CD5267700FD4A77 /* background.jpg */; };
-		ED7A8E471CB3B09800A39614 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ED7A8E461CB3B09800A39614 /* main.m */; };
-		ED7A8E4A1CB3B09800A39614 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ED7A8E491CB3B09800A39614 /* AppDelegate.m */; };
-		ED7A8E4D1CB3B09800A39614 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED7A8E4C1CB3B09800A39614 /* ViewController.m */; };
+		ED403BA81D858C6900A16668 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ED403BA31D858C6900A16668 /* AppDelegate.m */; };
+		ED403BA91D858C6900A16668 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED403BA41D858C6900A16668 /* Info.plist */; };
+		ED403BAA1D858C6900A16668 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ED403BA51D858C6900A16668 /* main.m */; };
+		ED403BAB1D858C6900A16668 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED403BA71D858C6900A16668 /* ViewController.m */; };
+		ED403BAE1D858E8700A16668 /* JVTWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = ED403BAD1D858E8700A16668 /* JVTWorker.m */; };
+		ED403BB11D858E9500A16668 /* JVTCameraAccesebility.m in Sources */ = {isa = PBXBuildFile; fileRef = ED403BB01D858E9500A16668 /* JVTCameraAccesebility.m */; };
+		ED403BB41D858EA200A16668 /* JVTImageFilePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = ED403BB31D858EA200A16668 /* JVTImageFilePicker.m */; };
+		ED403BB71D858EB300A16668 /* JVTActionSheetAction.m in Sources */ = {isa = PBXBuildFile; fileRef = ED403BB61D858EB300A16668 /* JVTActionSheetAction.m */; };
+		ED403BBA1D858EBB00A16668 /* JVTActionSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED403BB91D858EBB00A16668 /* JVTActionSheetView.m */; };
+		ED403BBF1D858ED900A16668 /* JVTRecentImagesProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = ED403BBC1D858ED900A16668 /* JVTRecentImagesProvider.m */; };
+		ED403BC01D858ED900A16668 /* JVTRecetImagesCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = ED403BBE1D858ED900A16668 /* JVTRecetImagesCollection.m */; };
+		ED403BC51D858EE700A16668 /* JVTCameraViewPreviewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ED403BC21D858EE700A16668 /* JVTCameraViewPreviewVC.m */; };
+		ED403BC61D858EE700A16668 /* JVTImagePreviewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ED403BC41D858EE700A16668 /* JVTImagePreviewVC.m */; };
+		ED403BCD1D858F1200A16668 /* JVTTransitionOpenViewFullScreenDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ED403BC81D858F1200A16668 /* JVTTransitionOpenViewFullScreenDelegate.m */; };
+		ED403BCE1D858F1200A16668 /* JVTTransitionOpenViewFullScreenDismiss.m in Sources */ = {isa = PBXBuildFile; fileRef = ED403BCA1D858F1200A16668 /* JVTTransitionOpenViewFullScreenDismiss.m */; };
+		ED403BCF1D858F1200A16668 /* JVTTransitionOpenViewFullScreenPresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = ED403BCC1D858F1200A16668 /* JVTTransitionOpenViewFullScreenPresentation.m */; };
+		ED403BD61D858F1900A16668 /* JVTTransitionOpenImageFullScreenDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ED403BD11D858F1900A16668 /* JVTTransitionOpenImageFullScreenDelegate.m */; };
+		ED403BD71D858F1900A16668 /* JVTTransitionOpenImageFullScreenDismiss.m in Sources */ = {isa = PBXBuildFile; fileRef = ED403BD31D858F1900A16668 /* JVTTransitionOpenImageFullScreenDismiss.m */; };
+		ED403BD81D858F1900A16668 /* JVTTransitionOpenImageFullScreenPresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = ED403BD51D858F1900A16668 /* JVTTransitionOpenImageFullScreenPresentation.m */; };
+		ED403BDD1D858F3400A16668 /* JVTRecentImagesCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED403BDA1D858F3400A16668 /* JVTRecentImagesCollectionViewCell.m */; };
+		ED403BDE1D858F3400A16668 /* JVTRecentImagesVideoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED403BDC1D858F3400A16668 /* JVTRecentImagesVideoCollectionViewCell.m */; };
 		ED7A8E501CB3B09800A39614 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED7A8E4E1CB3B09800A39614 /* Main.storyboard */; };
 		ED7A8E521CB3B09800A39614 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED7A8E511CB3B09800A39614 /* Assets.xcassets */; };
 		ED7A8E551CB3B09800A39614 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED7A8E531CB3B09800A39614 /* LaunchScreen.storyboard */; };
 		ED7A8E601CB3B09800A39614 /* ImagePickerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ED7A8E5F1CB3B09800A39614 /* ImagePickerTests.m */; };
 		ED7A8E6B1CB3B09800A39614 /* ImagePickerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = ED7A8E6A1CB3B09800A39614 /* ImagePickerUITests.m */; };
-		ED7A8E7B1CB3B0B800A39614 /* JVTImageFilePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = ED7A8E7A1CB3B0B800A39614 /* JVTImageFilePicker.m */; };
-		ED7A8E821CB3B0CD00A39614 /* JVTWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = ED7A8E811CB3B0CD00A39614 /* JVTWorker.m */; };
-		ED7A8E8D1CB3B58500A39614 /* JVTRecetImagesCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = ED7A8E8C1CB3B58500A39614 /* JVTRecetImagesCollection.m */; };
-		ED7A8E911CB3B59600A39614 /* JVTRecentImagesProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = ED7A8E901CB3B59600A39614 /* JVTRecentImagesProvider.m */; };
-		ED7A8E951CB3BB7B00A39614 /* JVTRecentImagesCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED7A8E941CB3BB7B00A39614 /* JVTRecentImagesCollectionViewCell.m */; };
-		ED7A8E991CB3D97700A39614 /* JVTTransitionOpenImageFullScreenDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ED7A8E981CB3D97700A39614 /* JVTTransitionOpenImageFullScreenDelegate.m */; };
-		ED7A8E9C1CB3DAFD00A39614 /* JVTTransitionOpenImageFullScreenPresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = ED7A8E9B1CB3DAFD00A39614 /* JVTTransitionOpenImageFullScreenPresentation.m */; };
-		ED7A8E9F1CB3DE2C00A39614 /* JVTTransitionOpenImageFullScreenDismiss.m in Sources */ = {isa = PBXBuildFile; fileRef = ED7A8E9E1CB3DE2C00A39614 /* JVTTransitionOpenImageFullScreenDismiss.m */; };
-		ED7A8EA21CB3DFDD00A39614 /* JVTImagePreviewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = ED7A8EA11CB3DFDD00A39614 /* JVTImagePreviewVC.m */; };
-		ED7A8EA61CB4036600A39614 /* JVTActionSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED7A8EA51CB4036600A39614 /* JVTActionSheetView.m */; };
-		ED7A8EAA1CB4044A00A39614 /* JVTActionSheetAction.m in Sources */ = {isa = PBXBuildFile; fileRef = ED7A8EA91CB4044A00A39614 /* JVTActionSheetAction.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,18 +59,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		ED0564521CBF8D060020524C /* JVTRecentImagesVideoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVTRecentImagesVideoCollectionViewCell.h; sourceTree = "<group>"; };
-		ED0564531CBF8D060020524C /* JVTRecentImagesVideoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVTRecentImagesVideoCollectionViewCell.m; sourceTree = "<group>"; };
-		ED0564561CBF92EC0020524C /* JVTCameraViewPreviewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVTCameraViewPreviewVC.h; sourceTree = "<group>"; };
-		ED0564571CBF92EC0020524C /* JVTCameraViewPreviewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVTCameraViewPreviewVC.m; sourceTree = "<group>"; };
-		ED05646B1CC11F280020524C /* JVTTransitionOpenViewFullScreenDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVTTransitionOpenViewFullScreenDelegate.h; sourceTree = "<group>"; };
-		ED05646C1CC11F280020524C /* JVTTransitionOpenViewFullScreenDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVTTransitionOpenViewFullScreenDelegate.m; sourceTree = "<group>"; };
-		ED05646E1CC11F800020524C /* JVTTransitionOpenViewFullScreenPresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVTTransitionOpenViewFullScreenPresentation.h; sourceTree = "<group>"; };
-		ED05646F1CC11F800020524C /* JVTTransitionOpenViewFullScreenPresentation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVTTransitionOpenViewFullScreenPresentation.m; sourceTree = "<group>"; };
-		ED0564711CC11FBD0020524C /* JVTTransitionOpenViewFullScreenDismiss.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVTTransitionOpenViewFullScreenDismiss.h; sourceTree = "<group>"; };
-		ED0564721CC11FBD0020524C /* JVTTransitionOpenViewFullScreenDismiss.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVTTransitionOpenViewFullScreenDismiss.m; sourceTree = "<group>"; };
-		ED2B87EB1CC3BE250033AEE9 /* JVTCameraAccesebility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVTCameraAccesebility.h; sourceTree = "<group>"; };
-		ED2B87EC1CC3BE250033AEE9 /* JVTCameraAccesebility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVTCameraAccesebility.m; sourceTree = "<group>"; };
 		ED3D52B21CD5265C00FD4A77 /* EXTScope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXTScope.h; sourceTree = "<group>"; };
 		ED3D52B31CD5265C00FD4A77 /* EXTScope.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EXTScope.m; sourceTree = "<group>"; };
 		ED3D52B41CD5265C00FD4A77 /* LLSimpleCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLSimpleCamera.h; sourceTree = "<group>"; };
@@ -82,44 +71,57 @@
 		ED3D52BB1CD5265C00FD4A77 /* UIImagePickerController+Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImagePickerController+Block.h"; sourceTree = "<group>"; };
 		ED3D52BC1CD5265C00FD4A77 /* UIImagePickerController+Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImagePickerController+Block.m"; sourceTree = "<group>"; };
 		ED3D52C21CD5267700FD4A77 /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpg; sourceTree = "<group>"; };
+		ED403BA21D858C6900A16668 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Application/AppDelegate.h; sourceTree = "<group>"; };
+		ED403BA31D858C6900A16668 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Application/AppDelegate.m; sourceTree = "<group>"; };
+		ED403BA41D858C6900A16668 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Application/Info.plist; sourceTree = "<group>"; };
+		ED403BA51D858C6900A16668 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Application/main.m; sourceTree = "<group>"; };
+		ED403BA61D858C6900A16668 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = Application/ViewController.h; sourceTree = "<group>"; };
+		ED403BA71D858C6900A16668 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewController.m; path = Application/ViewController.m; sourceTree = "<group>"; };
+		ED403BAC1D858E8700A16668 /* JVTWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JVTWorker.h; path = Resource/JVTWorker.h; sourceTree = "<group>"; };
+		ED403BAD1D858E8700A16668 /* JVTWorker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JVTWorker.m; path = Resource/JVTWorker.m; sourceTree = "<group>"; };
+		ED403BAF1D858E9500A16668 /* JVTCameraAccesebility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JVTCameraAccesebility.h; path = Resource/JVTCameraAccesebility.h; sourceTree = "<group>"; };
+		ED403BB01D858E9500A16668 /* JVTCameraAccesebility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JVTCameraAccesebility.m; path = Resource/JVTCameraAccesebility.m; sourceTree = "<group>"; };
+		ED403BB21D858EA200A16668 /* JVTImageFilePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JVTImageFilePicker.h; path = Resource/JVTImageFilePicker.h; sourceTree = "<group>"; };
+		ED403BB31D858EA200A16668 /* JVTImageFilePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JVTImageFilePicker.m; path = Resource/JVTImageFilePicker.m; sourceTree = "<group>"; };
+		ED403BB51D858EB300A16668 /* JVTActionSheetAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JVTActionSheetAction.h; path = Resource/JVTActionSheetAction.h; sourceTree = "<group>"; };
+		ED403BB61D858EB300A16668 /* JVTActionSheetAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JVTActionSheetAction.m; path = Resource/JVTActionSheetAction.m; sourceTree = "<group>"; };
+		ED403BB81D858EBB00A16668 /* JVTActionSheetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JVTActionSheetView.h; path = Resource/JVTActionSheetView.h; sourceTree = "<group>"; };
+		ED403BB91D858EBB00A16668 /* JVTActionSheetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JVTActionSheetView.m; path = Resource/JVTActionSheetView.m; sourceTree = "<group>"; };
+		ED403BBB1D858ED900A16668 /* JVTRecentImagesProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JVTRecentImagesProvider.h; path = Resource/JVTRecentImagesProvider.h; sourceTree = "<group>"; };
+		ED403BBC1D858ED900A16668 /* JVTRecentImagesProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JVTRecentImagesProvider.m; path = Resource/JVTRecentImagesProvider.m; sourceTree = "<group>"; };
+		ED403BBD1D858ED900A16668 /* JVTRecetImagesCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JVTRecetImagesCollection.h; path = Resource/JVTRecetImagesCollection.h; sourceTree = "<group>"; };
+		ED403BBE1D858ED900A16668 /* JVTRecetImagesCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JVTRecetImagesCollection.m; path = Resource/JVTRecetImagesCollection.m; sourceTree = "<group>"; };
+		ED403BC11D858EE700A16668 /* JVTCameraViewPreviewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JVTCameraViewPreviewVC.h; path = Resource/JVTCameraViewPreviewVC.h; sourceTree = "<group>"; };
+		ED403BC21D858EE700A16668 /* JVTCameraViewPreviewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JVTCameraViewPreviewVC.m; path = Resource/JVTCameraViewPreviewVC.m; sourceTree = "<group>"; };
+		ED403BC31D858EE700A16668 /* JVTImagePreviewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JVTImagePreviewVC.h; path = Resource/JVTImagePreviewVC.h; sourceTree = "<group>"; };
+		ED403BC41D858EE700A16668 /* JVTImagePreviewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JVTImagePreviewVC.m; path = Resource/JVTImagePreviewVC.m; sourceTree = "<group>"; };
+		ED403BC71D858F1200A16668 /* JVTTransitionOpenViewFullScreenDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JVTTransitionOpenViewFullScreenDelegate.h; path = Resource/JVTTransitionOpenViewFullScreenDelegate.h; sourceTree = "<group>"; };
+		ED403BC81D858F1200A16668 /* JVTTransitionOpenViewFullScreenDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JVTTransitionOpenViewFullScreenDelegate.m; path = Resource/JVTTransitionOpenViewFullScreenDelegate.m; sourceTree = "<group>"; };
+		ED403BC91D858F1200A16668 /* JVTTransitionOpenViewFullScreenDismiss.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JVTTransitionOpenViewFullScreenDismiss.h; path = Resource/JVTTransitionOpenViewFullScreenDismiss.h; sourceTree = "<group>"; };
+		ED403BCA1D858F1200A16668 /* JVTTransitionOpenViewFullScreenDismiss.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JVTTransitionOpenViewFullScreenDismiss.m; path = Resource/JVTTransitionOpenViewFullScreenDismiss.m; sourceTree = "<group>"; };
+		ED403BCB1D858F1200A16668 /* JVTTransitionOpenViewFullScreenPresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JVTTransitionOpenViewFullScreenPresentation.h; path = Resource/JVTTransitionOpenViewFullScreenPresentation.h; sourceTree = "<group>"; };
+		ED403BCC1D858F1200A16668 /* JVTTransitionOpenViewFullScreenPresentation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JVTTransitionOpenViewFullScreenPresentation.m; path = Resource/JVTTransitionOpenViewFullScreenPresentation.m; sourceTree = "<group>"; };
+		ED403BD01D858F1900A16668 /* JVTTransitionOpenImageFullScreenDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JVTTransitionOpenImageFullScreenDelegate.h; path = Resource/JVTTransitionOpenImageFullScreenDelegate.h; sourceTree = "<group>"; };
+		ED403BD11D858F1900A16668 /* JVTTransitionOpenImageFullScreenDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JVTTransitionOpenImageFullScreenDelegate.m; path = Resource/JVTTransitionOpenImageFullScreenDelegate.m; sourceTree = "<group>"; };
+		ED403BD21D858F1900A16668 /* JVTTransitionOpenImageFullScreenDismiss.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JVTTransitionOpenImageFullScreenDismiss.h; path = Resource/JVTTransitionOpenImageFullScreenDismiss.h; sourceTree = "<group>"; };
+		ED403BD31D858F1900A16668 /* JVTTransitionOpenImageFullScreenDismiss.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JVTTransitionOpenImageFullScreenDismiss.m; path = Resource/JVTTransitionOpenImageFullScreenDismiss.m; sourceTree = "<group>"; };
+		ED403BD41D858F1900A16668 /* JVTTransitionOpenImageFullScreenPresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JVTTransitionOpenImageFullScreenPresentation.h; path = Resource/JVTTransitionOpenImageFullScreenPresentation.h; sourceTree = "<group>"; };
+		ED403BD51D858F1900A16668 /* JVTTransitionOpenImageFullScreenPresentation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JVTTransitionOpenImageFullScreenPresentation.m; path = Resource/JVTTransitionOpenImageFullScreenPresentation.m; sourceTree = "<group>"; };
+		ED403BD91D858F3400A16668 /* JVTRecentImagesCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JVTRecentImagesCollectionViewCell.h; path = Resource/JVTRecentImagesCollectionViewCell.h; sourceTree = "<group>"; };
+		ED403BDA1D858F3400A16668 /* JVTRecentImagesCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JVTRecentImagesCollectionViewCell.m; path = Resource/JVTRecentImagesCollectionViewCell.m; sourceTree = "<group>"; };
+		ED403BDB1D858F3400A16668 /* JVTRecentImagesVideoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JVTRecentImagesVideoCollectionViewCell.h; path = Resource/JVTRecentImagesVideoCollectionViewCell.h; sourceTree = "<group>"; };
+		ED403BDC1D858F3400A16668 /* JVTRecentImagesVideoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JVTRecentImagesVideoCollectionViewCell.m; path = Resource/JVTRecentImagesVideoCollectionViewCell.m; sourceTree = "<group>"; };
 		ED7A8E421CB3B09800A39614 /* ImagePicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImagePicker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED7A8E461CB3B09800A39614 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		ED7A8E481CB3B09800A39614 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		ED7A8E491CB3B09800A39614 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		ED7A8E4B1CB3B09800A39614 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		ED7A8E4C1CB3B09800A39614 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		ED7A8E4F1CB3B09800A39614 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		ED7A8E511CB3B09800A39614 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ED7A8E541CB3B09800A39614 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		ED7A8E561CB3B09800A39614 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED7A8E5B1CB3B09800A39614 /* ImagePickerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImagePickerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED7A8E5F1CB3B09800A39614 /* ImagePickerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImagePickerTests.m; sourceTree = "<group>"; };
 		ED7A8E611CB3B09800A39614 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED7A8E661CB3B09800A39614 /* ImagePickerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImagePickerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED7A8E6A1CB3B09800A39614 /* ImagePickerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImagePickerUITests.m; sourceTree = "<group>"; };
 		ED7A8E6C1CB3B09800A39614 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		ED7A8E791CB3B0B800A39614 /* JVTImageFilePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVTImageFilePicker.h; sourceTree = "<group>"; };
-		ED7A8E7A1CB3B0B800A39614 /* JVTImageFilePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVTImageFilePicker.m; sourceTree = "<group>"; };
-		ED7A8E801CB3B0CD00A39614 /* JVTWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVTWorker.h; sourceTree = "<group>"; };
-		ED7A8E811CB3B0CD00A39614 /* JVTWorker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVTWorker.m; sourceTree = "<group>"; };
-		ED7A8E8B1CB3B58500A39614 /* JVTRecetImagesCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVTRecetImagesCollection.h; sourceTree = "<group>"; };
-		ED7A8E8C1CB3B58500A39614 /* JVTRecetImagesCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVTRecetImagesCollection.m; sourceTree = "<group>"; };
-		ED7A8E8F1CB3B59600A39614 /* JVTRecentImagesProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVTRecentImagesProvider.h; sourceTree = "<group>"; };
-		ED7A8E901CB3B59600A39614 /* JVTRecentImagesProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVTRecentImagesProvider.m; sourceTree = "<group>"; };
-		ED7A8E931CB3BB7B00A39614 /* JVTRecentImagesCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVTRecentImagesCollectionViewCell.h; sourceTree = "<group>"; };
-		ED7A8E941CB3BB7B00A39614 /* JVTRecentImagesCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVTRecentImagesCollectionViewCell.m; sourceTree = "<group>"; };
-		ED7A8E971CB3D97700A39614 /* JVTTransitionOpenImageFullScreenDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVTTransitionOpenImageFullScreenDelegate.h; sourceTree = "<group>"; };
-		ED7A8E981CB3D97700A39614 /* JVTTransitionOpenImageFullScreenDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVTTransitionOpenImageFullScreenDelegate.m; sourceTree = "<group>"; };
-		ED7A8E9A1CB3DAFD00A39614 /* JVTTransitionOpenImageFullScreenPresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVTTransitionOpenImageFullScreenPresentation.h; sourceTree = "<group>"; };
-		ED7A8E9B1CB3DAFD00A39614 /* JVTTransitionOpenImageFullScreenPresentation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVTTransitionOpenImageFullScreenPresentation.m; sourceTree = "<group>"; };
-		ED7A8E9D1CB3DE2C00A39614 /* JVTTransitionOpenImageFullScreenDismiss.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVTTransitionOpenImageFullScreenDismiss.h; sourceTree = "<group>"; };
-		ED7A8E9E1CB3DE2C00A39614 /* JVTTransitionOpenImageFullScreenDismiss.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVTTransitionOpenImageFullScreenDismiss.m; sourceTree = "<group>"; };
-		ED7A8EA01CB3DFDD00A39614 /* JVTImagePreviewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVTImagePreviewVC.h; sourceTree = "<group>"; };
-		ED7A8EA11CB3DFDD00A39614 /* JVTImagePreviewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVTImagePreviewVC.m; sourceTree = "<group>"; };
-		ED7A8EA41CB4036600A39614 /* JVTActionSheetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVTActionSheetView.h; sourceTree = "<group>"; };
-		ED7A8EA51CB4036600A39614 /* JVTActionSheetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVTActionSheetView.m; sourceTree = "<group>"; };
-		ED7A8EA81CB4044A00A39614 /* JVTActionSheetAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVTActionSheetAction.h; sourceTree = "<group>"; };
-		ED7A8EA91CB4044A00A39614 /* JVTActionSheetAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JVTActionSheetAction.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,10 +152,10 @@
 		ED0564551CBF92C20020524C /* DisplayControllers */ = {
 			isa = PBXGroup;
 			children = (
-				ED7A8EA01CB3DFDD00A39614 /* JVTImagePreviewVC.h */,
-				ED7A8EA11CB3DFDD00A39614 /* JVTImagePreviewVC.m */,
-				ED0564561CBF92EC0020524C /* JVTCameraViewPreviewVC.h */,
-				ED0564571CBF92EC0020524C /* JVTCameraViewPreviewVC.m */,
+				ED403BC11D858EE700A16668 /* JVTCameraViewPreviewVC.h */,
+				ED403BC21D858EE700A16668 /* JVTCameraViewPreviewVC.m */,
+				ED403BC31D858EE700A16668 /* JVTImagePreviewVC.h */,
+				ED403BC41D858EE700A16668 /* JVTImagePreviewVC.m */,
 			);
 			name = DisplayControllers;
 			sourceTree = "<group>";
@@ -161,12 +163,12 @@
 		ED0564691CC11C810020524C /* ImageTransition */ = {
 			isa = PBXGroup;
 			children = (
-				ED7A8E971CB3D97700A39614 /* JVTTransitionOpenImageFullScreenDelegate.h */,
-				ED7A8E981CB3D97700A39614 /* JVTTransitionOpenImageFullScreenDelegate.m */,
-				ED7A8E9A1CB3DAFD00A39614 /* JVTTransitionOpenImageFullScreenPresentation.h */,
-				ED7A8E9B1CB3DAFD00A39614 /* JVTTransitionOpenImageFullScreenPresentation.m */,
-				ED7A8E9D1CB3DE2C00A39614 /* JVTTransitionOpenImageFullScreenDismiss.h */,
-				ED7A8E9E1CB3DE2C00A39614 /* JVTTransitionOpenImageFullScreenDismiss.m */,
+				ED403BD01D858F1900A16668 /* JVTTransitionOpenImageFullScreenDelegate.h */,
+				ED403BD11D858F1900A16668 /* JVTTransitionOpenImageFullScreenDelegate.m */,
+				ED403BD21D858F1900A16668 /* JVTTransitionOpenImageFullScreenDismiss.h */,
+				ED403BD31D858F1900A16668 /* JVTTransitionOpenImageFullScreenDismiss.m */,
+				ED403BD41D858F1900A16668 /* JVTTransitionOpenImageFullScreenPresentation.h */,
+				ED403BD51D858F1900A16668 /* JVTTransitionOpenImageFullScreenPresentation.m */,
 			);
 			name = ImageTransition;
 			sourceTree = "<group>";
@@ -174,12 +176,12 @@
 		ED05646A1CC11C8E0020524C /* ViewTransition */ = {
 			isa = PBXGroup;
 			children = (
-				ED05646B1CC11F280020524C /* JVTTransitionOpenViewFullScreenDelegate.h */,
-				ED05646C1CC11F280020524C /* JVTTransitionOpenViewFullScreenDelegate.m */,
-				ED05646E1CC11F800020524C /* JVTTransitionOpenViewFullScreenPresentation.h */,
-				ED05646F1CC11F800020524C /* JVTTransitionOpenViewFullScreenPresentation.m */,
-				ED0564711CC11FBD0020524C /* JVTTransitionOpenViewFullScreenDismiss.h */,
-				ED0564721CC11FBD0020524C /* JVTTransitionOpenViewFullScreenDismiss.m */,
+				ED403BC71D858F1200A16668 /* JVTTransitionOpenViewFullScreenDelegate.h */,
+				ED403BC81D858F1200A16668 /* JVTTransitionOpenViewFullScreenDelegate.m */,
+				ED403BC91D858F1200A16668 /* JVTTransitionOpenViewFullScreenDismiss.h */,
+				ED403BCA1D858F1200A16668 /* JVTTransitionOpenViewFullScreenDismiss.m */,
+				ED403BCB1D858F1200A16668 /* JVTTransitionOpenViewFullScreenPresentation.h */,
+				ED403BCC1D858F1200A16668 /* JVTTransitionOpenViewFullScreenPresentation.m */,
 			);
 			name = ViewTransition;
 			sourceTree = "<group>";
@@ -187,8 +189,8 @@
 		ED2B87EA1CC3BE0E0033AEE9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				ED2B87EB1CC3BE250033AEE9 /* JVTCameraAccesebility.h */,
-				ED2B87EC1CC3BE250033AEE9 /* JVTCameraAccesebility.m */,
+				ED403BAF1D858E9500A16668 /* JVTCameraAccesebility.h */,
+				ED403BB01D858E9500A16668 /* JVTCameraAccesebility.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -196,8 +198,8 @@
 		ED3D529F1CD5243900FD4A77 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				ED7A8E801CB3B0CD00A39614 /* JVTWorker.h */,
-				ED7A8E811CB3B0CD00A39614 /* JVTWorker.m */,
+				ED403BAC1D858E8700A16668 /* JVTWorker.h */,
+				ED403BAD1D858E8700A16668 /* JVTWorker.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -256,14 +258,15 @@
 				ED3D529F1CD5243900FD4A77 /* Utils */,
 				ED2B87EA1CC3BE0E0033AEE9 /* Model */,
 				ED7A8E781CB3B0AD00A39614 /* Picker */,
-				ED7A8E481CB3B09800A39614 /* AppDelegate.h */,
-				ED7A8E491CB3B09800A39614 /* AppDelegate.m */,
-				ED7A8E4B1CB3B09800A39614 /* ViewController.h */,
-				ED7A8E4C1CB3B09800A39614 /* ViewController.m */,
 				ED7A8E4E1CB3B09800A39614 /* Main.storyboard */,
+				ED403BA21D858C6900A16668 /* AppDelegate.h */,
+				ED403BA31D858C6900A16668 /* AppDelegate.m */,
+				ED403BA41D858C6900A16668 /* Info.plist */,
+				ED403BA51D858C6900A16668 /* main.m */,
+				ED403BA61D858C6900A16668 /* ViewController.h */,
+				ED403BA71D858C6900A16668 /* ViewController.m */,
 				ED7A8E511CB3B09800A39614 /* Assets.xcassets */,
 				ED7A8E531CB3B09800A39614 /* LaunchScreen.storyboard */,
-				ED7A8E561CB3B09800A39614 /* Info.plist */,
 				ED7A8E451CB3B09800A39614 /* Supporting Files */,
 			);
 			path = ImagePicker;
@@ -298,9 +301,11 @@
 		ED7A8E781CB3B0AD00A39614 /* Picker */ = {
 			isa = PBXGroup;
 			children = (
-				ED7A8E791CB3B0B800A39614 /* JVTImageFilePicker.h */,
-				ED7A8E7A1CB3B0B800A39614 /* JVTImageFilePicker.m */,
+				ED403BB21D858EA200A16668 /* JVTImageFilePicker.h */,
+				ED403BB31D858EA200A16668 /* JVTImageFilePicker.m */,
 				ED7A8EA31CB4035100A39614 /* ActionSheetView */,
+				ED403BB81D858EBB00A16668 /* JVTActionSheetView.h */,
+				ED403BB91D858EBB00A16668 /* JVTActionSheetView.m */,
 				ED7A8E8A1CB3B56600A39614 /* RecetImagesCollection */,
 			);
 			name = Picker;
@@ -309,10 +314,10 @@
 		ED7A8E8A1CB3B56600A39614 /* RecetImagesCollection */ = {
 			isa = PBXGroup;
 			children = (
-				ED7A8E8B1CB3B58500A39614 /* JVTRecetImagesCollection.h */,
-				ED7A8E8C1CB3B58500A39614 /* JVTRecetImagesCollection.m */,
-				ED7A8E8F1CB3B59600A39614 /* JVTRecentImagesProvider.h */,
-				ED7A8E901CB3B59600A39614 /* JVTRecentImagesProvider.m */,
+				ED403BBB1D858ED900A16668 /* JVTRecentImagesProvider.h */,
+				ED403BBC1D858ED900A16668 /* JVTRecentImagesProvider.m */,
+				ED403BBD1D858ED900A16668 /* JVTRecetImagesCollection.h */,
+				ED403BBE1D858ED900A16668 /* JVTRecetImagesCollection.m */,
 				ED0564551CBF92C20020524C /* DisplayControllers */,
 				ED7A8E961CB3D95D00A39614 /* TransitionDelegate */,
 				ED7A8E921CB3BB6900A39614 /* Views */,
@@ -323,10 +328,10 @@
 		ED7A8E921CB3BB6900A39614 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				ED7A8E931CB3BB7B00A39614 /* JVTRecentImagesCollectionViewCell.h */,
-				ED7A8E941CB3BB7B00A39614 /* JVTRecentImagesCollectionViewCell.m */,
-				ED0564521CBF8D060020524C /* JVTRecentImagesVideoCollectionViewCell.h */,
-				ED0564531CBF8D060020524C /* JVTRecentImagesVideoCollectionViewCell.m */,
+				ED403BD91D858F3400A16668 /* JVTRecentImagesCollectionViewCell.h */,
+				ED403BDA1D858F3400A16668 /* JVTRecentImagesCollectionViewCell.m */,
+				ED403BDB1D858F3400A16668 /* JVTRecentImagesVideoCollectionViewCell.h */,
+				ED403BDC1D858F3400A16668 /* JVTRecentImagesVideoCollectionViewCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -344,8 +349,6 @@
 			isa = PBXGroup;
 			children = (
 				ED7A8EA71CB403BE00A39614 /* ActionSheetAction */,
-				ED7A8EA41CB4036600A39614 /* JVTActionSheetView.h */,
-				ED7A8EA51CB4036600A39614 /* JVTActionSheetView.m */,
 			);
 			name = ActionSheetView;
 			sourceTree = "<group>";
@@ -353,8 +356,8 @@
 		ED7A8EA71CB403BE00A39614 /* ActionSheetAction */ = {
 			isa = PBXGroup;
 			children = (
-				ED7A8EA81CB4044A00A39614 /* JVTActionSheetAction.h */,
-				ED7A8EA91CB4044A00A39614 /* JVTActionSheetAction.m */,
+				ED403BB51D858EB300A16668 /* JVTActionSheetAction.h */,
+				ED403BB61D858EB300A16668 /* JVTActionSheetAction.m */,
 			);
 			name = ActionSheetAction;
 			sourceTree = "<group>";
@@ -466,6 +469,7 @@
 				ED7A8E551CB3B09800A39614 /* LaunchScreen.storyboard in Resources */,
 				ED3D52C31CD5267700FD4A77 /* background.jpg in Resources */,
 				ED7A8E521CB3B09800A39614 /* Assets.xcassets in Resources */,
+				ED403BA91D858C6900A16668 /* Info.plist in Resources */,
 				ED7A8E501CB3B09800A39614 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -491,31 +495,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED0564701CC11F800020524C /* JVTTransitionOpenViewFullScreenPresentation.m in Sources */,
-				ED7A8E7B1CB3B0B800A39614 /* JVTImageFilePicker.m in Sources */,
-				ED2B87ED1CC3BE250033AEE9 /* JVTCameraAccesebility.m in Sources */,
+				ED403BBF1D858ED900A16668 /* JVTRecentImagesProvider.m in Sources */,
+				ED403BB71D858EB300A16668 /* JVTActionSheetAction.m in Sources */,
+				ED403BC51D858EE700A16668 /* JVTCameraViewPreviewVC.m in Sources */,
+				ED403BD81D858F1900A16668 /* JVTTransitionOpenImageFullScreenPresentation.m in Sources */,
 				ED3D52BE1CD5265C00FD4A77 /* LLSimpleCamera.m in Sources */,
-				ED7A8E9F1CB3DE2C00A39614 /* JVTTransitionOpenImageFullScreenDismiss.m in Sources */,
+				ED403BCE1D858F1200A16668 /* JVTTransitionOpenViewFullScreenDismiss.m in Sources */,
+				ED403BCD1D858F1200A16668 /* JVTTransitionOpenViewFullScreenDelegate.m in Sources */,
 				ED3D52C11CD5265C00FD4A77 /* UIImagePickerController+Block.m in Sources */,
-				ED7A8E4D1CB3B09800A39614 /* ViewController.m in Sources */,
-				ED0564581CBF92EC0020524C /* JVTCameraViewPreviewVC.m in Sources */,
+				ED403BC01D858ED900A16668 /* JVTRecetImagesCollection.m in Sources */,
+				ED403BAE1D858E8700A16668 /* JVTWorker.m in Sources */,
+				ED403BDD1D858F3400A16668 /* JVTRecentImagesCollectionViewCell.m in Sources */,
+				ED403BAB1D858C6900A16668 /* ViewController.m in Sources */,
+				ED403BB41D858EA200A16668 /* JVTImageFilePicker.m in Sources */,
 				ED3D52BF1CD5265C00FD4A77 /* UIBlockButton.m in Sources */,
-				ED7A8EAA1CB4044A00A39614 /* JVTActionSheetAction.m in Sources */,
-				ED7A8E991CB3D97700A39614 /* JVTTransitionOpenImageFullScreenDelegate.m in Sources */,
-				ED7A8EA21CB3DFDD00A39614 /* JVTImagePreviewVC.m in Sources */,
-				ED7A8E8D1CB3B58500A39614 /* JVTRecetImagesCollection.m in Sources */,
+				ED403BCF1D858F1200A16668 /* JVTTransitionOpenViewFullScreenPresentation.m in Sources */,
 				ED3D52BD1CD5265C00FD4A77 /* EXTScope.m in Sources */,
-				ED7A8EA61CB4036600A39614 /* JVTActionSheetView.m in Sources */,
-				ED0564541CBF8D060020524C /* JVTRecentImagesVideoCollectionViewCell.m in Sources */,
-				ED7A8E951CB3BB7B00A39614 /* JVTRecentImagesCollectionViewCell.m in Sources */,
-				ED7A8E4A1CB3B09800A39614 /* AppDelegate.m in Sources */,
-				ED7A8E821CB3B0CD00A39614 /* JVTWorker.m in Sources */,
-				ED7A8E911CB3B59600A39614 /* JVTRecentImagesProvider.m in Sources */,
-				ED7A8E471CB3B09800A39614 /* main.m in Sources */,
-				ED05646D1CC11F280020524C /* JVTTransitionOpenViewFullScreenDelegate.m in Sources */,
-				ED0564731CC11FBD0020524C /* JVTTransitionOpenViewFullScreenDismiss.m in Sources */,
+				ED403BAA1D858C6900A16668 /* main.m in Sources */,
+				ED403BB11D858E9500A16668 /* JVTCameraAccesebility.m in Sources */,
+				ED403BD71D858F1900A16668 /* JVTTransitionOpenImageFullScreenDismiss.m in Sources */,
+				ED403BBA1D858EBB00A16668 /* JVTActionSheetView.m in Sources */,
+				ED403BA81D858C6900A16668 /* AppDelegate.m in Sources */,
+				ED403BDE1D858F3400A16668 /* JVTRecentImagesVideoCollectionViewCell.m in Sources */,
+				ED403BD61D858F1900A16668 /* JVTTransitionOpenImageFullScreenDelegate.m in Sources */,
+				ED403BC61D858EE700A16668 /* JVTImagePreviewVC.m in Sources */,
 				ED3D52C01CD5265C00FD4A77 /* UIImage+FixOrientation.m in Sources */,
-				ED7A8E9C1CB3DAFD00A39614 /* JVTTransitionOpenImageFullScreenPresentation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -665,7 +669,7 @@
 					"$(SRCROOT)/Vendor/include/**",
 					"$(SRCROOT)/Resource/include/**",
 				);
-				INFOPLIST_FILE = ImagePicker/Info.plist;
+				INFOPLIST_FILE = ImagePicker/Application/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mc.JV.ImagePicker.;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -683,7 +687,7 @@
 					"$(SRCROOT)/Vendor/include/**",
 					"$(SRCROOT)/Resource/include/**",
 				);
-				INFOPLIST_FILE = ImagePicker/Info.plist;
+				INFOPLIST_FILE = ImagePicker/Application/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mc.JV.ImagePicker.;
 				PRODUCT_NAME = "$(TARGET_NAME)";
