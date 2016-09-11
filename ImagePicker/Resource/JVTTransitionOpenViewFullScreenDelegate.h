@@ -11,14 +11,13 @@
 
 @protocol JVTTransitionOpenViewFullScreenDelegateDismissCalles <NSObject>
 
--(void) didDissmiss;
+- (void)didDissmiss;
 
 @end
 
-
 @interface JVTTransitionOpenViewFullScreenDelegate : NSObject <UIViewControllerTransitioningDelegate>
-@property (nonatomic,assign ) CGRect openingFrame;
-@property (nonatomic,weak) id<JVTTransitionOpenViewFullScreenDelegateDismissCalles> delegate;
--(void) setViewToPresentFrom:(UIView *) view;
--(void) setViewToDissmissFrom:(UIView *) view;
+@property (nonatomic, assign) CGRect openingFrame;
+@property (nonatomic, weak) id<JVTTransitionOpenViewFullScreenDelegateDismissCalles> delegate;
+- (void)setViewToPresentFrom:(UIView *)view;
+- (void)setViewToDissmissFrom:(UIView *)view;
 @end

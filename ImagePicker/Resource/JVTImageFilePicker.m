@@ -19,34 +19,33 @@
 #import "EXTScope.h"
 #import "JVTCameraAccesebility.h"
 
+#define DEFAULT_IMAGE_SIZE CGSizeMake(600, 600)
+
 @interface JVTImageFilePicker () <JVTRecetImagesCollectionDelegate, JVTActionSheetActionDelegate>
-@property(nonatomic, strong) JVTActionSheetView *actionSheet;
-@property(nonatomic, weak) UIViewController *presentedFromController;
-@property (nonatomic,strong) JVTRecetImagesCollection *recetImagesCollection;
-@property (nonatomic,strong) UIView *backgroundDimmedView;
+@property (nonatomic, strong) JVTActionSheetView *actionSheet;
+@property (nonatomic, weak) UIViewController *presentedFromController;
+@property (nonatomic, strong) JVTRecetImagesCollection *recetImagesCollection;
+@property (nonatomic, strong) UIView *backgroundDimmedView;
 @end
 
 @implementation JVTImageFilePicker
 
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     if (self) {
         self.backgroundDimmedView = [[UIView alloc] init];
         self.backgroundDimmedView.backgroundColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:0.5];
+        self.imageResizeSize = DEFAULT_IMAGE_SIZE;
     }
     return self;
 }
 
-
 - (void)presentFilesPickerOnController:(UIViewController *)presentFromController
-  withAddingCustomActionsToActionSheet:(NSArray *) customAlertActions {
-    
+  withAddingCustomActionsToActionSheet:(NSArray *)customAlertActions {
     if (self.actionSheet && [self.actionSheet isPresented]) {
         NSLog(@"Trying to present ImagePicker when already presented");
         return;
     }
-    
     
     self.presentedFromController = presentFromController;
     [self.presentedFromController.view endEditing:YES];
@@ -62,22 +61,30 @@
     self.actionSheet.delegate = self;
     
     @weakify(self);
-    JVTActionSheetAction *photoLibrary = [JVTActionSheetAction actionWithTitle:photoLibraryTxt actionType:kActionType_default handler:^(JVTActionSheetAction *action) {
-        @strongify(self);
-        [self photoLibraryPress];
-    }];
-    JVTActionSheetAction *takePhotoOrVideo = [JVTActionSheetAction actionWithTitle:takePhotoOrVideoTxt actionType:kActionType_default handler:^(JVTActionSheetAction *action) {
-        @strongify(self);
-        [self takePhotoOrVideoPress];
-    }];
-    JVTActionSheetAction *uploadFile = [JVTActionSheetAction actionWithTitle:uploadFileTxt actionType:kActionType_default handler:^(JVTActionSheetAction *action) {
-        @strongify(self);
-        [self uploadFilePress];
-    }];
-    JVTActionSheetAction *cancel = [JVTActionSheetAction actionWithTitle:cancelTxt actionType:kActionType_cancel handler:^(JVTActionSheetAction *action) {
-        @strongify(self);
-            [self dismissPresentedControllerAndInformDelegate:nil];
-    }];
+    JVTActionSheetAction *photoLibrary = [JVTActionSheetAction actionWithTitle:photoLibraryTxt
+                                                                    actionType:kActionType_default
+                                                                       handler:^(JVTActionSheetAction *action) {
+                                                                           @strongify(self);
+                                                                           [self photoLibraryPress];
+                                                                       }];
+    JVTActionSheetAction *takePhotoOrVideo = [JVTActionSheetAction actionWithTitle:takePhotoOrVideoTxt
+                                                                        actionType:kActionType_default
+                                                                           handler:^(JVTActionSheetAction *action) {
+                                                                               @strongify(self);
+                                                                               [self takePhotoOrVideoPress];
+                                                                           }];
+    JVTActionSheetAction *uploadFile = [JVTActionSheetAction actionWithTitle:uploadFileTxt
+                                                                  actionType:kActionType_default
+                                                                     handler:^(JVTActionSheetAction *action) {
+                                                                         @strongify(self);
+                                                                         [self uploadFilePress];
+                                                                     }];
+    JVTActionSheetAction *cancel = [JVTActionSheetAction actionWithTitle:cancelTxt
+                                                              actionType:kActionType_cancel
+                                                                 handler:^(JVTActionSheetAction *action) {
+                                                                     @strongify(self);
+                                                                     [self dismissPresentedControllerAndInformDelegate:nil];
+                                                                 }];
     
     [self.actionSheet addAction:photoLibrary];
     [self.actionSheet addAction:takePhotoOrVideo];
@@ -90,15 +97,12 @@
         }
     }
     
-    
     [self addCollectionImagesPreviewToSheetAndPresent:self.actionSheet];
-    
 }
 
--(void) addCollectionImagesPreviewToSheetAndPresent:(JVTActionSheetView *) alertController {
-    
+- (void)addCollectionImagesPreviewToSheetAndPresent:(JVTActionSheetView *)alertController {
     @weakify(self);
-    [JVTRecentImagesProvider getRecentImages:^(NSArray<UIImage *> *images) {
+    [JVTRecentImagesProvider getRecentImagesWithSize:self.imageResizeSize return:^(NSArray<UIImage *> *images) {
         @strongify(self);
         
         if (images.count > 0) {
@@ -125,23 +129,23 @@
     UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
     imagePickerController.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
     [self.presentedFromController presentViewController:imagePickerController animated:YES completion:nil];
-
+    
     imagePickerController.finalizationBlock = ^(UIImagePickerController *picker, NSDictionary *info) {
         @strongify(self);
-        UIImage *image = (UIImage *) [info valueForKey:UIImagePickerControllerOriginalImage];
-
+        UIImage *image = (UIImage *)[info valueForKey:UIImagePickerControllerOriginalImage];
+        
         [self showPreviewForImage:image];
     };
     imagePickerController.cancellationBlock = ^(UIImagePickerController *picker) {
-        [picker dismissViewControllerAnimated:YES completion:^{}];
+        [picker dismissViewControllerAnimated:YES
+                                   completion:^{
+                                   }];
     };
 }
 
 - (void)takePhotoOrVideoPress {
-    
     AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
-    if(authStatus == AVAuthorizationStatusAuthorized || authStatus == AVAuthorizationStatusNotDetermined) {
-        
+    if (authStatus == AVAuthorizationStatusAuthorized || authStatus == AVAuthorizationStatusNotDetermined) {
         @weakify(self);
         UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
         imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
@@ -151,27 +155,29 @@
         
         imagePickerController.finalizationBlock = ^(UIImagePickerController *picker, NSDictionary *info) {
             @strongify(self);
-            UIImage *image = (UIImage *) [info valueForKey:UIImagePickerControllerOriginalImage];
-
+            UIImage *image = (UIImage *)[info valueForKey:UIImagePickerControllerOriginalImage];
+            
             [self didPressSendOnImage:image];
             
         };
         imagePickerController.cancellationBlock = ^(UIImagePickerController *picker) {
-            [picker dismissViewControllerAnimated:YES completion:^{}];
+            [picker dismissViewControllerAnimated:YES
+                                       completion:^{
+                                       }];
         };
         
-    } else if(authStatus == AVAuthorizationStatusDenied){
+    } else if (authStatus == AVAuthorizationStatusDenied) {
         [self presentPermissionDenied];
-    } else if(authStatus == AVAuthorizationStatusRestricted){
+    } else if (authStatus == AVAuthorizationStatusRestricted) {
         // restricted, normally won't happen
         [self presentPermissionDenied];
     }
 }
 
 - (void)uploadFilePress {
-    UIDocumentMenuViewController *documentMenuViewController = [[UIDocumentMenuViewController alloc] initWithDocumentTypes:@[(__bridge NSString *) kUTTypeItem] inMode:UIDocumentPickerModeImport];
+    UIDocumentMenuViewController *documentMenuViewController = [[UIDocumentMenuViewController alloc] initWithDocumentTypes:@[ (__bridge NSString *)kUTTypeItem ] inMode:UIDocumentPickerModeImport];
     documentMenuViewController.delegate = self;
-
+    
     [self.presentedFromController presentViewController:documentMenuViewController animated:YES completion:nil];
 }
 
@@ -179,45 +185,45 @@
 
 - (void)documentMenu:(UIDocumentMenuViewController *)documentMenu didPickDocumentPicker:(UIDocumentPickerViewController *)documentPicker {
     documentPicker.delegate = self;
-    [self.presentedFromController presentViewController:documentPicker animated:YES completion:^{
-        NSLog(@"Document menu dismissed");
-    }];
+    [self.presentedFromController presentViewController:documentPicker
+                                               animated:YES
+                                             completion:^{
+                                                 NSLog(@"Document menu dismissed");
+                                             }];
 }
 
 - (void)documentPicker:(UIDocumentPickerViewController *)controller didPickDocumentAtURL:(NSURL *)url {
-
     @weakify(self);
     [[JVTWorker shared] addOperationWithBlock:^{
         @strongify(self);
-
+        
         NSLog(@"Document picker picked %@", url);
         NSData *file = [self fileFromFileURL:url];
         NSString *fileName = [url lastPathComponent];
-
+        
         dispatch_async(dispatch_get_main_queue(), ^{
-        @strongify(self);
+            @strongify(self);
             
             if ([self isFileOfTypeImage:[url absoluteString]]) {
-                
-                    UIImage *image = [UIImage imageWithData: file];
-                    if (!image) {
-                        [self presentFileNotSupportedAlert];
-                    } else {
-                        [self.delegate didPickImage:image withImageName:fileName];
-                    }
+                UIImage *image = [UIImage imageWithData:file];
+                if (!image) {
+                    [self presentFileNotSupportedAlert];
+                } else {
+                    [self.delegate didPickImage:image withImageName:fileName];
+                }
                 
             } else {
                 [self.delegate didPickFile:file fileName:fileName];
             }
             
         });
-
+        
     }];
 }
 
--(BOOL) isFileOfTypeImage: (NSString *) filePath {
+- (BOOL)isFileOfTypeImage:(NSString *)filePath {
     NSString *file = filePath;
-    CFStringRef fileExtension = (__bridge CFStringRef) [file pathExtension];
+    CFStringRef fileExtension = (__bridge CFStringRef)[file pathExtension];
     CFStringRef fileUTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension, NULL);
     
     if (UTTypeConformsTo(fileUTI, kUTTypeImage)) {
@@ -229,17 +235,16 @@
     }
 }
 
--(NSData *) fileFromFileURL: (NSURL *) fileURL{
+- (NSData *)fileFromFileURL:(NSURL *)fileURL {
     NSString *stringURL = [fileURL absoluteString];
-    NSURL  *url = [NSURL URLWithString:stringURL];
+    NSURL *url = [NSURL URLWithString:stringURL];
     NSData *urlData = [NSData dataWithContentsOfURL:url];
-    if ( urlData )
-    {
-        NSArray       *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString  *documentsDirectory = [paths objectAtIndex:0];
+    if (urlData) {
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
         
         NSString *fileName = [NSString stringWithFormat:@"filename%@", [fileURL lastPathComponent]];
-        NSString  *filePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory,fileName];
+        NSString *filePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory, fileName];
         [urlData writeToFile:filePath atomically:YES];
     }
     
@@ -248,10 +253,11 @@
 
 #pragma mark - delegate updates
 
-- (void)dismissPresentedControllerAndInformDelegate:(UIViewController *) presentedController {
-    [presentedController dismissViewControllerAnimated:YES completion:^(void) {
-        [self updateDelegateOnDissmiss];
-    }];
+- (void)dismissPresentedControllerAndInformDelegate:(UIViewController *)presentedController {
+    [presentedController dismissViewControllerAnimated:YES
+                                            completion:^(void) {
+                                                [self updateDelegateOnDissmiss];
+                                            }];
 }
 
 - (void)updateDelegateOnDissmiss {
@@ -262,7 +268,7 @@
 
 #pragma mark - Action sheet delegate
 
--(void) actionSheetDidDismiss {
+- (void)actionSheetDidDismiss {
     [self hideBackgroundDimmed];
     [self.recetImagesCollection removeFromSuperview];
     self.recetImagesCollection = nil;
@@ -271,50 +277,59 @@
 
 #pragma mark - Alerts
 
--(void) presentFileNotSupportedAlert {
+- (void)presentFileNotSupportedAlert {
     @weakify(self);
     
     NSString *title = @"Unable to Upload";
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *okBtn = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
+    UIAlertAction *okBtn = [UIAlertAction actionWithTitle:@"Ok"
+                                                    style:UIAlertActionStyleDefault
+                                                  handler:^(UIAlertAction *_Nonnull action){
+                                                  }];
     [alert addAction:okBtn];
-    [self.presentedFromController presentViewController:alert animated:YES completion:^{
-@strongify(self);
-        [self updateDelegateOnDissmiss];
-    }];
+    [self.presentedFromController presentViewController:alert
+                                               animated:YES
+                                             completion:^{
+                                                 @strongify(self);
+                                                 [self updateDelegateOnDissmiss];
+                                             }];
 }
 
--(void) presentPermissionDenied {
+- (void)presentPermissionDenied {
     @weakify(self);
     NSString *title = @"Permission Denied";
     NSString *subtitle = @"App isn't allowed to access to the camera. You can change this from Settings > Privacy > Camera";
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:subtitle preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *okBtn = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
+    UIAlertAction *okBtn = [UIAlertAction actionWithTitle:@"Ok"
+                                                    style:UIAlertActionStyleDefault
+                                                  handler:^(UIAlertAction *_Nonnull action){
+                                                  }];
     [alert addAction:okBtn];
-    [self.presentedFromController presentViewController:alert animated:YES completion:^{
-@strongify(self);
-        [self updateDelegateOnDissmiss];
-    }];
+    [self.presentedFromController presentViewController:alert
+                                               animated:YES
+                                             completion:^{
+                                                 @strongify(self);
+                                                 [self updateDelegateOnDissmiss];
+                                             }];
 }
 
 #pragma mark - CollectionView picker delegat
 
--(void)didChooseImagesFromCollection:(UIImage *)image {
+- (void)didChooseImagesFromCollection:(UIImage *)image {
     [self.actionSheet dismiss];
     [self.delegate didPickImage:image withImageName:@"asset"];
 }
 
 #pragma mark - ImagePreview delegate
 
--(void) didPressSendOnImage:(UIImage *) image {
+- (void)didPressSendOnImage:(UIImage *)image {
     [self.presentedFromController dismissViewControllerAnimated:YES completion:nil];
     [self.delegate didPickImage:image withImageName:@"asset"];
 }
 
 #pragma mark - image preview
 
--(void) showPreviewForImage:(UIImage *) image {
-
+- (void)showPreviewForImage:(UIImage *)image {
     if (self.presentedFromController.presentedViewController) {
         self.presentedFromController = self.presentedFromController.presentedViewController;
     }
@@ -329,8 +344,7 @@
 
 #pragma mark - Background dimmed view
 
-
--(void) addBackgroundDimmed  {
+- (void)addBackgroundDimmed {
     [self.backgroundDimmedView removeFromSuperview];
     [self.presentedFromController.view addSubview:self.backgroundDimmedView];
     self.backgroundDimmedView.frame = CGRectMake(0, 0, CGRectGetWidth(self.presentedFromController.view.frame), CGRectGetHeight(self.presentedFromController.view.frame));
@@ -340,24 +354,33 @@
     [self.backgroundDimmedView addGestureRecognizer:tap];
 }
 
--(void) didTapOnDimmedBackground {
+- (void)didTapOnDimmedBackground {
     [self.actionSheet dismiss];
 }
 
--(void) showBackgroundDimmed {
-    [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.backgroundDimmedView.alpha = 0.8;
-    } completion:^(BOOL finished) {}];
+- (void)showBackgroundDimmed {
+    [UIView animateWithDuration:0.4
+                          delay:0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^{
+                         self.backgroundDimmedView.alpha = 0.8;
+                     }
+                     completion:^(BOOL finished){
+                     }];
 }
 
--(void) hideBackgroundDimmed {
+- (void)hideBackgroundDimmed {
     @weakify(self);
-    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        @strongify(self);
-        self.backgroundDimmedView.alpha = 0;
-    } completion:^(BOOL finished) {
-        @strongify(self);
-        [self.backgroundDimmedView removeFromSuperview];
-    }];
+    [UIView animateWithDuration:0.3
+                          delay:0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^{
+                         @strongify(self);
+                         self.backgroundDimmedView.alpha = 0;
+                     }
+                     completion:^(BOOL finished) {
+                         @strongify(self);
+                         [self.backgroundDimmedView removeFromSuperview];
+                     }];
 }
 @end

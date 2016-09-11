@@ -10,7 +10,7 @@
 
 @protocol JVTActionSheetActionDelegate <NSObject>
 
--(void) actionSheetDidDismiss;
+- (void)actionSheetDidDismiss;
 
 @end
 
@@ -18,10 +18,10 @@
 @import UIKit;
 @interface JVTActionSheetView : NSObject
 @property (nonatomic, weak) id<JVTActionSheetActionDelegate> delegate;
--(void)addHeaderView:(UIView *) headerView ;
+- (void)addHeaderView:(UIView *)headerView;
 - (void)addAction:(JVTActionSheetAction *)action;
--(void) presentOnTopOfView:(UIView *) view;
--(void) dismiss;
--(void) show ;
--(BOOL) isPresented;
+- (void)presentOnTopOfView:(UIView *)view;
+- (void)dismiss;
+- (void)show;
+- (BOOL)isPresented;
 @end

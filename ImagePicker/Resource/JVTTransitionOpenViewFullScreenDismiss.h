@@ -10,8 +10,8 @@
 @import UIKit;
 
 @interface JVTTransitionOpenViewFullScreenDismiss : NSObject <UIViewControllerAnimatedTransitioning>
-@property (nonatomic, assign)    CGRect openingFrame;
-@property (nonatomic,weak) UIView *viewToDissmissFrom;
-@property (nonatomic,strong) void (^dissmissBlock)();
+@property (nonatomic, assign) CGRect openingFrame;
+@property (nonatomic, weak) UIView *viewToDissmissFrom;
+@property (nonatomic, strong) void (^dissmissBlock)();
 
 @end

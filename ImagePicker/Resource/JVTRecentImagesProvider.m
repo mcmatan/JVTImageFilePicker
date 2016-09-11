@@ -11,29 +11,25 @@
 @import AssetsLibrary;
 #import "JVTCameraAccesebility.h"
 
-#define IMAGE_SIZE CGSizeMake(600, 600)
-
 static NSInteger maxResults = 15;
 
 @implementation JVTRecentImagesProvider
 
-+(void) getRecentImages:(void(^)(NSArray<UIImage *> *images)) callback {
-    
++ (void)getRecentImagesWithSize:(CGSize) size return:(void (^)(NSArray<UIImage *> *images))callback {
     [JVTCameraAccesebility getPhotoRollAccessibilityAndRequestIfNeeded:^(BOOL allowedToUseCamera) {
         if (!allowedToUseCamera) {
             dispatch_async(dispatch_get_main_queue(), ^{
-               callback(nil);
+                callback(nil);
             });
         }
         PHFetchResult *smartAlbums = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeAlbumRegular options:nil];
         
-        [smartAlbums enumerateObjectsUsingBlock:^(PHAssetCollection *collection, NSUInteger idx, BOOL *stop) {
+        [smartAlbums enumerateObjectsUsingBlock:^(PHAssetCollection *collection, NSUInteger idx, BOOL *stop){
             
         }];
         
-        
         PHFetchOptions *fetchOptions = [PHFetchOptions new];
-        fetchOptions.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO]];
+        fetchOptions.sortDescriptors = @[ [NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO] ];
         PHFetchResult *allPhotosResult = [PHAsset fetchAssetsWithMediaType:PHAssetMediaTypeImage options:fetchOptions];
         
         if (allPhotosResult.count == 0) {
@@ -47,7 +43,6 @@ static NSInteger maxResults = 15;
         
         //   Get assets from the PHFetchResult object
         [allPhotosResult enumerateObjectsUsingBlock:^(PHAsset *asset, NSUInteger idx, BOOL *stop) {
-            CGSize size = IMAGE_SIZE;
             PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
             options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat; //I only want the highest possible quality
             options.synchronous = YES;
@@ -56,18 +51,22 @@ static NSInteger maxResults = 15;
                 NSLog(@"%f", progress); //follow progress + update progress bar
             };
             
-            __block PHImageRequestID reqId =[[PHImageManager defaultManager] requestImageForAsset:asset targetSize:size contentMode:PHImageContentModeAspectFill options:options resultHandler:^(UIImage *image, NSDictionary *info) {
-                
-                [allImages addObject:image];
-                
-                if (allImages.count == allPhotosResult.count || allImages.count >= maxResults) {
-                    *stop = YES;
-                    [[PHImageManager defaultManager] cancelImageRequest:reqId];
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        callback(allImages);
-                    });
-                }
-            }];
+            __block PHImageRequestID reqId = [[PHImageManager defaultManager] requestImageForAsset:asset
+                                                                                        targetSize:size
+                                                                                       contentMode:PHImageContentModeAspectFill
+                                                                                           options:options
+                                                                                     resultHandler:^(UIImage *image, NSDictionary *info) {
+                                                                                         
+                                                                                         [allImages addObject:image];
+                                                                                         
+                                                                                         if (allImages.count == allPhotosResult.count || allImages.count >= maxResults) {
+                                                                                             *stop = YES;
+                                                                                             [[PHImageManager defaultManager] cancelImageRequest:reqId];
+                                                                                             dispatch_async(dispatch_get_main_queue(), ^{
+                                                                                                 callback(allImages);
+                                                                                             });
+                                                                                         }
+                                                                                     }];
         }];
     }];
 }

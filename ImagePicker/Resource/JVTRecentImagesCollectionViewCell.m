@@ -13,31 +13,27 @@
 
 @implementation JVTRecentImagesCollectionViewCell
 
--(instancetype) initWithFrame:(CGRect)frame {
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame))];
         [self.imageView setContentMode:UIViewContentModeScaleAspectFill];
         self.imageView.clipsToBounds = YES;
         [self addSubview:self.imageView];
-        
-    
     }
     return self;
 }
 
-
--(void) setImage:(UIImage *) image {
+- (void)setImage:(UIImage *)image {
     [self.imageView setImage:image];
 }
 
--(void) prepareForReuse {
+- (void)prepareForReuse {
     [super prepareForReuse];
     self.imageView.image = nil;
 }
 
-+(NSString *) cellIdentifer {
++ (NSString *)cellIdentifer {
     return NSStringFromClass([self class]);
 }
 @end
-

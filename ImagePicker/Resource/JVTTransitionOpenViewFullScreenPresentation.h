@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 @import UIKit;
 
-@interface JVTTransitionOpenViewFullScreenPresentation : NSObject<UIViewControllerAnimatedTransitioning>
-@property (nonatomic, assign)    CGRect openingFrame;
-@property (nonatomic,assign) UIView *viewToPresentFrom;
+@interface JVTTransitionOpenViewFullScreenPresentation : NSObject <UIViewControllerAnimatedTransitioning>
+@property (nonatomic, assign) CGRect openingFrame;
+@property (nonatomic, assign) UIView *viewToPresentFrom;
 @end

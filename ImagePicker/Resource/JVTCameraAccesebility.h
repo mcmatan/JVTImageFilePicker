@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface JVTCameraAccesebility : NSObject
-+(void) getCameraAccessibilityAndRequestIfNeeded:(void(^)(BOOL allowedToUseCamera))callback  ;
-+(void) getPhotoRollAccessibilityAndRequestIfNeeded:(void(^)(BOOL allowedToUseCamera))callback  ;
++ (void)getCameraAccessibilityAndRequestIfNeeded:(void (^)(BOOL allowedToUseCamera))callback;
++ (void)getPhotoRollAccessibilityAndRequestIfNeeded:(void (^)(BOOL allowedToUseCamera))callback;
 @end

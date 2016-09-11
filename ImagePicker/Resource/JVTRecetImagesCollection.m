@@ -20,21 +20,21 @@
 #import "JVTCameraAccesebility.h"
 #import "JVTImagePreviewVC.h"
 
-static NSString * CellPortraitIdentifier = @"CELL_PROTRAIT";
-static NSString * CellLandscpeIdentifier = @"CELL_LANDSCAPE";
+static NSString *CellPortraitIdentifier = @"CELL_PROTRAIT";
+static NSString *CellLandscpeIdentifier = @"CELL_LANDSCAPE";
 @import GLKit;
 static int cameraIndex = 0;
 @interface JVTRecetImagesCollection () <UICollectionViewDelegate, UICollectionViewDataSource, JVTImagePreviewVCDelegate, JVTTransitionOpenImageFullScreenDismissCalles, AVCaptureVideoDataOutputSampleBufferDelegate, JVTTransitionOpenViewFullScreenDelegateDismissCalles, JVTCameraViewPreviewVCDelegate>
-@property (nonatomic,strong) UICollectionView *collectionView;
-@property (nonatomic,strong) NSArray<UIImage *> *imagesModel;
+@property (nonatomic, strong) UICollectionView *collectionView;
+@property (nonatomic, strong) NSArray<UIImage *> *imagesModel;
 
-@property (nonatomic,strong) JVTTransitionOpenImageFullScreenDelegate *transitionImageOpenDelegate;
-@property (nonatomic,strong) JVTTransitionOpenViewFullScreenDelegate *transitionViewOpenDelegate;
+@property (nonatomic, strong) JVTTransitionOpenImageFullScreenDelegate *transitionImageOpenDelegate;
+@property (nonatomic, strong) JVTTransitionOpenViewFullScreenDelegate *transitionViewOpenDelegate;
 
-@property (nonatomic,strong) JVTImagePreviewVC *imageDisplayVC;
-@property (nonatomic,strong) JVTCameraViewPreviewVC *cameraInstantTakeDisplay;
+@property (nonatomic, strong) JVTImagePreviewVC *imageDisplayVC;
+@property (nonatomic, strong) JVTCameraViewPreviewVC *cameraInstantTakeDisplay;
 
-@property (nonatomic,strong) LLSimpleCamera *camera;
+@property (nonatomic, strong) LLSimpleCamera *camera;
 @property (nonatomic, assign) BOOL cameraAccesible;
 
 @property (nonatomic, weak) UIImageView *cellImageViewPresenting;
@@ -48,8 +48,8 @@ static int cameraIndex = 0;
     CGFloat cellPadding;
 }
 
--(instancetype) initWithFrame:(CGRect)frame
-          withImagesToDisplay:(NSArray<UIImage *>*) imagesToDisplay{
+- (instancetype)initWithFrame:(CGRect)frame
+          withImagesToDisplay:(NSArray<UIImage *> *)imagesToDisplay {
     self = [super initWithFrame:frame];
     if (self) {
         self.cameraAccesible = NO;
@@ -58,12 +58,11 @@ static int cameraIndex = 0;
         [self setupPresentationControllerAndTransitions];
         [self setupCollection];
         [self checkForCameraAccesbiliyAnsAskIfNeeded];
-        
     }
     return self;
 }
 
--(void) checkForCameraAccesbiliyAnsAskIfNeeded {
+- (void)checkForCameraAccesbiliyAnsAskIfNeeded {
     @weakify(self);
     [JVTCameraAccesebility getCameraAccessibilityAndRequestIfNeeded:^(BOOL allowedToUseCamera) {
         @strongify(self);
@@ -75,14 +74,14 @@ static int cameraIndex = 0;
     }];
 }
 
--(void) cameraStateAccessible {
+- (void)cameraStateAccessible {
     self.camera = [[LLSimpleCamera alloc] init];
 }
 
--(void) configureItemSize {
+- (void)configureItemSize {
     cellPadding = 5;
-    CGFloat aspectRatio =   [UIScreen mainScreen].bounds.size.width / [UIScreen mainScreen].bounds.size.height;
-    CGFloat height = CGRectGetHeight(self.frame)  - (cellPadding * 2);
+    CGFloat aspectRatio = [UIScreen mainScreen].bounds.size.width / [UIScreen mainScreen].bounds.size.height;
+    CGFloat height = CGRectGetHeight(self.frame) - (cellPadding * 2);
     CGFloat width = height * aspectRatio;
     CGFloat widthAspectRatio = height / width;
     CGFloat widthLandscap = height * widthAspectRatio;
@@ -92,7 +91,7 @@ static int cameraIndex = 0;
     itemHeight = height;
 }
 
--(void) setupCollection {
+- (void)setupCollection {
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
     flowLayout.minimumLineSpacing = cellPadding;
@@ -105,11 +104,9 @@ static int cameraIndex = 0;
     self.collectionView.backgroundColor = [UIColor whiteColor];
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
-    
-    
 }
 
--(void) setupPresentationControllerAndTransitions {
+- (void)setupPresentationControllerAndTransitions {
     self.transitionImageOpenDelegate = [[JVTTransitionOpenImageFullScreenDelegate alloc] init];
     self.transitionImageOpenDelegate.delegate = self;
     self.transitionViewOpenDelegate = [[JVTTransitionOpenViewFullScreenDelegate alloc] init];
@@ -125,7 +122,6 @@ static int cameraIndex = 0;
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.item == cameraIndex && self.cameraAccesible) {
         JVTRecentImagesVideoCollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:[JVTRecentImagesVideoCollectionViewCell cellIdentifer] forIndexPath:indexPath];
-        
         
         self.camera.view.frame = CGRectMake(0, 0, itemWidthPortrait, itemHeight);
         self.camera.view.userInteractionEnabled = NO;
@@ -147,17 +143,15 @@ static int cameraIndex = 0;
     return cell;
 }
 
--(void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.item == cameraIndex && self.cameraAccesible) {
-          [self cameraCellPressed:collectionView indexPath:indexPath];
+        [self cameraCellPressed:collectionView indexPath:indexPath];
     } else {
         [self imageCellPressed:collectionView indexPath:indexPath];
     }
-    
 }
 
--(void) imageCellPressed:(UICollectionView *) collectionView indexPath:(NSIndexPath *) indexPath {
+- (void)imageCellPressed:(UICollectionView *)collectionView indexPath:(NSIndexPath *)indexPath {
     UICollectionViewLayoutAttributes *att = [collectionView layoutAttributesForItemAtIndexPath:indexPath];
     CGRect attFrame = att.frame;
     CGRect frameToOpenFrom = [collectionView convertRect:attFrame toView:self.presentingViewController.view];
@@ -172,18 +166,19 @@ static int cameraIndex = 0;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:self.imageDisplayVC];
     nav.transitioningDelegate = self.transitionImageOpenDelegate;
     nav.modalPresentationStyle = UIModalPresentationCustom;
-    [self.presentingViewController presentViewController:nav animated:YES completion:^{}];
+    [self.presentingViewController presentViewController:nav
+                                                animated:YES
+                                              completion:^{
+                                              }];
     
     JVTRecentImagesCollectionViewCell *cell = (JVTRecentImagesCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     self.cellImageViewPresenting = cell.imageView;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [cell.imageView setHidden:YES];
     });
-    
 }
 
-
--(void) cameraCellPressed:(UICollectionView *) collectionView indexPath:(NSIndexPath *) indexPath {
+- (void)cameraCellPressed:(UICollectionView *)collectionView indexPath:(NSIndexPath *)indexPath {
     UICollectionViewLayoutAttributes *att = [collectionView layoutAttributesForItemAtIndexPath:indexPath];
     CGRect attFrame = att.frame;
     CGRect frameToOpenFrom = [collectionView convertRect:attFrame toView:self.presentingViewController.view];
@@ -205,49 +200,50 @@ static int cameraIndex = 0;
     [self.presentingViewController presentViewController:self.cameraInstantTakeDisplay animated:YES completion:nil];
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.item == cameraIndex && self.cameraAccesible) {
-        return CGSizeMake(itemWidthPortrait, itemHeight);;
+        return CGSizeMake(itemWidthPortrait, itemHeight);
+        ;
     }
     UIImage *image = [self imageForImagePath:indexPath];
     return [self cellSizeForImage:image];
 }
 
--(void) didChooseImagesFromCollection:(UIImage *)image {
+- (void)didChooseImagesFromCollection:(UIImage *)image {
     [self.delegate didChooseImagesFromCollection:image];
 }
 
 #pragma mark - JVTImagePreviewVCDelegate
 
--(void) didPressSendOnImage:(UIImage *)image {
+- (void)didPressSendOnImage:(UIImage *)image {
     [self.delegate didChooseImagesFromCollection:image];
 }
 
--(void) didDismissImagePreview {
+- (void)didDismissImagePreview {
     [self.cellImageViewPresenting setHidden:NO];
 }
 
 #pragma mark - JVTOpenFullScreenTransitionDelegateCalls delegate
 
--(void) didDissmiss {
+- (void)didDissmiss {
     [self setupPresentationControllerAndTransitions];
-    [self.collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:0 inSection:0]]];
+    [self.collectionView reloadItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:0 inSection:0] ]];
 }
 
 #pragma mark - size calculations
 
--(CGSize) cellSizeForImage:(UIImage *) image {
+- (CGSize)cellSizeForImage:(UIImage *)image {
     if ([self isImagePortrait:image]) {
         return CGSizeMake(itemWidthPortrait, itemHeight);
     }
     return CGSizeMake(itemWidthLandscap, itemHeight);
 }
 
--(BOOL) isImagePortrait:(UIImage *) image {
+- (BOOL)isImagePortrait:(UIImage *)image {
     return image.size.height >= image.size.width;
 }
 
--(UIImage *) imageForImagePath:(NSIndexPath *) indexPath {
+- (UIImage *)imageForImagePath:(NSIndexPath *)indexPath {
     if (self.cameraAccesible) {
         return self.imagesModel[indexPath.item - 1];
     } else {
@@ -257,38 +253,34 @@ static int cameraIndex = 0;
 
 #pragma mark - JVTOpenFullScreenTransitioinCameraVCDelegate
 
--(void) didPressTakeImage {
+- (void)didPressTakeImage {
     @weakify(self);
     
-            [self.camera capture:^(LLSimpleCamera *camera, UIImage *image, NSDictionary *metadata, NSError *error) {
-                @strongify(self);
-                if(!error) {
-                    
-                    self.imageDisplayVC = [[JVTImagePreviewVC alloc] initWithImage:image];
-                    self.imageDisplayVC.delegate = self;
-                    
-
-                    UIView *mainWindow = [[UIApplication sharedApplication].windows lastObject];
-                    UIView *snapShot = [mainWindow snapshotViewAfterScreenUpdates:YES];
-                    [mainWindow addSubview:snapShot];
-
-                    [self.collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:0 inSection:0]]];
-                    [self.presentingViewController.presentedViewController dismissViewControllerAnimated:NO completion:nil];
-                    [self.presentingViewController presentViewController:self.imageDisplayVC animated:NO completion:nil];
-                    
-                    
-                    [self setNeedsDisplay];
-                    [self setNeedsLayout];
-                    
-                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                        [snapShot removeFromSuperview];
-                    });
-                    
-                }
-                else {
-                    NSLog(@"An error has occured: %@", error);
-                }
-            } exactSeenImage:YES];
-    
+    [self.camera capture:^(LLSimpleCamera *camera, UIImage *image, NSDictionary *metadata, NSError *error) {
+        @strongify(self);
+        if (!error) {
+            self.imageDisplayVC = [[JVTImagePreviewVC alloc] initWithImage:image];
+            self.imageDisplayVC.delegate = self;
+            
+            UIView *mainWindow = [[UIApplication sharedApplication].windows lastObject];
+            UIView *snapShot = [mainWindow snapshotViewAfterScreenUpdates:YES];
+            [mainWindow addSubview:snapShot];
+            
+            [self.collectionView reloadItemsAtIndexPaths:@[ [NSIndexPath indexPathForItem:0 inSection:0] ]];
+            [self.presentingViewController.presentedViewController dismissViewControllerAnimated:NO completion:nil];
+            [self.presentingViewController presentViewController:self.imageDisplayVC animated:NO completion:nil];
+            
+            [self setNeedsDisplay];
+            [self setNeedsLayout];
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [snapShot removeFromSuperview];
+            });
+            
+        } else {
+            NSLog(@"An error has occured: %@", error);
+        }
+    }
+          exactSeenImage:YES];
 }
 @end

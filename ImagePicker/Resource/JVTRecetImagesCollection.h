@@ -10,13 +10,13 @@
 
 @protocol JVTRecetImagesCollectionDelegate <NSObject>
 
--(void) didChooseImagesFromCollection:(UIImage *)image ;
+- (void)didChooseImagesFromCollection:(UIImage *)image;
 
 @end
 
 @interface JVTRecetImagesCollection : UIView
--(instancetype) initWithFrame:(CGRect)frame
-          withImagesToDisplay:(NSArray<UIImage *>*) imagesToDisplay;
+- (instancetype)initWithFrame:(CGRect)frame
+          withImagesToDisplay:(NSArray<UIImage *> *)imagesToDisplay;
 @property (nonatomic, weak) id<JVTRecetImagesCollectionDelegate> delegate;
 @property (nonatomic, weak) UIViewController *presentingViewController;
 @end

@@ -11,21 +11,19 @@
 @import Photos;
 @import AssetsLibrary;
 
-
 @implementation JVTCameraAccesebility
 
-+(void) getCameraAccessibilityAndRequestIfNeeded:(void(^)(BOOL allowedToUseCamera))callback  {
-    
++ (void)getCameraAccessibilityAndRequestIfNeeded:(void (^)(BOOL allowedToUseCamera))callback {
     AVAuthorizationStatus authorizationState = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
     switch (authorizationState) {
         case AVAuthorizationStatusNotDetermined: {
-            [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                   callback(granted);
-                });
-            }];
-        }
-            break;
+            [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo
+                                     completionHandler:^(BOOL granted) {
+                                         dispatch_async(dispatch_get_main_queue(), ^{
+                                             callback(granted);
+                                         });
+                                     }];
+        } break;
         case AVAuthorizationStatusDenied:
             callback(NO);
             break;
@@ -35,12 +33,9 @@
         default:
             break;
     }
-    
-    
 }
 
-+(void) getPhotoRollAccessibilityAndRequestIfNeeded:(void(^)(BOOL allowedToUseCamera))callback   {
-    
++ (void)getPhotoRollAccessibilityAndRequestIfNeeded:(void (^)(BOOL allowedToUseCamera))callback {
     [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
         switch (status) {
             case PHAuthorizationStatusAuthorized:

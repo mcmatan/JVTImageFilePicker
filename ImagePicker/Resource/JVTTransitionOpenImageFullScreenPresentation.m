@@ -13,11 +13,11 @@ static NSTimeInterval transitionDuration = 0.5;
 
 @implementation JVTTransitionOpenImageFullScreenPresentation
 
--(NSTimeInterval) transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext {
+- (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext {
     return transitionDuration;
 }
 
--(void) animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
+- (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
     __block UIViewController *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     __block UIView *containerView = [transitionContext containerView];
     
@@ -38,16 +38,22 @@ static NSTimeInterval transitionDuration = 0.5;
     [containerView addSubview:toViewController.view];
     
     @weakify(self);
-    [UIView animateWithDuration:animationDuration delay:0 usingSpringWithDamping:0.8 initialSpringVelocity:20.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        @strongify(self);
-        fromViewSnapShot.frame = self.endingFrame;
-        backgroundBlackView.alpha = 1;
-    } completion:^(BOOL finished) {
-        toViewController.view.alpha = 1.0;
-        [backgroundBlackView removeFromSuperview];
-        [fromViewSnapShot removeFromSuperview];
-        [transitionContext completeTransition:finished];
-    }];
+    [UIView animateWithDuration:animationDuration
+                          delay:0
+         usingSpringWithDamping:0.8
+          initialSpringVelocity:20.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^{
+                         @strongify(self);
+                         fromViewSnapShot.frame = self.endingFrame;
+                         backgroundBlackView.alpha = 1;
+                     }
+                     completion:^(BOOL finished) {
+                         toViewController.view.alpha = 1.0;
+                         [backgroundBlackView removeFromSuperview];
+                         [fromViewSnapShot removeFromSuperview];
+                         [transitionContext completeTransition:finished];
+                     }];
 }
 
 @end

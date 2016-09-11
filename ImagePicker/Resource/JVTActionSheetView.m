@@ -14,21 +14,23 @@
 
 static CGFloat itemHeight = 50;
 
-@interface JVTActionSheetView () {}
-@property (nonatomic,strong) NSMutableArray<JVTActionSheetAction *> *actions;
-@property (nonatomic,weak) UIView *headerView;
-@property (nonatomic,assign) CGFloat sheetWidth;
-@property (nonatomic,strong) UIView *sheetView;
-@property (nonatomic,weak) UIView *presentingOnView;
+@interface JVTActionSheetView () {
+}
+@property (nonatomic, strong) NSMutableArray<JVTActionSheetAction *> *actions;
+@property (nonatomic, weak) UIView *headerView;
+@property (nonatomic, assign) CGFloat sheetWidth;
+@property (nonatomic, strong) UIView *sheetView;
+@property (nonatomic, weak) UIView *presentingOnView;
 @property (nonatomic, assign) BOOL isPresented;
 @end
 
 @implementation JVTActionSheetView
 
--(instancetype) init {
+- (instancetype)init {
     self = [super init];
     if (self) {
-        self.actions = [NSMutableArray array];    }
+        self.actions = [NSMutableArray array];
+    }
     return self;
 }
 
@@ -36,19 +38,19 @@ static CGFloat itemHeight = 50;
     [self.actions addObject:action];
 }
 
--(void)addHeaderView:(UIView *) headerView {
+- (void)addHeaderView:(UIView *)headerView {
     self.headerView = headerView;
 }
 
--(void) dismiss {
+- (void)dismiss {
     [self endPresentationAnimation];
 }
 
--(void) show {
+- (void)show {
     [self startPresentationAnimation];
 }
 
--(void) presentOnTopOfView:(UIView *) view {
+- (void)presentOnTopOfView:(UIView *)view {
     if (self.isPresented) {
         return;
     }
@@ -61,7 +63,6 @@ static CGFloat itemHeight = 50;
     self.sheetView.backgroundColor = [UIColor whiteColor];
     
     if (self.headerView) {
-        
         CGRect oldSheetViewFrame = self.sheetView.frame;
         oldSheetViewFrame.size.height += self.headerView.frame.size.height;
         self.sheetView.frame = oldSheetViewFrame;
@@ -74,7 +75,6 @@ static CGFloat itemHeight = 50;
     }
     
     for (JVTActionSheetAction *action in self.actions) {
-        
         UIView *itemView = [self itemViewForAction:action];
         
         CGRect oldSheetViewFrame = self.sheetView.frame;
@@ -88,7 +88,6 @@ static CGFloat itemHeight = 50;
         [self.sheetView addSubview:itemView];
     }
     
-    
     [self.sheetView setHidden:YES];
     
     [view addSubview:self.sheetView];
@@ -96,7 +95,7 @@ static CGFloat itemHeight = 50;
     [self startPresentationAnimation];
 }
 
--(void) startPresentationAnimation {
+- (void)startPresentationAnimation {
     CGRect startFrame = self.sheetView.frame;
     startFrame.origin.y = self.presentingOnView.bounds.size.height;
     CGRect endFrame = startFrame;
@@ -105,39 +104,48 @@ static CGFloat itemHeight = 50;
     [self.sheetView setFrame:startFrame];
     [self.sheetView setHidden:NO];
     
-    [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        [self.sheetView setFrame:endFrame];
-    } completion:^(BOOL finished) {}];
+    [UIView animateWithDuration:0.4
+                          delay:0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^{
+                         [self.sheetView setFrame:endFrame];
+                     }
+                     completion:^(BOOL finished){
+                     }];
 }
 
--(void) endPresentationAnimation {
+- (void)endPresentationAnimation {
     CGRect endFrame = self.sheetView.frame;
     endFrame.origin.y = self.presentingOnView.bounds.size.height;
-
+    
     @weakify(self);
-    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        @strongify(self);
-        [self.sheetView setFrame:endFrame];
-    } completion:^(BOOL finished) {
-        @strongify(self);
-        self.isPresented = NO;
-
-        if (self.delegate) {
-            [self.delegate actionSheetDidDismiss];
-        }
-    }];
+    [UIView animateWithDuration:0.3
+                          delay:0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^{
+                         @strongify(self);
+                         [self.sheetView setFrame:endFrame];
+                     }
+                     completion:^(BOOL finished) {
+                         @strongify(self);
+                         self.isPresented = NO;
+                         
+                         if (self.delegate) {
+                             [self.delegate actionSheetDidDismiss];
+                         }
+                     }];
 }
 
--(UIView *) itemViewForAction:(JVTActionSheetAction *) action {
+- (UIView *)itemViewForAction:(JVTActionSheetAction *)action {
     UIView *view = [[UIView alloc] init];
     CGFloat linePaddingFromLeft = 10;
     UIView *topLineView = [[UIView alloc] initWithFrame:CGRectMake(linePaddingFromLeft, 0, self.sheetWidth - linePaddingFromLeft, 0.5)];
-    topLineView.backgroundColor = [UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1.0];
+    topLineView.backgroundColor = [UIColor colorWithRed:221.0 / 255.0 green:221.0 / 255.0 blue:221.0 / 255.0 alpha:1.0];
     [view addSubview:topLineView];
     UIBlockButton *btn = [[UIBlockButton alloc] init];
     [btn setTitle:action.title forState:UIControlStateNormal];
     [btn.titleLabel setTextAlignment:NSTextAlignmentCenter];
-    [btn setTitleColor:[UIColor colorWithRed:46.0/255.0 green:145.0/255.0 blue:255.0/255.0 alpha:1.0] forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor colorWithRed:46.0 / 255.0 green:145.0 / 255.0 blue:255.0 / 255.0 alpha:1.0] forState:UIControlStateNormal];
     
     [view setFrame:CGRectMake(0, 0, self.sheetWidth, itemHeight)];
     [btn setFrame:view.frame];
@@ -148,16 +156,17 @@ static CGFloat itemHeight = 50;
     [btn.titleLabel setFont:[UIFont systemFontOfSize:fontSize weight:fontWeight]];
     
     @weakify(self);
-    [btn handleControlEvent:UIControlEventTouchUpInside withBlock:^{
-        @strongify(self);
-        [self endPresentationAnimation];
-        action.handler(action);
-    }];
+    [btn handleControlEvent:UIControlEventTouchUpInside
+                  withBlock:^{
+                      @strongify(self);
+                      [self endPresentationAnimation];
+                      action.handler(action);
+                  }];
     
     return view;
 }
 
--(void) didTapOnDimmedBackground {
+- (void)didTapOnDimmedBackground {
     [self dismiss];
 }
 

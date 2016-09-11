@@ -10,15 +10,15 @@
 
 @protocol JVTImagePreviewVCDelegate <NSObject>
 
--(void) didPressSendOnImage:(UIImage *) image;
+- (void)didPressSendOnImage:(UIImage *)image;
 
 @optional
--(void) didDismissImagePreview;
+- (void)didDismissImagePreview;
 
 @end
 
 @interface JVTImagePreviewVC : UIViewController
--(instancetype) initWithImage:(UIImage *) image;
--(CGRect) rectForImageView:(UIImage *) image ;
-@property (nonatomic,weak) id<JVTImagePreviewVCDelegate> delegate;
+- (instancetype)initWithImage:(UIImage *)image;
+- (CGRect)rectForImageView:(UIImage *)image;
+@property (nonatomic, weak) id<JVTImagePreviewVCDelegate> delegate;
 @end

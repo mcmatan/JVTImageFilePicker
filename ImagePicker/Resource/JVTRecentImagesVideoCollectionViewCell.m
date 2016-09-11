@@ -10,26 +10,25 @@
 @import AVFoundation;
 
 @interface JVTRecentImagesVideoCollectionViewCell ()
-@property (nonatomic,weak) UIView *viewToPresent;
+@property (nonatomic, weak) UIView *viewToPresent;
 @end
 
 @implementation JVTRecentImagesVideoCollectionViewCell
 
--(instancetype) initWithFrame:(CGRect)frame {
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-
         self.backgroundColor = [UIColor blackColor];
     }
     return self;
 }
 
--(void) setViewToPresent:(UIView *) view {
+- (void)setViewToPresent:(UIView *)view {
     _viewToPresent = view;
-  [self.contentView addSubview:_viewToPresent];
+    [self.contentView addSubview:_viewToPresent];
 }
 
-+(NSString *) cellIdentifer {
++ (NSString *)cellIdentifer {
     return NSStringFromClass([self class]);
 }
 

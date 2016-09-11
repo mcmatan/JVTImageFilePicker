@@ -2,15 +2,16 @@
 
 @implementation JVTWorker
 
-+ (JVTWorker *)shared
-{
++ (JVTWorker *)shared {
     static dispatch_once_t once;
     static JVTWorker *sharedFoo;
-    dispatch_once(&once, ^ { sharedFoo = [[self alloc] init]; });
+    dispatch_once(&once, ^{
+        sharedFoo = [[self alloc] init];
+    });
     return sharedFoo;
 }
 
--(JVTWorker *) init {
+- (JVTWorker *)init {
     self = [super init];
     if (self) {
         self.maxConcurrentOperationCount = 1;

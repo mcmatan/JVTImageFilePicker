@@ -11,11 +11,11 @@
 
 @protocol JVTCameraViewPreviewVCDelegate <NSObject>
 
--(void) didPressTakeImage;
+- (void)didPressTakeImage;
 
 @end
 
 @interface JVTCameraViewPreviewVC : UIViewController
--(void) setViewToPresent:(UIView *) view ;
+- (void)setViewToPresent:(UIView *)view;
 @property (nonatomic, weak) id<JVTCameraViewPreviewVCDelegate> delegate;
 @end

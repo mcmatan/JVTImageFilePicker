@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 @import AVFoundation;
 @interface JVTRecentImagesVideoCollectionViewCell : UICollectionViewCell
--(void) setViewToPresent:(UIView *) view ;
-+(NSString *) cellIdentifer ;
+- (void)setViewToPresent:(UIView *)view;
++ (NSString *)cellIdentifer;
 @end

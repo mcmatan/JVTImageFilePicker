@@ -13,17 +13,18 @@
 @class JVTActionSheetAction;
 @protocol FilesPickerDelegate <NSObject>
 - (void)didPickFile:(NSData *)file
-           fileName: (NSString *) fileName;
+           fileName:(NSString *)fileName;
 - (void)didPickImage:(UIImage *)image
-       withImageName:(NSString *) imageName;
+       withImageName:(NSString *)imageName;
 @optional
 - (void)didDismissFilesPicker;
 @end
 
 @interface JVTImageFilePicker : NSObject <UIDocumentPickerDelegate, UIDocumentMenuDelegate, JVTImagePreviewVCDelegate>
-@property(weak) id <FilesPickerDelegate> delegate;
+@property (nonatomic,assign) CGSize imageResizeSize;
+@property (weak) id<FilesPickerDelegate> delegate;
 
 - (void)presentFilesPickerOnController:(UIViewController *)presentFromController;
 - (void)presentFilesPickerOnController:(UIViewController *)presentFromController
-  withAddingCustomActionsToActionSheet:(NSArray<JVTActionSheetAction *> *) customAlertActions;
+  withAddingCustomActionsToActionSheet:(NSArray<JVTActionSheetAction *> *)customAlertActions;
 @end

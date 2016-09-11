@@ -14,8 +14,8 @@ typedef NS_ENUM(NSUInteger, kActionType) {
 };
 
 @interface JVTActionSheetAction : NSObject
-@property (nonatomic,strong) NSString *title;
-@property (nonatomic,assign) kActionType actionType;
-@property (nonatomic,strong) void(^handler)(JVTActionSheetAction *handlerResonse);
-+ (JVTActionSheetAction *)actionWithTitle:(NSString *)title actionType:(kActionType) actionType handler:(void (^)(JVTActionSheetAction *action))handler;
+@property (nonatomic, strong) NSString *title;
+@property (nonatomic, assign) kActionType actionType;
+@property (nonatomic, strong) void (^handler)(JVTActionSheetAction *handlerResonse);
++ (JVTActionSheetAction *)actionWithTitle:(NSString *)title actionType:(kActionType)actionType handler:(void (^)(JVTActionSheetAction *action))handler;
 @end
