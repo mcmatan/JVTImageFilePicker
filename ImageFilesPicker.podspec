@@ -17,7 +17,7 @@ s.source            = {
 :git => 'https://github.com/mcmatan/ImageFilesPicker.git',
 }
 s.framework = "UIKit"
-s.source_files      =  'Vendor/*', 'Resource/*'
+s.source_files      =  'Vendor/*', 'Resource/*', 'ImagePicker/Resource'
 s.requires_arc      = true
 
 end
