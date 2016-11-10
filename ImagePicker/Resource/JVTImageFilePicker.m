@@ -74,6 +74,13 @@
                                                                                @strongify(self);
                                                                                [self takePhotoOrVideoPress];
                                                                            }];
+    JVTActionSheetAction *uploadFile = [JVTActionSheetAction actionWithTitle:uploadFileTxt
+                                                                  actionType:kActionType_default
+                                                                     handler:^(JVTActionSheetAction *action) {
+                                                                         @strongify(self);
+                                                                         [self uploadFilePress];
+                                                                     }];
+    
     JVTActionSheetAction *cancel = [JVTActionSheetAction actionWithTitle:cancelTxt
                                                               actionType:kActionType_cancel
                                                                  handler:^(JVTActionSheetAction *action) {
@@ -83,6 +90,9 @@
     
     [self.actionSheet addAction:photoLibrary];
     [self.actionSheet addAction:takePhotoOrVideo];
+    if (_isFilePickerEnabled) {
+        [self.actionSheet addAction:uploadFile];
+    }
     [self.actionSheet addAction:cancel];
     
     if (customAlertActions) {
