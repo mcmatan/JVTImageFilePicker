@@ -90,7 +90,7 @@
     
     [self.actionSheet addAction:photoLibrary];
     [self.actionSheet addAction:takePhotoOrVideo];
-    if (_isFilePickerEnabled) {
+    if (self.isFilePickerEnabled) {
         [self.actionSheet addAction:uploadFile];
     }
     [self.actionSheet addAction:cancel];
@@ -130,17 +130,17 @@
 
 - (void)photoLibraryPress {
     @weakify(self);
-    _imagePickerController = [[UIImagePickerController alloc] init];
-    _imagePickerController.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+    self.imagePickerController = [[UIImagePickerController alloc] init];
+    self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
     [self.presentedFromController presentViewController:_imagePickerController animated:YES completion:nil];
     
-    _imagePickerController.finalizationBlock = ^(UIImagePickerController *picker, NSDictionary *info) {
+    self.imagePickerController.finalizationBlock = ^(UIImagePickerController *picker, NSDictionary *info) {
         @strongify(self);
         UIImage *image = (UIImage *)[info valueForKey:UIImagePickerControllerOriginalImage];
         
         [self showPreviewForImage:image];
     };
-    _imagePickerController.cancellationBlock = ^(UIImagePickerController *picker) {
+    self.imagePickerController.cancellationBlock = ^(UIImagePickerController *picker) {
         [picker dismissViewControllerAnimated:YES
                                    completion:^{
                                    }];
