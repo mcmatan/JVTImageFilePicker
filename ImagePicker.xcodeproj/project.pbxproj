@@ -59,6 +59,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		902546111DD6258600D53C58 /* ImagePicker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ImagePicker.entitlements; sourceTree = "<group>"; };
 		ED3D52B21CD5265C00FD4A77 /* EXTScope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXTScope.h; sourceTree = "<group>"; };
 		ED3D52B31CD5265C00FD4A77 /* EXTScope.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EXTScope.m; sourceTree = "<group>"; };
 		ED3D52B41CD5265C00FD4A77 /* LLSimpleCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLSimpleCamera.h; sourceTree = "<group>"; };
@@ -255,6 +256,7 @@
 		ED7A8E441CB3B09800A39614 /* ImagePicker */ = {
 			isa = PBXGroup;
 			children = (
+				902546111DD6258600D53C58 /* ImagePicker.entitlements */,
 				ED3D529F1CD5243900FD4A77 /* Utils */,
 				ED2B87EA1CC3BE0E0033AEE9 /* Model */,
 				ED7A8E781CB3B0AD00A39614 /* Picker */,
@@ -430,6 +432,11 @@
 					ED7A8E411CB3B09800A39614 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = PH85M24H5K;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 0;
+							};
+						};
 					};
 					ED7A8E5A1CB3B09800A39614 = {
 						CreatedOnToolsVersion = 7.3;
@@ -665,6 +672,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Matan Cohen (V88TJNTSQC)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = PH85M24H5K;
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/Vendor/include/**",
 					"$(SRCROOT)/Resource/include/**",
@@ -673,7 +681,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mc.JV.ImagePicker.;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7c603ede-813f-426b-9acf-ecd9208e16cd";
+				PROVISIONING_PROFILE = "e16e9ca9-d300-4821-87e9-a403189f0404";
+				PROVISIONING_PROFILE_SPECIFIER = MemoriaXc8;
 			};
 			name = Debug;
 		};
