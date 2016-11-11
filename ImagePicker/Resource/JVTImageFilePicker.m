@@ -24,6 +24,7 @@
 @interface JVTImageFilePicker () <JVTRecetImagesCollectionDelegate, JVTActionSheetActionDelegate>
 @property (nonatomic, strong) JVTActionSheetView *actionSheet;
 @property (nonatomic, weak) UIViewController *presentedFromController;
+@property (nonatomic, strong) UIImagePickerController *imagePickerController;
 @property (nonatomic, strong) JVTRecetImagesCollection *recetImagesCollection;
 @property (nonatomic, strong) UIView *backgroundDimmedView;
 @end
@@ -79,6 +80,7 @@
                                                                          @strongify(self);
                                                                          [self uploadFilePress];
                                                                      }];
+    
     JVTActionSheetAction *cancel = [JVTActionSheetAction actionWithTitle:cancelTxt
                                                               actionType:kActionType_cancel
                                                                  handler:^(JVTActionSheetAction *action) {
@@ -88,7 +90,9 @@
     
     [self.actionSheet addAction:photoLibrary];
     [self.actionSheet addAction:takePhotoOrVideo];
-    [self.actionSheet addAction:uploadFile];
+    if (self.isFilePickerEnabled) {
+        [self.actionSheet addAction:uploadFile];
+    }
     [self.actionSheet addAction:cancel];
     
     if (customAlertActions) {
@@ -126,17 +130,17 @@
 
 - (void)photoLibraryPress {
     @weakify(self);
-    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-    imagePickerController.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-    [self.presentedFromController presentViewController:imagePickerController animated:YES completion:nil];
+    self.imagePickerController = [[UIImagePickerController alloc] init];
+    self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+    [self.presentedFromController presentViewController:_imagePickerController animated:YES completion:nil];
     
-    imagePickerController.finalizationBlock = ^(UIImagePickerController *picker, NSDictionary *info) {
+    self.imagePickerController.finalizationBlock = ^(UIImagePickerController *picker, NSDictionary *info) {
         @strongify(self);
         UIImage *image = (UIImage *)[info valueForKey:UIImagePickerControllerOriginalImage];
         
         [self showPreviewForImage:image];
     };
-    imagePickerController.cancellationBlock = ^(UIImagePickerController *picker) {
+    self.imagePickerController.cancellationBlock = ^(UIImagePickerController *picker) {
         [picker dismissViewControllerAnimated:YES
                                    completion:^{
                                    }];
@@ -147,20 +151,20 @@
     AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
     if (authStatus == AVAuthorizationStatusAuthorized || authStatus == AVAuthorizationStatusNotDetermined) {
         @weakify(self);
-        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-        imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-        imagePickerController.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto;
-        imagePickerController.allowsEditing = NO;
-        [self.presentedFromController presentViewController:imagePickerController animated:YES completion:nil];
+        _imagePickerController = [[UIImagePickerController alloc] init];
+        _imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+        _imagePickerController.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto;
+        _imagePickerController.allowsEditing = NO;
+        [self.presentedFromController presentViewController:_imagePickerController animated:YES completion:nil];
         
-        imagePickerController.finalizationBlock = ^(UIImagePickerController *picker, NSDictionary *info) {
+        _imagePickerController.finalizationBlock = ^(UIImagePickerController *picker, NSDictionary *info) {
             @strongify(self);
             UIImage *image = (UIImage *)[info valueForKey:UIImagePickerControllerOriginalImage];
             
             [self didPressSendOnImage:image];
             
         };
-        imagePickerController.cancellationBlock = ^(UIImagePickerController *picker) {
+        _imagePickerController.cancellationBlock = ^(UIImagePickerController *picker) {
             [picker dismissViewControllerAnimated:YES
                                        completion:^{
                                        }];
@@ -325,6 +329,9 @@
 - (void)didPressSendOnImage:(UIImage *)image {
     [self.presentedFromController dismissViewControllerAnimated:YES completion:nil];
     [self.delegate didPickImage:image withImageName:@"asset"];
+    if (_imagePickerController != nil) {
+        [_imagePickerController dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 #pragma mark - image preview
