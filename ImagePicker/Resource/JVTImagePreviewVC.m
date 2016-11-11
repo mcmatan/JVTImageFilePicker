@@ -60,7 +60,7 @@
     [self.backgroundBlackTransparentView addSubview:btnCancel];
     
     UIButton *btnSend = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btnSend setTitle:@"Send" forState:UIControlStateNormal];
+    [btnSend setTitle:@"Select" forState:UIControlStateNormal];
     [btnSend.titleLabel setTextColor:[UIColor whiteColor]];
     CGRect btnSendFrame = CGRectMake([UIScreen mainScreen].bounds.size.width - btnWidth - btnPaddingFromLeft, (backgroundViewHeight / 2) - (btnCancelHeight / 2), btnWidth, btnCancelHeight);
     btnSend.frame = btnSendFrame;
