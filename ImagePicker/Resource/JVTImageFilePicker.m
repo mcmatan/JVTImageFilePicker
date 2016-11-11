@@ -34,6 +34,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
+        self.isFilePickerEnabled = YES;
         self.backgroundDimmedView = [[UIView alloc] init];
         self.backgroundDimmedView.backgroundColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:0.5];
         self.imageResizeSize = DEFAULT_IMAGE_SIZE;
@@ -132,7 +133,7 @@
     @weakify(self);
     self.imagePickerController = [[UIImagePickerController alloc] init];
     self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-    [self.presentedFromController presentViewController:_imagePickerController animated:YES completion:nil];
+    [self.presentedFromController presentViewController:self.imagePickerController animated:YES completion:nil];
     
     self.imagePickerController.finalizationBlock = ^(UIImagePickerController *picker, NSDictionary *info) {
         @strongify(self);
@@ -151,20 +152,20 @@
     AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
     if (authStatus == AVAuthorizationStatusAuthorized || authStatus == AVAuthorizationStatusNotDetermined) {
         @weakify(self);
-        _imagePickerController = [[UIImagePickerController alloc] init];
-        _imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-        _imagePickerController.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto;
-        _imagePickerController.allowsEditing = NO;
-        [self.presentedFromController presentViewController:_imagePickerController animated:YES completion:nil];
+        self.imagePickerController = [[UIImagePickerController alloc] init];
+        self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+        self.imagePickerController.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto;
+        self.imagePickerController.allowsEditing = NO;
+        [self.presentedFromController presentViewController:self.imagePickerController animated:YES completion:nil];
         
-        _imagePickerController.finalizationBlock = ^(UIImagePickerController *picker, NSDictionary *info) {
+        self.imagePickerController.finalizationBlock = ^(UIImagePickerController *picker, NSDictionary *info) {
             @strongify(self);
             UIImage *image = (UIImage *)[info valueForKey:UIImagePickerControllerOriginalImage];
             
             [self didPressSendOnImage:image];
             
         };
-        _imagePickerController.cancellationBlock = ^(UIImagePickerController *picker) {
+        self.imagePickerController.cancellationBlock = ^(UIImagePickerController *picker) {
             [picker dismissViewControllerAnimated:YES
                                        completion:^{
                                        }];
@@ -329,8 +330,8 @@
 - (void)didPressSendOnImage:(UIImage *)image {
     [self.presentedFromController dismissViewControllerAnimated:YES completion:nil];
     [self.delegate didPickImage:image withImageName:@"asset"];
-    if (_imagePickerController != nil) {
-        [_imagePickerController dismissViewControllerAnimated:YES completion:nil];
+    if (self.imagePickerController != nil) {
+        [self.imagePickerController dismissViewControllerAnimated:YES completion:nil];
     }
 }
 

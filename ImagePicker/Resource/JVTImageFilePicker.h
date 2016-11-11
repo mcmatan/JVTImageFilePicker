@@ -22,7 +22,7 @@
 
 @interface JVTImageFilePicker : NSObject <UIDocumentPickerDelegate, UIDocumentMenuDelegate, JVTImagePreviewVCDelegate>
 @property (nonatomic,assign) CGSize imageResizeSize;
-@property (assign) bool isFilePickerEnabled;
+@property (assign) bool isFilePickerEnabled; // Default is YES.
 @property (weak) id<FilesPickerDelegate> delegate;
 
 - (void)presentFilesPickerOnController:(UIViewController *)presentFromController;
