@@ -63,18 +63,6 @@
     self.actionSheet.delegate = self;
     
     @weakify(self);
-    JVTActionSheetAction *photoLibrary = [JVTActionSheetAction actionWithTitle:photoLibraryTxt
-                                                                    actionType:kActionType_default
-                                                                       handler:^(JVTActionSheetAction *action) {
-                                                                           @strongify(self);
-                                                                           [self photoLibraryPress];
-                                                                       }];
-    JVTActionSheetAction *takePhotoOrVideo = [JVTActionSheetAction actionWithTitle:takePhotoOrVideoTxt
-                                                                        actionType:kActionType_default
-                                                                           handler:^(JVTActionSheetAction *action) {
-                                                                               @strongify(self);
-                                                                               [self takePhotoOrVideoPress];
-                                                                           }];
     JVTActionSheetAction *uploadFile = [JVTActionSheetAction actionWithTitle:uploadFileTxt
                                                                   actionType:kActionType_default
                                                                      handler:^(JVTActionSheetAction *action) {
@@ -88,9 +76,25 @@
                                                                      @strongify(self);
                                                                      [self dismissPresentedControllerAndInformDelegate:nil];
                                                                  }];
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+        JVTActionSheetAction *photoLibrary = [JVTActionSheetAction actionWithTitle:photoLibraryTxt
+                                                                        actionType:kActionType_default
+                                                                           handler:^(JVTActionSheetAction *action) {
+                                                                               @strongify(self);
+                                                                               [self photoLibraryPress];
+                                                                           }];
+        [self.actionSheet addAction:photoLibrary];
+    }
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        JVTActionSheetAction *takePhotoOrVideo = [JVTActionSheetAction actionWithTitle:takePhotoOrVideoTxt
+                                                                            actionType:kActionType_default
+                                                                               handler:^(JVTActionSheetAction *action) {
+                                                                                   @strongify(self);
+                                                                                   [self takePhotoOrVideoPress];
+                                                                               }];
+        [self.actionSheet addAction:takePhotoOrVideo];
+    }
     
-    [self.actionSheet addAction:photoLibrary];
-    [self.actionSheet addAction:takePhotoOrVideo];
     if (self.isFilePickerEnabled) {
         [self.actionSheet addAction:uploadFile];
     }

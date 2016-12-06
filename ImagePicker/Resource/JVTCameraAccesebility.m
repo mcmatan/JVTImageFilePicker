@@ -14,6 +14,10 @@
 @implementation JVTCameraAccesebility
 
 + (void)getCameraAccessibilityAndRequestIfNeeded:(void (^)(BOOL allowedToUseCamera))callback {
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        callback(NO);
+        return;
+    }
     AVAuthorizationStatus authorizationState = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
     switch (authorizationState) {
         case AVAuthorizationStatusNotDetermined: {
